@@ -15,6 +15,8 @@ public class MultiArray {
         //
 
         Scanner sc = new Scanner(System.in);
+        System.out.println(scores.length);
+        System.out.println(scores[0].length);
 
         for (int i = 0; 0 < scores.length; i++) {
             System.out.println(i + "번 째 학생임");
@@ -22,8 +24,6 @@ public class MultiArray {
                 scores[i][j] = sc.nextInt();
             }
         }
-
-        System.out.println(scores[0][0]);
     }
 
 }
