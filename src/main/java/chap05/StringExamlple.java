@@ -17,6 +17,25 @@ public class StringExamlple {
         // 스택 영역
             // 메소드: 프레임
             // 범위를 벗어나면 사용불가
+            // 먼저들어 간 것이 제일 마지막에 나옴
+
+        int n = 50;
+        int n2 = 50;
+        char c = 'A';
+
+        String s = "HELLO";  // 힙에 저장됨
+        int[] scores = {10, 20, 30};  //힙에 저장됨
+
+        System.out.println(n == 50);
+        System.out.println(n == n2);
+        System.out.println(c == 'A');
+        System.out.println(s == "HELLO");
+        System.out.println(s == new String("HELLO")); // 참조하는 주소가 달라서 다름
+        System.out.println(scores == new int[]{10, 20, 30});
+
+        s = null; //참조하는 것이 없다
+        System.out.println(s.length());
+
     }
 
 }
