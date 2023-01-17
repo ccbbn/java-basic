@@ -1,4 +1,4 @@
-package algorithm.basic;
+package algorithm.basic.M;
 
 import java.util.Scanner;
 
