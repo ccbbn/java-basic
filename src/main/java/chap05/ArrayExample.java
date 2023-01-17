@@ -16,7 +16,7 @@ public class ArrayExample {
         System.out.println(cups.length); // 사이즈는 한 번 정해지면 고정
 
         cups[3] = "레몬레이드";
-        System.out.println();
+        System.out.println(cups[3]);
 
     }
 }
