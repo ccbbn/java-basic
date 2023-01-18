@@ -1,4 +1,4 @@
-package quiz;
+package chap05.quiz;
 
 import java.sql.SQLOutput;
 import java.util.Arrays;
@@ -22,10 +22,9 @@ public class Check9 {
             if (selectNo == 1) {
                 System.out.print("학생수> ");
                 studentNum = scanner.nextInt();
-
-            } else if (selectNo == 2) {
                 scores = new int[studentNum]; // scores[]의 크기 정함
 
+            } else if (selectNo == 2) {
                 for (int i = 0; i < studentNum; i++) {
                     System.out.print("scores["+i+"]" + "> ");
                     scores[i] = scanner.nextInt();
@@ -38,20 +37,20 @@ public class Check9 {
 
             } else if (selectNo == 4) {
                 int max = 0;
-                int sum = 0;
-                // max 구하기
+                double sum = 0;
+                // 최댓값 구하기
                 for (int i = 0; i < studentNum; i++) {
                     if (scores[i] > max) {
                         max = scores[i];
                     }
                 }
-                // sum 구하기
+                // 총점 구하기
                 for (int i = 0; i < studentNum; i++) {
                     sum += scores[i];
                 }
 
                 System.out.println("최고 점수: " + max);
-                System.out.println("평균 점수: " + (double)sum/studentNum);
+                System.out.println("평균 점수: " + sum/studentNum);
 
             } else if (selectNo == 5) {
                 run = false;

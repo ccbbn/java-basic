@@ -1,4 +1,4 @@
-package quiz;
+package chap05.quiz;
 
 public class Check {
     public static void main(String[] args) {

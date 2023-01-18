@@ -1,4 +1,4 @@
-package quiz;
+package chap05.quiz;
 
 public class Check8 {
     public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class Check8 {
         int sum = 0;
         double avg = 0.0;
         int len = 0;
-
+        //int double = 0;
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
