@@ -20,7 +20,26 @@ public class OOPExample {
         System.out.println(human4.shopping("밥"));
 
 
+        Member member = new Member();
+        member.name = "김지영";
+        member.grade = Grade.GOLD;
+
+        Item item = new Item();
+        item.category = ItemCategory.ELECTRONICS;
+        item.name = "귀요미";
+        item.stock = 3;
+        item.des = "좋은 밥맛";
 
 
+        Order order = member.order(item);
+        if (order != null) {
+
+            System.out.println("=====주문내역====");
+            System.out.println("구매일자 : " + order.orderDate);
+            System.out.println("구매자 : " + order.member.name);
+            System.out.println("상품명 : " + order.item.name);
+            System.out.println("=============");
+
+        }
     }
 }
