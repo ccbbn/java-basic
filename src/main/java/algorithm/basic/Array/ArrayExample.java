@@ -49,6 +49,14 @@ public class ArrayExample {
             } else if (height < 10) {
                 height += 129;
             }
+            /*
+            int j = 0;
+            while ( j < arrayHeight.length){
+                함수식
+                i++;
+            }*/
+
+
             arrayHeight[i] = height; //키 배열에 랜덤 키 넣기
         }
         // 키 배열 나열
@@ -74,6 +82,7 @@ public class ArrayExample {
             heights[i] = 130 + rand.nextInt(60);
             System.out.println((i+0)+"번째 사람 키" +heights[i]);
         }
+
 
 
     }

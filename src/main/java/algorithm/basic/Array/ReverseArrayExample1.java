@@ -17,12 +17,12 @@ public class ReverseArrayExample1 {
             arr[i] = sc.nextInt();
         }
 
-
         int[] rArr = new int[size];
         for (int i = 0 ; i < arr.length; i++) {
             rArr[i] = arr[size - i - 1]; // rArr의 정순은 arr의 역순, 크기가 5: rArr[0] = arr[4], rArr[1] = arr[3]....
             System.out.println("rArr [" + i + "] : " + rArr[i]) ;
         }
+
 
         // 배열을 역순으로 정렬 후 전체 배열 요소 출력
         // arr = reverseArr(arr);
