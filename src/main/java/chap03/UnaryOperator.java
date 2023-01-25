@@ -17,7 +17,7 @@ public class UnaryOperator {
         // 함수: input 0...N 개
 
         // 증감 연산자
-        //int val =10;
+        int val =10;
         val++;
         System.out.println(val);    // 11
         val--;
