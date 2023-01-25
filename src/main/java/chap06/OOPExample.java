@@ -21,12 +21,12 @@ public class OOPExample {
 
 
         Member member = new Member();
-        member.name = "김지영";
+        member.name = "홍길동";
         member.grade = Grade.GOLD;
 
         Item item = new Item();
         item.category = ItemCategory.ELECTRONICS;
-        item.name = "귀요미";
+        item.name = "레전드";
         item.stock = 3;
         item.des = "좋은 밥맛";
 
