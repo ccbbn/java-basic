@@ -17,27 +17,26 @@ public class UnaryOperator {
         // 함수: input 0...N 개
 
         // 증감 연산자
-        int val =10;
+        //int val =10;
         val++;
-        System.out.println(val);
+        System.out.println(val);    // 11
         val--;
-        System.out.println(val);
+        System.out.println(val);    // 10
         ++val;
-        System.out.println(val);
+        System.out.println(val);    // 11
         --val;
-        System.out.println(val);
+        System.out.println(val);    // 10
 
-        //val 10
-        System.out.println( ++val + 1);
-        //val 11
-        System.out.println( val);
-        int res = val++ +1;
-        System.out.println(res);
-        System.out.println(val);
+        int val =10;
+        System.out.println( ++val + 1);     // 12
+        System.out.println(val);            // 11
+        int res = val++ + 1;
+        System.out.println(res);            // 12
+        System.out.println(val);            // 12
 
         //논리 부정 연산자 (!)
         boolean b = !false;
-        System.out.println(!b);
+        System.out.println(!b);     // false
 
         //비트 반전 연산자 : 정수 타입 (byte, short, int, long)
         //정수에서 최상위 비트는 부호를 가르킴(+ / -)
