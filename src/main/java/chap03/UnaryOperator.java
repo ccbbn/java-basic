@@ -27,7 +27,7 @@ public class UnaryOperator {
         --val;
         System.out.println(val);    // 10
 
-        int val =10;
+
         System.out.println( ++val + 1);     // 12
         System.out.println(val);            // 11
         int res = val++ + 1;

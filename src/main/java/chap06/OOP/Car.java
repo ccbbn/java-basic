@@ -1,5 +1,11 @@
 package chap06.OOP;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+
+
 public class Car {
     // 필드, 메소드로 객체 모델링
     // 필드 + 메소드: 멤버
@@ -7,7 +13,7 @@ public class Car {
         // 인스턴스: new로 생성산 객체
         //
 
-    static double pi = 3.14;   //정적 멤버, 클레스에서 바로 접근, 변하지 않음
+    static double pi = 3.14;   //정적 멤버, 클레스에서 바로 접근(객체 필요없이 사용), 변하지 않음,
 
     String company;
     String model;
@@ -49,6 +55,8 @@ public class Car {
         this.tire = tire;
     }
 
+    // 객체와 동작 : 메소드
+    // 다른 객체와 상호작용
     public boolean run() {
         if ( fuel > 0) {
             System.out.println(this.model + "이 운행한다");
@@ -65,6 +73,20 @@ public class Car {
         this.fuel += fuel;
         return this.fuel;
     }
+    public void method() {
+        run();
+        gasUp(110);
+    }
 
+    public int getterFuel() {
+        return fuel;
+    }
+
+    public void setterFuel(int fuel) {
+        if ( fuel < 0 ) {
+            return;
+        }
+        this.fuel = fuel;
+    }
 }
 

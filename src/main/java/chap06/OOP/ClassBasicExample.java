@@ -30,6 +30,15 @@ public class ClassBasicExample { // 실행클래스, 라이브러리 클래스
 
 
 
+        // 매소드로 값 접근
+        // 무결성 유지를 위해 사용함
+        // a5.fuel = -100;
+        a5.getterFuel(); // 읽기전용 같은거
+        a5.setterFuel(-100);
+
+
+
+
 
 /*
         inCar(a6,"audi", 0, carType.DISEL, "white", 300,

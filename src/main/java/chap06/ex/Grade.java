@@ -1,4 +1,4 @@
-package chap06;
+package chap06.ex;
 
 public enum Grade {
     GOLD,
