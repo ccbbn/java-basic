@@ -85,9 +85,8 @@ public class Q20Ex {
         System.out.print("예금액: ");
         int save = scanner.nextInt();
 
-        Q20 account = findAccount(ano);
-
-        account.setBalance(account.getBalance()+save);
+        // 입력한 계좌명과 일치한 계좌의 잔고에 입력한 저축액을 더함
+        findAccount(ano).setBalance(findAccount(ano).getBalance() + save);
         System.out.println("결과: 예금이 성공되었다.");
 
     }
@@ -102,10 +101,10 @@ public class Q20Ex {
         System.out.print("출금액: ");
         int minus = scanner.nextInt();
 
-        Q20 account = findAccount(ano);
+        // 입력한 계좌명과 일치한 계좌의 잔고에 입력한 출금액을 뺌
+        findAccount(ano).setBalance(findAccount(ano).getBalance() - minus);
+        System.out.println("결과: 출금이 성공되었다.");
 
-        account.setBalance(account.getBalance() - minus);
-        System.out.println("결과: 예금이 성공되었다.");
     }
 
     //Account(Q20) 배열에서 ano와 동일한 Account 객체 찾기
