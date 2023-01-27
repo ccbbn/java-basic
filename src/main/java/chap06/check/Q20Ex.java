@@ -25,9 +25,9 @@ public class Q20Ex {
                 accountList();
             } else if (selectNo == 3) {
                 deposit();
-//            } else if (selectNo == 4) {
-//                withdraw();
-//            } else if (selectNo == 5) {
+            } else if (selectNo == 4) {
+                withdraw();
+            } else if (selectNo == 5) {
                 run = false;
             }
         }
@@ -63,6 +63,9 @@ public class Q20Ex {
 
     //계좌목록보기
     private static void accountList() {
+        System.out.println("----------------");
+        System.out.println("계좌목록");
+        System.out.println("----------------");
         int i = 0;
         while (accountArray[i] != null) {
             System.out.println(accountArray[i].getAno() +
@@ -74,35 +77,50 @@ public class Q20Ex {
 
     // 예금하기
     private static void deposit() {
+        System.out.println("----------------");
+        System.out.println("예금");
+        System.out.println("----------------");
         System.out.print("계좌번호: ");
         String ano = scanner.next();
         System.out.print("예금액: ");
-        int balance = scanner.nextInt();
+        int save = scanner.nextInt();
 
-        findAccount(ano);
+        Q20 account = findAccount(ano);
 
-
+        account.setBalance(account.getBalance()+save);
+        System.out.println("결과: 예금이 성공되었다.");
 
     }
 
     // 출금하기
     private static void withdraw() {
+        System.out.println("----------------");
+        System.out.println("출금");
+        System.out.println("----------------");
+        System.out.print("계좌번호: ");
+        String ano = scanner.next();
+        System.out.print("출금액: ");
+        int minus = scanner.nextInt();
 
+        Q20 account = findAccount(ano);
+
+        account.setBalance(account.getBalance() - minus);
+        System.out.println("결과: 예금이 성공되었다.");
     }
 
     //Account(Q20) 배열에서 ano와 동일한 Account 객체 찾기
     private static Q20 findAccount(String ano) {
-        Q20 find = null;
-        for (int i = 0; i < accountArray.length; i++) {
-            if (ano == accountArray[i].getAno()) {
-                find = accountArray[i];
-
+        Q20 account = null;
+        for(int i = 0; i < accountArray.length; i++) {
+            if(accountArray[i].getAno().equals(ano)) {
+                account = accountArray[i];
+                break;
             }
         }
-        return find;
+        return account;
     }
-
 }
+
 
 
 
