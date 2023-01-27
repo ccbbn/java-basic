@@ -1,12 +1,8 @@
-package chap06.check;
-
-import jdk.swing.interop.DropTargetContextWrapper;
-
-import java.sql.Struct;
+package chap06.check.extra;
 import java.util.Scanner;
 
-public class Q20Ex {
-    private static Q20[] accountArray = new Q20[100];
+public class Bank {
+    private static Map[] accountArray = new Map[100];
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -36,6 +32,9 @@ public class Q20Ex {
     }
 
     //계좌생성하기
+
+    static int i;
+
     private static void createAccount() {
         System.out.println("----------------");
         System.out.println("계좌생성");
@@ -51,14 +50,10 @@ public class Q20Ex {
         int balance = scanner.nextInt();
 
         System.out.println("결과: 계좌가 생성되었습니다.");
-        Q20 row = new Q20(ano, owner, balance);
+        Map row = new Map(ano, owner, balance);
 
-        for (int i = 0; i < accountArray.length; i++) {
-            if (accountArray[i] == null) {
-                accountArray[i] = row;
-                break;
-            }
-        }
+        accountArray[i] = row;
+        i++;
     }
 
     //계좌목록보기
@@ -66,13 +61,18 @@ public class Q20Ex {
         System.out.println("----------------");
         System.out.println("계좌목록");
         System.out.println("----------------");
-        int i = 0;
-        while (accountArray[i] != null) {
-            System.out.println(accountArray[i].getAno() +
-                    "      " + accountArray[i].getOwner() +
-                    "      " + accountArray[i].getBalance());
-            i++;
+
+        for (int i = 0; i <= accountArray.length; i++) {
+            if(accountArray[i] == null) { return; }
+            System.out.print(accountArray[i].getAno());
+            System.out.print("    ");
+            System.out.print(accountArray[i].getOwner());
+            System.out.print("    ");
+            System.out.println(accountArray[i].getBalance());
         }
+
+
+
     }
 
     // 예금하기
@@ -85,8 +85,9 @@ public class Q20Ex {
         System.out.print("예금액: ");
         int save = scanner.nextInt();
 
-        // 입력한 계좌명과 일치한 계좌의 잔고에 입력한 저축액을 더함
+
         findAccount(ano).setBalance(findAccount(ano).getBalance() + save);
+
         System.out.println("결과: 예금이 성공되었다.");
 
     }
@@ -101,35 +102,23 @@ public class Q20Ex {
         System.out.print("출금액: ");
         int minus = scanner.nextInt();
 
-        // 입력한 계좌명과 일치한 계좌의 잔고에 입력한 출금액을 뺌
         findAccount(ano).setBalance(findAccount(ano).getBalance() - minus);
+
         System.out.println("결과: 출금이 성공되었다.");
 
     }
 
     //Account(Q20) 배열에서 ano와 동일한 Account 객체 찾기
-    private static Q20 findAccount(String ano) {
-        Q20 account = null;
-        for(int i = 0; i < accountArray.length; i++) {
-            if(accountArray[i].getAno().equals(ano)) {
-                account = accountArray[i];
+    private static Map findAccount(String ano) {
+        Map Account = null;
+        for(int i = 0; i <= accountArray.length; i++) {
+            if (accountArray[i].getAno().equals(ano)) {
+                Account = accountArray[i];
                 break;
             }
         }
-        return account;
+        return Account;
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
