@@ -16,6 +16,11 @@ public class Q20 {
     public String getOwner() { return owner; }
     public void setOwner(String owner) { this.owner = owner; }
     public int getBalance() { return balance; }
-    public void setBalance(int balance) { this.balance = balance; }
+    public void setBalance(int balance) {
+        if (balance < 0) {
+            System.out.println("잔액이 부족");
+            return;
+        }
+        this.balance = balance; }
 
 }

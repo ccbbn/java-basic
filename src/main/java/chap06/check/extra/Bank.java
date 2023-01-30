@@ -2,7 +2,7 @@ package chap06.check.extra;
 import java.util.Scanner;
 
 public class Bank {
-    private static Map[] accountArray = new Map[100];
+    private static Map[] accountArray = new Map[100];  //필드라서 개체 안에 NULL로 참
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {

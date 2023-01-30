@@ -51,8 +51,11 @@ public class Q20Ex {
         int balance = scanner.nextInt();
 
         System.out.println("결과: 계좌가 생성되었습니다.");
+
+        // 개체 생성
         Q20 row = new Q20(ano, owner, balance);
 
+        // 배열에 개체 입력
         for (int i = 0; i < accountArray.length; i++) {
             if (accountArray[i] == null) {
                 accountArray[i] = row;
@@ -66,6 +69,8 @@ public class Q20Ex {
         System.out.println("----------------");
         System.out.println("계좌목록");
         System.out.println("----------------");
+
+        // null전 까지 출력
         int i = 0;
         while (accountArray[i] != null) {
             System.out.println(accountArray[i].getAno() +
@@ -88,6 +93,8 @@ public class Q20Ex {
         // 입력한 계좌명과 일치한 계좌의 잔고에 입력한 저축액을 더함
         findAccount(ano).setBalance(findAccount(ano).getBalance() + save);
         System.out.println("결과: 예금이 성공되었다.");
+
+        Q20 account = findAccount(ano);
 
     }
 
