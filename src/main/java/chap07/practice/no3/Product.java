@@ -1,4 +1,4 @@
-package chap07.practice.no2;
+package chap07.practice.no3;
 
 public abstract class Product {
 
@@ -11,6 +11,10 @@ public abstract class Product {
     static final int seed2 = 2;
 
     static final int seed3 = 3;
+
+    Product() {
+
+    }
 
     public Product(int id, String name, int price, int stock) {
         this.id = id;

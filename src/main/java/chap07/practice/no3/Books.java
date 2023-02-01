@@ -1,13 +1,17 @@
-package chap07.practice.no2;
+package chap07.practice.no3;
+
+import chap07.practice.no2.Product;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Books extends Product{
+public class Books extends Product {
     public static Books[] booksArray = new Books[100];
     public static Scanner scanner = new Scanner(System.in);
     String writer;
     int isbn;
+
+
 
 
     public Books(int id, String name, int price, int stock, String writer, int isbn) {
@@ -15,6 +19,7 @@ public class Books extends Product{
 
         this.writer = writer;
         this.isbn = isbn;
+
 
 
     }
@@ -59,7 +64,10 @@ public class Books extends Product{
             if (booksArray[i].getName().equals(pName1)) {
                 booksArray[i] = null;
 
+            } else {
+
             }
+
         }
     }
 
