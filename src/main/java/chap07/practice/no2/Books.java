@@ -13,9 +13,19 @@ public class Books extends Product{
 
     public Books(int id, String name, int price, int stock, String writer, int isbn) {
         super(id, name, price, stock);
-        this.writer = writer;
-        this.isbn = isbn;
+
+        setId(id);
+        setName(name);
+        setPrice(price);
+        setStock(stock);
+        setWriter(writer);
+        setIsbn(isbn);
+
+        this.writer = getWriter();
+        this.isbn = getId();
     }
+
+
 
 
     // 책 입력 1
@@ -87,6 +97,10 @@ public class Books extends Product{
     }
 
 
+    @Override
+    public void reWrite() {
+
+    }
 
     public String getWriter() { return writer; }
     public void setWriter(String writer) { this.writer = writer; }

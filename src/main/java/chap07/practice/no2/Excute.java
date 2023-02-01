@@ -1,12 +1,28 @@
 package chap07.practice.no2;
 
+import access.p1.B;
 import chap06.check.extra.Bank;
 
 import java.util.Scanner;
 
+
+
 public class Excute {
 
     private static Scanner scanner = new Scanner(System.in);
+    static Product[] updatehall = new Product[1000];
+
+    int p;
+//updatehall[p++];
+
+
+
+
+
+    //Product findbook = new Books(a,b,c,d,e,f);
+
+
+
 
 
     public static void main(String[] args) {
@@ -43,7 +59,74 @@ public class Excute {
 
             } else if (selectNo.equals("2")) {
 
+
+//                      for (int i = 0; i <= updatehall.length; i++) {
+//                        Product upBooks;
+//                        if (Books.booksArray[i] != null) {
+//                            upBooks = new Books(Books.booksArray[i].getId(),
+//                                    Books.booksArray[i].getName(),
+//                                    Books.booksArray[i].getPrice(),
+//                                    Books.booksArray[i].getStock(),
+//                                    Books.booksArray[i].getWriter(),
+//                                    Books.booksArray[i].getIsbn());
+//                            updatehall[i] = upBooks;
+//
+//                        }
+
+                System.out.println("찾는 상품이름을 적으세요");
+                System.out.print("찾는 것은?? : ");
+                String pName = scanner.next();
+
+                Books.findBookName(pName);
+                Food.findFoodName(pName);
+                Elect.findElectName(pName);
+
+                System.out.println("바꿀이름은?");
+                String change = scanner.next();
+
+                if (Books.booksArray[0] != null) {
+                    for (int i = 0; i <= 10000; i++) {
+                        if (Books.booksArray[i].getName().equals(pName)) {
+                            Books.booksArray[i].setName(change);
+                        }
+                        break;
+                    }
+                }  // 책에서 찾아서 변경
+                if (Food.foodArray[0] != null) {
+                    for (int i = 0; i <= 10000; i++) {
+                        if (Food.foodArray[i].getName().equals(pName)) {
+                            Food.foodArray[i].setName(change);
+                        }
+                        break;
+                    }
+                }  // 음식에서 찾아서 변경
+                if (Elect.electsArray[0] != null) {
+                    for (int i = 0; i <= 10000; i++) {
+                        if (Elect.electsArray[i].getName().equals(pName)) {
+                            Elect.electsArray[i].setName(change);
+                        }
+                        break;
+                    }
+                } // 전기에서 찾아서 변경
+
+
             } else if (selectNo.equals("3")) {
+                System.out.println("지울 상품이름을 적으세요");
+                System.out.print("지울 이름은?? : ");
+                String pName = scanner.next();
+
+                if (Books.booksArray[0] != null) {
+                    for (int i = 0; i <= Books.booksArray.length; i++) {
+                        if (Books.booksArray[i].getName().equals(pName)) {
+                            Books.booksArray[i] = null;
+                            break;
+                        }
+
+                    }
+
+                }System.out.println(Books.booksArray[0]);
+
+
 
             } else if (selectNo.equals("4")) {
 
@@ -92,13 +175,12 @@ public class Excute {
 
     // 전체 목록 5
     private static void alllist() {
-        if (Books.booksArray[0] != null) {
-            System.out.println("1: 상품id | 2: 상품명 | 3: 저자");
-            System.out.println("=============================================================");
-        } else {
-            System.out.println("입력된 책이 없음");
-        }
+
+                System.out.println("1: 상품id | 2: 상품명 | 3: 저자");
+                System.out.println("=============================================================");
+
         int i = 0;
+        //for 돌리고 i번 째가 null이면 출력안함 그외는 출역
         while (Books.booksArray[i] != null) {
             System.out.print(Books.booksArray[i].getId());
             System.out.print("        ");

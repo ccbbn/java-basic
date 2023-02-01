@@ -1,7 +1,5 @@
 package chap07.practice.no2;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public abstract class Product {
 
     int id;
@@ -16,6 +14,11 @@ public abstract class Product {
         this.price = price;
         this.stock = stock;
     }
+
+
+    abstract public void reWrite();
+
+
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

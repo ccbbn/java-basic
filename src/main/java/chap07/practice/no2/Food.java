@@ -95,6 +95,9 @@ public class Food extends Product {
 
     }
 
+    @Override
+    public void reWrite() {
 
+    }
 }
 

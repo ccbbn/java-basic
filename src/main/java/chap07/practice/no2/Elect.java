@@ -86,7 +86,10 @@ import java.util.concurrent.ThreadLocalRandom;
          }
      }
 
+     @Override
+     public void reWrite() {
 
+     }
 
      public String getCom() {
          return com;
