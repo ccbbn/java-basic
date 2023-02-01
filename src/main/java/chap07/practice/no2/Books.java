@@ -1,6 +1,5 @@
 package chap07.practice.no2;
 
-import java.awt.print.Book;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -24,8 +23,6 @@ public class Books extends Product{
         this.writer = getWriter();
         this.isbn = getId();
     }
-
-
 
 
     // 책 입력 1
@@ -61,13 +58,25 @@ public class Books extends Product{
         }
     }
 
+    // 책 삭제 3
+    public static void removeBook(String pName1) {
+        for (int i = 0; i < booksArray.length - 1; i++) {
+            if (booksArray[i].getName().equals(pName1)) {
+                booksArray[i] = null;
+
+            } else {
+
+            }
+
+        }
+    }
+
     // 책 검색 4
     public static void findBookName(String pName) {
         int i = 0;
-        System.out.println(pName + " 의 이름을 갖는 도서정보");
         while (booksArray[i] != null) {
             if (booksArray[i].getName().equals(pName)) {
-                System.out.println("===============");
+                System.out.println("================이름이 "+ pName + " 인 도서정보==============");
                 System.out.println("상품id : " + booksArray[i].getId());
                 System.out.println("가격 : " + booksArray[i].getPrice());
                 System.out.println("작가 : " + booksArray[i].getWriter());
@@ -79,21 +88,21 @@ public class Books extends Product{
 
     // 책 정보 6
     public static void bookList() {
-        if (Books.booksArray[0] != null) {
-            System.out.println("1: 상품id | 2: 상품명 | 3: 저자");
-            System.out.println("=============================================================");
-        } else {
-            System.out.println("책은 없음");
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■도서목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println("1: 상품id | 2: 상품명 | 3: 저자");
+        System.out.println("=============================================================");
+        for (int i = 0; i < Books.booksArray.length - 1; i++) {
+            if (Books.booksArray[i] != null) {
+                System.out.print(Books.booksArray[i].getId());
+                System.out.print("        ");
+                System.out.print(Books.booksArray[i].getName());
+                System.out.print("        ");
+                System.out.println(Books.booksArray[i].getWriter());
+            }
         }
-        int i = 0;
-        while (Books.booksArray[i] != null) {
-            System.out.print(Books.booksArray[i].getId());
-            System.out.print("        ");
-            System.out.print(Books.booksArray[i].getName());
-            System.out.print("        ");
-            System.out.println(Books.booksArray[i].getWriter());
-            i++;
-        }
+        System.out.println("-------------------------도서 목록 끝--------------------------");
+        System.out.println();
+
     }
 
 

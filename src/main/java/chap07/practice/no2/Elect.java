@@ -58,10 +58,10 @@ import java.util.concurrent.ThreadLocalRandom;
      // 전자기기 검색 4
      public static void findElectName(String pName) {
          int i = 0;
-         System.out.println(pName + " 의 이름을 갖는 전자기기 정보");
+
          while (electsArray[i] != null) {
              if (electsArray[i].getName().equals(pName)) {
-                 System.out.println("==============");
+                 System.out.println("==============이름이 "+ pName + " 인 전자기기 정보============");
                  System.out.println("상품id : " + electsArray[i].getId());
                  System.out.println("제조회사 : " + electsArray[i].getCom());
                  System.out.println("색상 : " + electsArray[i].getCol());
@@ -73,17 +73,34 @@ import java.util.concurrent.ThreadLocalRandom;
 
      // 전자기기 목록 6
      public static void electList() {
-         int k = 0;
-         while (Elect.electsArray[k] != null) {
-             System.out.print(Elect.electsArray[k].getId());
-             System.out.print("        ");
-             System.out.print(Elect.electsArray[k].getName());
-             System.out.print("        ");
-             System.out.print(Elect.electsArray[k].getCom());
-             System.out.print("        ");
-             System.out.println(Elect.electsArray[k].getCol());
-             k++;
+         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■전자기기 목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+         System.out.println("1: 상품id | 2: 상품명 | 3: 제조사 | 4: 색상");
+         System.out.println("=============================================================");
+         for (int i = 0; i < Elect.electsArray.length - 1; i++) {
+             if (Elect.electsArray[i] != null) {
+                 System.out.print(Elect.electsArray[i].getId());
+                 System.out.print("        ");
+                 System.out.print(Elect.electsArray[i].getName());
+                 System.out.print("        ");
+                 System.out.print(Elect.electsArray[i].getCom());
+                 System.out.print("        ");
+                 System.out.println(Elect.electsArray[i].getCol());
+             }
          }
+         System.out.println("-------------------------전자기기 목록 끝-------------------------");
+         System.out.println();
+
+     }
+
+     // 전자기기 삭제 3
+     public static void removeElect(String pName3) {
+         for (int i = 0; i < electsArray.length - 1; i++) {
+             if (electsArray[i].getName().equals(pName3)) {
+                 electsArray[i] = null;
+                 break;
+             }
+         }
+
      }
 
      @Override

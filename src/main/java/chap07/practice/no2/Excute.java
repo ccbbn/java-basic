@@ -4,7 +4,7 @@ import access.p1.B;
 import chap06.check.extra.Bank;
 
 import java.util.Scanner;
-
+import java.util.SortedMap;
 
 
 public class Excute {
@@ -16,13 +16,7 @@ public class Excute {
 //updatehall[p++];
 
 
-
-
-
     //Product findbook = new Books(a,b,c,d,e,f);
-
-
-
 
 
     public static void main(String[] args) {
@@ -53,13 +47,11 @@ public class Excute {
                         System.out.println("전자기기 추가");
                         Elect.inputElect();
                         break;
-                    default :
+                    default:
                         System.out.println("잘못 누르셨습니다. 1,2,3 중에 입력하세요");
                 }
 
             } else if (selectNo.equals("2")) {
-
-
 //                      for (int i = 0; i <= updatehall.length; i++) {
 //                        Product upBooks;
 //                        if (Books.booksArray[i] != null) {
@@ -72,7 +64,6 @@ public class Excute {
 //                            updatehall[i] = upBooks;
 //
 //                        }
-
                 System.out.println("찾는 상품이름을 적으세요");
                 System.out.print("찾는 것은?? : ");
                 String pName = scanner.next();
@@ -84,6 +75,7 @@ public class Excute {
                 System.out.println("바꿀이름은?");
                 String change = scanner.next();
 
+                // 도서 목록에서 찾아서 변경
                 if (Books.booksArray[0] != null) {
                     for (int i = 0; i <= 10000; i++) {
                         if (Books.booksArray[i].getName().equals(pName)) {
@@ -91,7 +83,8 @@ public class Excute {
                         }
                         break;
                     }
-                }  // 책에서 찾아서 변경
+                }
+                // 음식 목록에서 찾아서 변경
                 if (Food.foodArray[0] != null) {
                     for (int i = 0; i <= 10000; i++) {
                         if (Food.foodArray[i].getName().equals(pName)) {
@@ -99,7 +92,8 @@ public class Excute {
                         }
                         break;
                     }
-                }  // 음식에서 찾아서 변경
+                }
+                // 전자기기 목록에서 찾아서 변경
                 if (Elect.electsArray[0] != null) {
                     for (int i = 0; i <= 10000; i++) {
                         if (Elect.electsArray[i].getName().equals(pName)) {
@@ -107,26 +101,36 @@ public class Excute {
                         }
                         break;
                     }
-                } // 전기에서 찾아서 변경
+                }
 
 
             } else if (selectNo.equals("3")) {
-                System.out.println("지울 상품이름을 적으세요");
-                System.out.print("지울 이름은?? : ");
-                String pName = scanner.next();
+                System.out.println("삭제할 상품이 있는 카테고리를 선택하세요");
+                System.out.println("카테고리> 1: 도서 | 2: 식품 | 3: 전자기기");
+                System.out.print("카테고리 선택> ");
 
-                if (Books.booksArray[0] != null) {
-                    for (int i = 0; i <= Books.booksArray.length; i++) {
-                        if (Books.booksArray[i].getName().equals(pName)) {
-                            Books.booksArray[i] = null;
-                            break;
-                        }
+                String cate = scanner.next();
+                switch (cate) {
+                    case "1" :
+                        System.out.println("지울 책 이름을 적으세요");
+                        System.out.print("지울 책 이름은?? : ");
+                        String pName1 = scanner.next();
+                        Books.removeBook(pName1);
 
-                    }
+                    case "2" :
+                        System.out.println("지울 음식 이름을 적으세요");
+                        System.out.print("지울 음식 이름은?? : ");
+                        String pName2 = scanner.next();
+                        Food.removeFood(pName2);
 
-                }System.out.println(Books.booksArray[0]);
-
-
+                    case "3" :
+                        System.out.println("지울 전자기기 이름을 적으세요");
+                        System.out.print("지울 전자기기 이름은?? : ");
+                        String pName3 = scanner.next();
+                        Elect.removeElect(pName3);
+                    default :
+                        System.out.println("잘못 누르셨습니다. 1,2,3 중에 입력하세요");
+                }
 
             } else if (selectNo.equals("4")) {
 
@@ -145,25 +149,24 @@ public class Excute {
                 System.out.println("카테고리> 1: 도서 | 2: 식품 | 3: 전자기기");
                 System.out.print("카테고리 선택> ");
                 int list = scanner.nextInt();
-                switch (list){
-                    case 1 :
+                switch (list) {
+                    case 1:
                         System.out.println("도서에 해당합니다");
                         Books.bookList();
                         break;
-                    case 2 :
+                    case 2:
                         System.out.println("식품에 해당합니다");
                         Food.foodList();
                         break;
-                    case 3 :
+                    case 3:
                         System.out.println("전자기기에 해당합니다");
                         Elect.electList();
                         break;
-                    default :
+                    default:
                         System.out.println("존재하지 않는 카테고리입니다");
-
                 }
 
-            } else if (selectNo.equals("0")){
+            } else if (selectNo.equals("0")) {
                 run = false;
             } else {
                 System.out.println("유효한 입력번호가 아닙니다. 다시 입력하세요");
@@ -175,64 +178,20 @@ public class Excute {
 
     // 전체 목록 5
     private static void alllist() {
-
-                System.out.println("1: 상품id | 2: 상품명 | 3: 저자");
-                System.out.println("=============================================================");
-
-        int i = 0;
-        //for 돌리고 i번 째가 null이면 출력안함 그외는 출역
-        while (Books.booksArray[i] != null) {
-            System.out.print(Books.booksArray[i].getId());
-            System.out.print("        ");
-            System.out.print(Books.booksArray[i].getName());
-            System.out.print("        ");
-            System.out.println(Books.booksArray[i].getWriter());
-            i++;
-        } System.out.println();
-
-
-        if (Food.foodArray[0] != null) {
-            System.out.println("1: 상품id | 2: 상품명 |   3: 제조일     |   4: 유통기한     ");
-            System.out.println("=============================================================");
-        } else {
-            System.out.println("입력된 식품이 없음");
-
-        }
-        int j = 0;
-        while (Food.foodArray[j] != null) {
-            System.out.print(Food.foodArray[j].getId());
-            System.out.print("        ");
-            System.out.print(Food.foodArray[j].getName());
-            System.out.print("        ");
-            System.out.print(Food.foodArray[j].made);
-            System.out.print("        ");
-            System.out.println(Food.foodArray[j].limitation);
-            j++;
-        } System.out.println();
-
-
-
-        if (Elect.electsArray[0] != null) {
-            System.out.println("1: 상품id | 2: 상품명 | 3: 제조사 | 4: 색상");
-            System.out.println("=============================================================");
-        } else {
-            System.out.println("입력된 전자기기가 없음");
-
-        }
-        int k = 0;
-        while (Elect.electsArray[k] != null) {
-            System.out.print(Elect.electsArray[k].getId());
-            System.out.print("        ");
-            System.out.print(Elect.electsArray[k].getName());
-            System.out.print("        ");
-            System.out.print(Elect.electsArray[k].getCom());
-            System.out.print("        ");
-            System.out.println(Elect.electsArray[k].getCol());
-            k++;
-        } System.out.println();
+//        int i = 0;
+//        //for 돌리고 i번 째가 null이면 출력안함 그외는 출역
+//        while (Books.booksArray[i] != null) {
+//            System.out.print(Books.booksArray[i].getId());
+//            System.out.print("        ");
+//            System.out.print(Books.booksArray[i].getName());
+//            System.out.print("        ");
+//            System.out.println(Books.booksArray[i].getWriter());
+//            i++;
+//        } System.out.println();
+        Books.bookList();
+        Food.foodList();
+        Elect.electList();
     }
-
-
 
 }
 

@@ -20,6 +20,14 @@ public abstract class Product {
 
 
 
+
+
+    //public abstract void findName(String pName);
+
+
+
+
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

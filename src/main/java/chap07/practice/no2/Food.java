@@ -58,10 +58,9 @@ public class Food extends Product {
     // 음식 검색 4
     public static void findFoodName(String pName) {
         int i = 0;
-        System.out.println(pName + " 의 이름을 갖는 음식정보");
         while (foodArray[i] != null) {
             if (foodArray[i].getName().equals(pName)) {
-                System.out.println("===============");
+                System.out.println("================이름이 "+ pName + " 인 식품정보==============");
                 System.out.println("상품id : " + foodArray[i].getId());
                 System.out.println("가격 : " + foodArray[i].getPrice());
                 System.out.println("제조일 : " + foodArray[i].made);
@@ -74,25 +73,33 @@ public class Food extends Product {
 
     // 음식 정보 6
     public static void foodList() {
-        if (Food.foodArray[0] != null) {
-            System.out.println("1: 상품id | 2: 상품명 |   3: 제조일     |   4: 유통기한     ");
-            System.out.println("=============================================================");
-        } else {
-            System.out.println("식품은 없음");
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■식품목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println("1: 상품id | 2: 상품명 |   3: 제조일     |   4: 유통기한     ");
+        System.out.println("=============================================================");
+        for (int i = 0; i < Food.foodArray.length - 1; i++) {
+            if (Food.foodArray[i] != null) {
+                System.out.print(Food.foodArray[i].getId());
+                System.out.print("        ");
+                System.out.print(Food.foodArray[i].getName());
+                System.out.print("        ");
+                System.out.print(Food.foodArray[i].made);
+                System.out.print("        ");
+                System.out.println(Food.foodArray[i].limitation);
+            }
         }
-        int j = 0;
-        while (Food.foodArray[j] != null) {
-            System.out.print(Food.foodArray[j].getId());
-            System.out.print("        ");
-            System.out.print(Food.foodArray[j].getName());
-            System.out.print("        ");
-            System.out.print(Food.foodArray[j].made);
-            System.out.print("        ");
-            System.out.println(Food.foodArray[j].limitation);
-            j++;
+        System.out.println("-------------------------식품 목록 끝--------------------------");
+        System.out.println();
+
+    }
+
+    // 음식 삭제 3
+    public static void removeFood(String pName2) {
+        for (int i = 0; i < foodArray.length - 1; i++) {
+            if (foodArray[i].getName().equals(pName2)) {
+                foodArray[i] = null;
+                break;
+            }
         }
-
-
     }
 
     @Override
