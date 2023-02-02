@@ -41,7 +41,7 @@ public class Excute {
         };
 
         // 다중인터페이스
-        Smart smartTv = new SmartTv();  // Smart 인터페이스만 있는 것만 실행
+        Smart smartTv = new SmartTv();  // Smart 인터페이스만 있는 것만 실행, SmartTv의 객체가 Smart인터페이스 타입으로변환
         RemoteControl smartTv1 = new SmartTv(); // RemoteControl 인터페이스만 있는 것만 실행
 
         ((Smart)smartTv).search("www.www.net"); // SmartTv에는 없지만 Smart에 있는 것을 실행, 강제 형변환
