@@ -1,7 +1,8 @@
 package chap08.poly;
 
 public class Car {
-
+    //타이어 인터페이스 배열에 특정 회사의 타이어 개체를 넣음
+    //인터페이스를 활용한 Car 클래스
     Tire[] tires = {
             new KumhoTire(),
             new KumhoTire(),
