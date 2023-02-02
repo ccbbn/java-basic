@@ -16,7 +16,6 @@ public class Books extends Product{
         this.writer = writer;
         this.isbn = isbn;
 
-
     }
 
 
@@ -49,6 +48,17 @@ public class Books extends Product{
             if (booksArray[i] == null) {
                 booksArray[i] = books;
                 break;
+            }
+        }
+    }
+
+    // 책 바꿈 2
+    public static void changeBook(String pName1, String change1) {
+        for (int i = 0; i < booksArray.length - 1; i++) {
+            if (booksArray[i] != null) {
+                if (booksArray[i].getName().equals(pName1)) {
+                    booksArray[i].setName(change1);
+                }
             }
         }
     }

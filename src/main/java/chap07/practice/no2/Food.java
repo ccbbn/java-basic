@@ -55,6 +55,27 @@ public class Food extends Product {
 
         }
 
+    // 음식 바꿈 2
+    public static void changeFood(String pName1, String change1) {
+        for (int i = 0; i < Food.foodArray.length - 1; i++) {
+            if (foodArray[i] != null) {
+                if (Food.foodArray[i].getName().equals(pName1)) {
+                    Food.foodArray[i].setName(change1);
+                }
+            }
+        }
+    }
+
+    // 음식 삭제 3
+    public static void removeFood(String pName2) {
+        for (int i = 0; i < foodArray.length - 1; i++) {
+            if (foodArray[i].getName().equals(pName2)) {
+                foodArray[i] = null;
+                break;
+            }
+        }
+    }
+
     // 음식 검색 4
     public static void findFoodName(String pName) {
         int i = 0;
@@ -92,15 +113,6 @@ public class Food extends Product {
 
     }
 
-    // 음식 삭제 3
-    public static void removeFood(String pName2) {
-        for (int i = 0; i < foodArray.length - 1; i++) {
-            if (foodArray[i].getName().equals(pName2)) {
-                foodArray[i] = null;
-                break;
-            }
-        }
-    }
 
     @Override
     public void reWrite() {

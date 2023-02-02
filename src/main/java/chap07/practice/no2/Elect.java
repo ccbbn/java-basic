@@ -55,6 +55,28 @@ import java.util.concurrent.ThreadLocalRandom;
 
     }
 
+     // 전자기기 바꿈 2
+     public static void changeElect(String pName1, String change1) {
+         for (int i = 0; i < electsArray.length - 1; i++) {
+             if (electsArray[i] != null) {
+                 if (electsArray[i].getName().equals(pName1)) {
+                     electsArray[i].setName(change1);
+                 }
+             }
+         }
+     }
+
+     // 전자기기 삭제 3
+     public static void removeElect(String pName3) {
+         for (int i = 0; i < electsArray.length - 1; i++) {
+             if (electsArray[i].getName().equals(pName3)) {
+                 electsArray[i] = null;
+                 break;
+             }
+         }
+
+     }
+
      // 전자기기 검색 4
      public static void findElectName(String pName) {
          int i = 0;
@@ -92,16 +114,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
      }
 
-     // 전자기기 삭제 3
-     public static void removeElect(String pName3) {
-         for (int i = 0; i < electsArray.length - 1; i++) {
-             if (electsArray[i].getName().equals(pName3)) {
-                 electsArray[i] = null;
-                 break;
-             }
-         }
 
-     }
 
      @Override
      public void reWrite() {

@@ -1,6 +1,6 @@
 package chap07.practice.no3;
 
-import chap07.practice.no2.Product;
+import chap07.practice.no3.Product;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Exam {
     private static Scanner scanner = new Scanner(System.in);
-    private static chap07.practice.no2.Product[] basket = new Product[100];
+    private static chap07.practice.no3.Product[] basket = new Product[100];
 
     static int a = 0;
 
@@ -30,6 +30,9 @@ public class Exam {
                 switch (list) {
                     case "1":
                         System.out.println("상품 추가");
+
+                        int cate1 = chap07.practice.no3.Product.cate1;
+
                         System.out.print("상품ID: ");
                         int id1 = ThreadLocalRandom.current().nextInt(100000, 1000000);
                         System.out.println(id1);
@@ -51,12 +54,15 @@ public class Exam {
 
                         System.out.println("-----입력완료-----");
 
-                        basket[a] = new Books(id1, name1, price1, stock1, writer, isbn);
+                        basket[a] = new Books(cate1, id1, name1, price1, stock1, writer, isbn);
                         a++;
                         break;
 
                     case "2":
                         System.out.println("식품 추가");
+
+                        int cate2 = chap07.practice.no3.Product.cate2;
+
                         System.out.print("상품ID: ");
                         int id2 = ThreadLocalRandom.current().nextInt(100000, 1000000);
                         System.out.println(id2);
@@ -80,11 +86,15 @@ public class Exam {
 
                         System.out.println("-----입력완료-----");
 
-                        basket[a] = new Food(id2, name2, price2, stock2, made, limitation);
+                        basket[a] = new Food(cate2, id2, name2, price2, stock2, made, limitation);
                         a++;
                         break;
 
                     case "3":
+                        System.out.println("전자기기 추가");
+
+                        int cate3 = chap07.practice.no3.Product.cate3;
+
                         System.out.print("상품ID: ");
                         int id3 = ThreadLocalRandom.current().nextInt(100000, 1000000);
                         System.out.println(id3);
@@ -106,7 +116,7 @@ public class Exam {
 
                         System.out.println("-----입력완료-----");
 
-                        basket[a] = new Elect(id3, name3, price3, stock3, com, col);
+                        basket[a] = new Elect(cate3, id3, name3, price3, stock3, com, col);
                         a++;
                         break;
 
@@ -115,6 +125,9 @@ public class Exam {
                 }
 
             } else if (selectNo.equals("5")){
+
+
+                if (basket[0].getCate() == 1)
                 System.out.println("도서 출력");
                 System.out.println(" [1]도서id     [2]도서이름     [3]도서가격    [4]도서재고   [5]도서작가    [6]도서Isbn|" );
                 System.out.println("---------------------------------------------------------------------------------");
