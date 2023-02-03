@@ -69,26 +69,26 @@ public class Food extends Product {
     // 음식 삭제 3
     public static void removeFood(String pName2) {
         for (int i = 0; i < foodArray.length - 1; i++) {
-            if (foodArray[i].getName().equals(pName2)) {
-                foodArray[i] = null;
-                break;
+            if (foodArray[i] != null) {
+                if (foodArray[i].getName().equals(pName2)) {
+                    foodArray[i] = null;
+                }
             }
         }
     }
 
     // 음식 검색 4
     public static void findFoodName(String pName) {
-        int i = 0;
-        while (foodArray[i] != null) {
-            if (foodArray[i].getName().equals(pName)) {
-                System.out.println("================이름이 "+ pName + " 인 식품정보==============");
-                System.out.println("상품id : " + foodArray[i].getId());
-                System.out.println("가격 : " + foodArray[i].getPrice());
-                System.out.println("제조일 : " + foodArray[i].made);
-                System.out.println("유통기한 : " + foodArray[i].limitation);
-                System.out.println();
+        for (int i = 0; i < foodArray.length - 1; i++) {
+            if (foodArray[i] != null) {
+                if (foodArray[i].getName().equals(pName)) {
+                    System.out.println("================이름이 " + pName + " 인 식품정보==============");
+                    System.out.println("상품id : " + foodArray[i].getId());
+                    System.out.println("가격 : " + foodArray[i].getPrice());
+                    System.out.println("제조일 : " + foodArray[i].made);
+                    System.out.println("유통기한 : " + foodArray[i].limitation);
+                }    System.out.println();
             }
-            i++;
         }
     }
 

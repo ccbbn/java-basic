@@ -66,25 +66,27 @@ public class Books extends Product{
     // 책 삭제 3
     public static void removeBook(String pName1) {
         for (int i = 0; i < booksArray.length - 1; i++) {
-            if (booksArray[i].getName().equals(pName1)) {
-                booksArray[i] = null;
-
+            if (booksArray[i] != null) {
+                if (booksArray[i].getName().equals(pName1)) {
+                    booksArray[i] = null;
+                }
             }
         }
     }
 
+
     // 책 검색 4
     public static void findBookName(String pName) {
-        int i = 0;
-        while (booksArray[i] != null) {
-            if (booksArray[i].getName().equals(pName)) {
-                System.out.println("================이름이 "+ pName + " 인 도서정보==============");
-                System.out.println("상품id : " + booksArray[i].getId());
-                System.out.println("가격 : " + booksArray[i].getPrice());
-                System.out.println("작가 : " + booksArray[i].getWriter());
-                System.out.println();
+        for (int i = 0; i < booksArray.length - 1; i++) {
+            if (booksArray[i] != null) {
+                if (booksArray[i].getName().equals(pName)) {
+                    System.out.println("================이름이 " + pName + " 인 도서정보==============");
+                    System.out.println("상품id : " + booksArray[i].getId());
+                    System.out.println("가격 : " + booksArray[i].getPrice());
+                    System.out.println("작가 : " + booksArray[i].getWriter());
+                }   System.out.println();
             }
-            i++;
+
         }
     }
 

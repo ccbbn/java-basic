@@ -69,27 +69,27 @@ import java.util.concurrent.ThreadLocalRandom;
      // 전자기기 삭제 3
      public static void removeElect(String pName3) {
          for (int i = 0; i < electsArray.length - 1; i++) {
-             if (electsArray[i].getName().equals(pName3)) {
-                 electsArray[i] = null;
-                 break;
+             if (electsArray[i] != null) {
+                 if (electsArray[i].getName().equals(pName3)) {
+                     electsArray[i] = null;
+                 }
              }
+
          }
 
      }
 
      // 전자기기 검색 4
      public static void findElectName(String pName) {
-         int i = 0;
-
-         while (electsArray[i] != null) {
-             if (electsArray[i].getName().equals(pName)) {
-                 System.out.println("==============이름이 "+ pName + " 인 전자기기 정보============");
-                 System.out.println("상품id : " + electsArray[i].getId());
-                 System.out.println("제조회사 : " + electsArray[i].getCom());
-                 System.out.println("색상 : " + electsArray[i].getCol());
-                 System.out.println();
+         for (int i = 0; i < electsArray.length - 1; i++) {
+             if (electsArray[i] != null) {
+                if (electsArray[i].getName().equals(pName)) {
+                    System.out.println("==============이름이 " + pName + " 인 전자기기 정보============");
+                    System.out.println("상품id : " + electsArray[i].getId());
+                    System.out.println("제조회사 : " + electsArray[i].getCom());
+                    System.out.println("색상 : " + electsArray[i].getCol());
+                }   System.out.println();
              }
-             i++;
          }
      }
 
