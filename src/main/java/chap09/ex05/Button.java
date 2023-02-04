@@ -6,7 +6,7 @@ public class Button {
 
     //온클릭리스너 타입의 매개변수
     void setOnClickListener(OnClickListener listener) {
-        this.listener = listener;
+        this.listener = listener; // 어떤 인터페이스 구현 객체를 넣을까
 
     }
 
