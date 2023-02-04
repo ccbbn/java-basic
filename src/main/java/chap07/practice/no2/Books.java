@@ -5,7 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Books extends Product{
     public static Books[] booksArray = new Books[100];
-    public static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
+
     String writer;
     int isbn;
 
@@ -53,40 +54,38 @@ public class Books extends Product{
     }
 
     // 책 바꿈 2
-    public static void changeBook(String pName1, String change1) {
+    public static void changeBook(String bookName, String change) {
         for (int i = 0; i < booksArray.length - 1; i++) {
             if (booksArray[i] != null) {
-                if (booksArray[i].getName().equals(pName1)) {
-                    booksArray[i].setName(change1);
+                if (booksArray[i].getName().equals(bookName)) {
+                    booksArray[i].setName(change);
                 }
             }
         }
     }
 
     // 책 삭제 3
-    public static void removeBook(String pName1) {
+    public static void removeBook(String bookName) {
         for (int i = 0; i < booksArray.length - 1; i++) {
             if (booksArray[i] != null) {
-                if (booksArray[i].getName().equals(pName1)) {
+                if (booksArray[i].getName().equals(bookName)) {
                     booksArray[i] = null;
                 }
             }
         }
     }
 
-
     // 책 검색 4
-    public static void findBookName(String pName) {
+    public static void findBookName(String bookName) {
         for (int i = 0; i < booksArray.length - 1; i++) {
             if (booksArray[i] != null) {
-                if (booksArray[i].getName().equals(pName)) {
-                    System.out.println("================이름이 " + pName + " 인 도서정보==============");
+                if (booksArray[i].getName().equals(bookName)) {
+                    System.out.println("================이름이 " + bookName + " 인 도서정보==============");
                     System.out.println("상품id : " + booksArray[i].getId());
                     System.out.println("가격 : " + booksArray[i].getPrice());
                     System.out.println("작가 : " + booksArray[i].getWriter());
-                }   System.out.println();
+                }
             }
-
         }
     }
 
@@ -95,13 +94,13 @@ public class Books extends Product{
         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■도서목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         System.out.println("1: 상품id | 2: 상품명 | 3: 저자");
         System.out.println("=============================================================");
-        for (int i = 0; i < Books.booksArray.length - 1; i++) {
-            if (Books.booksArray[i] != null) {
-                System.out.print(Books.booksArray[i].getId());
+        for (int i = 0; i < booksArray.length - 1; i++) {
+            if (booksArray[i] != null) {
+                System.out.print(booksArray[i].getId());
                 System.out.print("        ");
-                System.out.print(Books.booksArray[i].getName());
+                System.out.print(booksArray[i].getName());
                 System.out.print("        ");
-                System.out.println(Books.booksArray[i].getWriter());
+                System.out.println(booksArray[i].getWriter());
             }
         }
         System.out.println("-------------------------도서 목록 끝--------------------------");
@@ -110,10 +109,6 @@ public class Books extends Product{
     }
 
 
-    @Override
-    public void reWrite() {
-
-    }
 
     public String getWriter() { return writer; }
     public void setWriter(String writer) { this.writer = writer; }

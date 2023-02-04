@@ -40,30 +40,32 @@ public class Excute {
                         Elect.inputElect();
                         break;
                     default:
-                        System.out.println("잘못 누르셨습니다. 1,2,3 중에 입력하세요");
+                        System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
                 }
 
             } else if (selectNo.equals("2")) {
 
                 System.out.println("찾는 상품이름을 적으세요");
                 System.out.print("찾는 것은?? : ");
-                String pName = scanner.next();
+                String findName = scanner.next();
 
-                Books.findBookName(pName);
-                Food.findFoodName(pName);
-                Elect.findElectName(pName);
+                Books.findBookName(findName);
+                Food.findFoodName(findName);
+                Elect.findElectName(findName);
 
-                System.out.println("바꿀이름은?");
+                System.out.print("바꿀이름은?");
                 String change = scanner.next();
 
                 // 도서 목록에서 찾아서 변경
-                Books.changeBook(pName, change);
+                Books.changeBook(findName, change);
 
                 // 음식 목록에서 찾아서 변경
-                Food.changeFood(pName, change);
+                Food.changeFood(findName, change);
 
                 // 전자기기 목록에서 찾아서 변경
-                Elect.changeElect(pName, change);
+                Elect.changeElect(findName, change);
+
+                System.out.println(findName + "의 이름이 " + change + "으로 변경되었습니다.");
 
 
             } else if (selectNo.equals("3")) {
@@ -72,41 +74,53 @@ public class Excute {
                 System.out.print("카테고리 선택> ");
 
                 String cate = scanner.next();
-                switch (cate) {
-                    case "1" :
-                        System.out.println("지울 책 이름을 적으세요");
-                        System.out.print("지울 책 이름은?? : ");
-                        String pName1 = scanner.next();
-                        Books.removeBook(pName1);
-                        break;
 
-                    case "2" :
-                        System.out.println("지울 음식 이름을 적으세요");
-                        System.out.print("지울 음식 이름은?? : ");
-                        String pName2 = scanner.next();
-                        Food.removeFood(pName2);
-                        break;
+                if ((cate.equals("1")) || (cate.equals("2")) || (cate.equals("3"))) {
 
-                    case "3" :
-                        System.out.println("지울 전자기기 이름을 적으세요");
-                        System.out.print("지울 전자기기 이름은?? : ");
-                        String pName3 = scanner.next();
-                        Elect.removeElect(pName3);
-                        break;
+                    switch (cate) {
+                        case "1":
+                            System.out.println("지울 책 이름을 적으세요");
+                            System.out.print("지울 책 이름은?? : ");
+                            String bookName = scanner.next();
+                            Books.removeBook(bookName);
+                            break;
+
+                        case "2":
+                            System.out.println("지울 음식 이름을 적으세요");
+                            System.out.print("지울 음식 이름은?? : ");
+                            String foodName = scanner.next();
+                            Food.removeFood(foodName);
+                            break;
+
+                        case "3":
+                            System.out.println("지울 전자기기 이름을 적으세요");
+                            System.out.print("지울 전자기기 이름은?? : ");
+                            String electName = scanner.next();
+                            Elect.removeElect(electName);
+                            break;
+
+                        default:
+                            System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
+
+                    }
+                } else {
+                    System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
                 }
 
             } else if (selectNo.equals("4")) {
 
                 System.out.println("찾는 상품이름을 적으세요");
                 System.out.print("찾는 것은?? : ");
-                String pName = scanner.next();
+                String findName = scanner.next();
 
-                Books.findBookName(pName);
-                Food.findFoodName(pName);
-                Elect.findElectName(pName);
+                Books.findBookName(findName);
+                Food.findFoodName(findName);
+                Elect.findElectName(findName);
 
             } else if (selectNo.equals("5")) {
+
                 alllist();
+
             } else if (selectNo.equals("6")) {
 
                 System.out.println("카테고리> 1: 도서 | 2: 식품 | 3: 전자기기");
@@ -126,13 +140,13 @@ public class Excute {
                         Elect.electList();
                         break;
                     default:
-                        System.out.println("존재하지 않는 카테고리입니다");
+                        System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
                 }
 
             } else if (selectNo.equals("0")) {
                 run = false;
             } else {
-                System.out.println("유효한 입력번호가 아닙니다. 다시 입력하세요");
+                System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
             }
         }
         System.out.println("프로그램 종료");
@@ -145,6 +159,8 @@ public class Excute {
         Food.foodList();
         Elect.electList();
     }
+
+
 
 }
 

@@ -7,27 +7,12 @@ public abstract class Product {
     int price;
     int stock;
 
-    static final int seed1 = 1;
-    static final int seed2 = 2;
-
-    static final int seed3 = 3;
-
     public Product(int id, String name, int price, int stock) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
-
-
-    abstract public void reWrite();
-
-
-
-
-
-    //public abstract void findName(String pName);
-
 
 
 

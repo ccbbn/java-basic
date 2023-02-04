@@ -5,10 +5,8 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Food extends Product {
-
-    static Food[] foodArray = new Food[100];
+    public static Food[] foodArray = new Food[100];
     static Scanner scanner = new Scanner(System.in);
-
 
     LocalDate made;
     LocalDate limitation;
@@ -52,25 +50,24 @@ public class Food extends Product {
                     break;
                 }
             }
-
         }
 
     // 음식 바꿈 2
-    public static void changeFood(String pName1, String change1) {
+    public static void changeFood(String foodName, String change) {
         for (int i = 0; i < Food.foodArray.length - 1; i++) {
             if (foodArray[i] != null) {
-                if (Food.foodArray[i].getName().equals(pName1)) {
-                    Food.foodArray[i].setName(change1);
+                if (Food.foodArray[i].getName().equals(foodName)) {
+                    Food.foodArray[i].setName(change);
                 }
             }
         }
     }
 
     // 음식 삭제 3
-    public static void removeFood(String pName2) {
+    public static void removeFood(String foodName) {
         for (int i = 0; i < foodArray.length - 1; i++) {
             if (foodArray[i] != null) {
-                if (foodArray[i].getName().equals(pName2)) {
+                if (foodArray[i].getName().equals(foodName)) {
                     foodArray[i] = null;
                 }
             }
@@ -78,16 +75,16 @@ public class Food extends Product {
     }
 
     // 음식 검색 4
-    public static void findFoodName(String pName) {
+    public static void findFoodName(String foodName) {
         for (int i = 0; i < foodArray.length - 1; i++) {
             if (foodArray[i] != null) {
-                if (foodArray[i].getName().equals(pName)) {
-                    System.out.println("================이름이 " + pName + " 인 식품정보==============");
+                if (foodArray[i].getName().equals(foodName)) {
+                    System.out.println("================이름이 " + foodName + " 인 식품정보==============");
                     System.out.println("상품id : " + foodArray[i].getId());
                     System.out.println("가격 : " + foodArray[i].getPrice());
                     System.out.println("제조일 : " + foodArray[i].made);
                     System.out.println("유통기한 : " + foodArray[i].limitation);
-                }    System.out.println();
+                }
             }
         }
     }
@@ -114,9 +111,6 @@ public class Food extends Product {
     }
 
 
-    @Override
-    public void reWrite() {
 
-    }
 }
 
