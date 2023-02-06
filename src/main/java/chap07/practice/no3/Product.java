@@ -9,6 +9,8 @@ public abstract class Product {
     int price;
     int stock;
 
+
+
     static final int cate1 = 1;
     static final int cate2 = 2;
     static final int cate3 = 3;
@@ -21,6 +23,7 @@ public abstract class Product {
         this.name = name;
         this.price = price;
         this.stock = stock;
+
     }
 
 

@@ -124,61 +124,77 @@ public class Exam {
                         System.out.println("잘못 누르셨습니다. 1,2,3 중에 입력하세요");
                 }
 
-            } else if (selectNo.equals("5")){
+            } else if (selectNo.equals("5")) {
 
 
-                if (basket[0].getCate() == 1)
-                System.out.println("도서 출력");
-                System.out.println(" [1]도서id     [2]도서이름     [3]도서가격    [4]도서재고   [5]도서작가    [6]도서Isbn|" );
-                System.out.println("---------------------------------------------------------------------------------");
-                for (Product value : basket) {
-                    if (value != null) {
-                        System.out.print("[1] " + value.getId());
-                        System.out.print("      ");
-                        System.out.print("[2] " + value.getName());
-                        System.out.print("      ");
-                        System.out.print("[3] " + value.getPrice());
-                        System.out.print("      ");
-                        System.out.print("[4] " + value.getStock());
-                        System.out.print("      ");
-                        System.out.print("[5] " + ((Books) value).getWriter());
-                        System.out.print("      ");
-                        System.out.print("[6] " + ((Books) value).getIsbn());
-                        System.out.println("      ");
-                        System.out.println("-------------------------------------------------------------------------");
+                if (basket[0].getCate() == 1) {
+                    System.out.println("도서 출력");
+                    System.out.println(" [1]도서id     [2]도서이름     [3]도서가격    [4]도서재고   [5]도서작가    [6]도서Isbn|");
+                    System.out.println("---------------------------------------------------------------------------------");
+                    for (Product product : basket) {
+                        if (product != null) {
+                            System.out.print("[1] " + product.getId());
+                            System.out.print("      ");
+                            System.out.print("[2] " + product.getName());
+                            System.out.print("      ");
+                            System.out.print("[3] " + product.getPrice());
+                            System.out.print("      ");
+                            System.out.print("[4] " + product.getStock());
+                            System.out.print("      ");
+                            System.out.print("[5] " + ((Books) product).getWriter());
+                            System.out.print("      ");
+                            System.out.print("[6] " + ((Books) product).getIsbn());
+                            System.out.println("      ");
+                            System.out.println("-------------------------------------------------------------------------");
+                        }
+                    }
+
+                    System.out.println("식품 출력");
+                    System.out.println(" [1]식품id     [2]식품이름     [3]식품가격    [4]식품재고   [5]제조일    [6]유통기한|");
+                    System.out.println("---------------------------------------------------------------------------------");
+                    for (Product product : basket) {
+                        if (product != null) {
+                            System.out.print("[1] " + product.getId());
+                            System.out.print("      ");
+                            System.out.print("[2] " + product.getName());
+                            System.out.print("      ");
+                            System.out.print("[3] " + product.getPrice());
+                            System.out.print("      ");
+                            System.out.print("[4] " + product.getStock());
+                            System.out.print("      ");
+                            System.out.print("[5] " + ((Food) product).made);
+                            System.out.print("      ");
+                            System.out.print("[6] " + ((Food) product).limitation);
+                            System.out.println("      ");
+                            System.out.println("-------------------------------------------------------------------------");
+                        }
+                    }
+
+                    System.out.println("전자기기 출력");
+                    System.out.println(" [1]식품id     [2]식품이름     [3]식품가격    [4]식품재고   [5]제조사    [6]상품색|");
+                    System.out.println("---------------------------------------------------------------------------------");
+                    for (Product product : basket) {
+                        if (product != null) {
+                            System.out.print("[1] " + product.getId());
+                            System.out.print("      ");
+                            System.out.print("[2] " + product.getName());
+                            System.out.print("      ");
+                            System.out.print("[3] " + product.getPrice());
+                            System.out.print("      ");
+                            System.out.print("[4] " + product.getStock());
+                            System.out.print("      ");
+                            System.out.print("[5] " + ((Elect) product).com);
+                            System.out.print("      ");
+                            System.out.print("[6] " + ((Elect) product).col);
+                            System.out.println("      ");
+                            System.out.println("-------------------------------------------------------------------------");
+                        }
                     }
                 }
-
-                System.out.println("식품 출력");
-                System.out.println(" [1]식품id     [2]식품이름     [3]식품가격    [4]식품재고   [5]제조일    [6]유통기한|" );
-                System.out.println("---------------------------------------------------------------------------------");
-                for (Product product : basket) {
-                    if (product != null) {
-                        System.out.print("[1] " + product.getId());
-                        System.out.print("      ");
-                        System.out.print("[2] " + product.getName());
-                        System.out.print("      ");
-                        System.out.print("[3] " + product.getPrice());
-                        System.out.print("      ");
-                        System.out.print("[4] " + product.getStock());
-                        System.out.print("      ");
-                        System.out.print("[5] " + ((Food) product).made);
-                        System.out.print("      ");
-                        System.out.print("[6] " + ((Food) product).limitation);
-                        System.out.println("      ");
-                        System.out.println("-------------------------------------------------------------------------");
-                    }
-                }
-
-
-
-
             }
         }
     }
 }
-
-
 
 
 
