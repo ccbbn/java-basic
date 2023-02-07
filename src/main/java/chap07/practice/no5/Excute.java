@@ -13,7 +13,7 @@ public class Excute {
         Food.addFood();
         Elect.addElect();
 
-        Discount changeFoodPrice = new Food();
+        Discount changeFoodPrice = new Food();  //implements 객체
 
 
         boolean run = true;

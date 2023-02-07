@@ -125,7 +125,7 @@ public class Food extends Product implements Discount {
                 System.out.println(Food.foodArray[i].limitation);
             }
         }
-        System.out.println("----------------------------식품 목록 끝---------------------------------");
+        System.out.println("----------------------------식품 목록 끝----------------------------");
         System.out.println();
 
     }
