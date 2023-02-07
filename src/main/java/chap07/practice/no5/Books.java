@@ -19,7 +19,7 @@ public class Books extends Product {
         this.writer = writer;
         this.isbn = isbn;
         this.bookType = bookType;
-    }
+}
 
 
     public static void addBook() {
@@ -33,7 +33,7 @@ public class Books extends Product {
 
 
     // 책 입력 1
-    public static void inputBook() {
+    public static void insertBook() {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -66,7 +66,7 @@ public class Books extends Product {
     }
 
     // 책 바꿈 2
-    public static void changeBook(String bookName, String change) {
+    public static void changeBookName(String bookName, String change) {
         for (int i = 0; i < booksArray.length - 1; i++) {
             if (booksArray[i] != null) {
                 if (booksArray[i].getName().equals(bookName)) {
@@ -77,7 +77,7 @@ public class Books extends Product {
     }
 
     // 책 삭제 3
-    public static void removeBook(String bookName) {
+    public static void deleteBook(String bookName) {
         for (int i = 0; i < booksArray.length - 1; i++) {
             if (booksArray[i] != null) {
                 if (booksArray[i].getName().equals(bookName)) {

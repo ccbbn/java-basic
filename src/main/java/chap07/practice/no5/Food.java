@@ -34,7 +34,7 @@ public class Food extends Product implements Discount {
 
 
     // 음식 입력 1
-    public static void inputFood() {
+    public static void insertFood() {
 
             System.out.print("상품ID: ");
             int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -70,7 +70,7 @@ public class Food extends Product implements Discount {
         }
 
     // 음식 바꿈 2
-    public static void changeFood(String foodName, String change) {
+    public static void changeFoodName(String foodName, String change) {
         for (int i = 0; i < Food.foodArray.length - 1; i++) {
             if (foodArray[i] != null) {
                 if (Food.foodArray[i].getName().equals(foodName)) {
@@ -81,7 +81,7 @@ public class Food extends Product implements Discount {
     }
 
     // 음식 삭제 3
-    public static void removeFood(String foodName) {
+    public static void deleteFood(String foodName) {
         for (int i = 0; i < foodArray.length - 1; i++) {
             if (foodArray[i] != null) {
                 if (foodArray[i].getName().equals(foodName)) {
