@@ -1,4 +1,4 @@
-package chap07.practice.no2;
+package chap07.practice.no5;
 
 public abstract class Product {
 
@@ -12,14 +12,14 @@ public abstract class Product {
     final static int electType = 3;
 
 
+    public Product(){};
+
     public Product(int id, String name, int price, int stock) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
-
-
 
 
 

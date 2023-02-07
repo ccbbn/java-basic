@@ -35,8 +35,8 @@ public class Food implements Order {
     @Override
     public void add() {
         int i = 0;
-        foodArray[i++] = new Food(778978,"떡볶이",300,100,LocalDate.now(),LocalDate.now().plusDays(30),2);
-        foodArray[i++] = new Food(123978,"라볶이",300,100,LocalDate.now(),LocalDate.now().plusDays(20),2);
+        foodArray[i++] = new Food(778978,"떡볶이",3000,100,LocalDate.now(),LocalDate.now().plusDays(30),2);
+        foodArray[i++] = new Food(123978,"라볶이",4000,100,LocalDate.now(),LocalDate.now().plusDays(20),2);
         foodArray[i++] = new Food(123978,"소고기",50000,100,LocalDate.now(),LocalDate.now().plusDays(3),2);
     }
 
@@ -122,9 +122,9 @@ public class Food implements Order {
 
     @Override
     public void allList() {
-        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■식품목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■식품목록■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         System.out.println("1: 상품id | 2: 상품명 | 3: 가격 |   4: 제조일     |   5: 유통기한     ");
-        System.out.println("=============================================================");
+        System.out.println("==================================================================");
 
         for (int i = 0; i < foodArray.length - 1; i++) {
             if (foodArray[i] != null) {
@@ -139,7 +139,7 @@ public class Food implements Order {
                 System.out.println(foodArray[i].limitation);
             }
         }
-                System.out.println("-------------------------식품 목록 끝--------------------------");
+                System.out.println("----------------------------식품 목록 끝---------------------------------");
                 System.out.println();
 
     }

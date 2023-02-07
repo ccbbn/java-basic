@@ -15,7 +15,6 @@ public class Elect implements Order{
     int stock;
     String com;
     String col;
-
     int electType;
 
     public Elect() {}
@@ -105,6 +104,7 @@ public class Elect implements Order{
                     System.out.println("==============이름이 " + findName + " 인 전자기기 정보============");
                     System.out.println("상품id : " + electArray[i].getId());
                     System.out.println("전자기기 이름: " + electArray[i].getName());
+                    System.out.println("전자기기 가격: " + electArray[i].getPrice());
                     System.out.println("제조회사 : " + electArray[i].getCom());
                     System.out.println("색상 : " + electArray[i].getCol());
                 }
@@ -118,7 +118,7 @@ public class Elect implements Order{
     public void allList() {
         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■전자기기 목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
         System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 제조사 | 5: 색상");
-        System.out.println("=============================================================");
+        System.out.println("===============================================================");
         for (int i = 0; i < electArray.length - 1; i++) {
             if (electArray[i] != null) {
                 System.out.print(electArray[i].getId());

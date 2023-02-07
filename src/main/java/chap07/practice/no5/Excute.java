@@ -1,10 +1,6 @@
-package chap07.practice.no2;
-
-import access.p1.B;
-import chap06.check.extra.Bank;
+package chap07.practice.no5;
 
 import java.util.Scanner;
-import java.util.SortedMap;
 
 
 public class Excute {
@@ -16,6 +12,8 @@ public class Excute {
         Books.addBook();
         Food.addFood();
         Elect.addElect();
+
+        Discount changeFoodPrice = new Food();
 
 
         boolean run = true;
@@ -149,7 +147,30 @@ public class Excute {
                         System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
                 }
 
-            } else if (selectNo.equals("0")) {
+            } else if (selectNo.equals("7")) {
+                // 상품이름으로 찾아서 할인율을 적용한 가격 재조정
+                System.out.println("할인율을 적용할 식품 이름을 적으세요");
+                System.out.print("찾는 식품명은?? : ");
+
+                String findName = scanner.next();
+                Food.findFoodName(findName);
+
+                System.out.println("적용할 할인율은? 할인율(%)은 10 ~ 90입니다");
+
+                boolean stayPage = true;
+                while(stayPage) {
+                    System.out.print("입력> ");
+                    int rate = scanner.nextInt();
+                    if ((rate < 10) || (rate > 90)) {
+                        System.out.println("할인율(%)은 10 ~ 90입니다. 다시 입력하세요");
+                    } else {
+                        changeFoodPrice.setPriceByDiscountRate(findName, rate);
+                        System.out.println("할인율 적용 성공");
+                        stayPage = false;
+                    }
+                }
+            }
+            else if (selectNo.equals("0")) {
                 run = false;
             } else {
                 System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");

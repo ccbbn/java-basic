@@ -90,10 +90,11 @@ public class Books implements Order{
         for (int i = 0; i < booksArray.length - 1; i++) {
             if (booksArray[i] != null) {
                 if (booksArray[i].getName().equals(deleteName)) {
-                    booksArray[i] = null;
+                    booksArray[i] = null; //return;
                 }
             }
         }
+        //System.out.println("없어");
     }
 
 

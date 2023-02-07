@@ -1,10 +1,10 @@
-package chap07.practice.no2;
+package chap07.practice.no5;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Food extends Product {
+public class Food extends Product implements Discount {
     public static Food[] foodArray = new Food[100];
     static Scanner scanner = new Scanner(System.in);
 
@@ -12,6 +12,8 @@ public class Food extends Product {
     LocalDate limitation;
     int foodType;
 
+
+    public Food(){};
 
     public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation,int foodType) {
         super(id, name, price, stock);
@@ -126,6 +128,18 @@ public class Food extends Product {
         System.out.println("----------------------------식품 목록 끝---------------------------------");
         System.out.println();
 
+    }
+
+
+    @Override
+    public void setPriceByDiscountRate(String findName, int rate) {
+        for (int i = 0; i < foodArray.length - 1; i++) {
+            if (foodArray[i] != null) {
+                if (foodArray[i].getName().equals(findName)) {
+                    foodArray[i].setPrice(foodArray[i].getPrice() - (int) (0.01 * rate * foodArray[i].getPrice()));
+                }
+            }
+        }
     }
 }
 

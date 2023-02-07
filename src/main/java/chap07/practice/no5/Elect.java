@@ -1,6 +1,4 @@
-package chap07.practice.no2;
-
-import chap07.poly.ex1.E;
+package chap07.practice.no5;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -54,7 +52,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
         System.out.println("-----입력완료-----");
 
-        Elect elect = new Elect(id, name, price, stock, com, col,Product.electType);
+        Elect elect = new Elect(id, name, price, stock, com, col, Product.electType);
         for (int i = 0; i <= electsArray.length; i++) {
             if (electsArray[i] == null) {
                 electsArray[i] = elect;

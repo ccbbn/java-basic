@@ -12,11 +12,10 @@ public class Execute {
         Order orderFood = new Food();
         Order orderElect = new Elect();
 
-
+        //// 기존에 저장된 자료들 불러오기
         orderBook.add();
         orderFood.add();
         orderElect.add();
-
 
 
         boolean run = true;
@@ -26,35 +25,36 @@ public class Execute {
             System.out.println("---------------------------------------------------------------------------------------------------------");
             System.out.print("선택> ");
 
-            String selectNo = scanner.next();
+            String selectNo = scanner.next();//메뉴 선택
 
             if (selectNo.equals("1")) {
-
+                // 상품추가
                 System.out.println("1: 도서추가 | 2: 식품추가 | 3: 전자기기추가 | *: 처음으로 돌아가기 ");
-                boolean no1 = true;
-                while (no1) {
+
+                boolean stayPage = true;
+                while (stayPage) {
                     System.out.print("선택> ");
                     String list = scanner.next();
                     switch (list) {
                         case "1":
                             System.out.println("도서 추가");
                             orderBook.insert();
-                            no1 = false;
+                            stayPage = false;
                             break;
                         case "2":
                             System.out.println("식품 추가");
                             orderFood.insert();
-                            no1 = false;
+                            stayPage = false;
                             break;
                         case "3":
                             System.out.println("전자기기 추가");
                             orderElect.insert();
-                            no1 = false;
+                            stayPage = false;
                             break;
 
                         case "*":
                             System.out.println("처음으로 돌아갑니다");
-                            no1 = false;
+                            stayPage = false;
                             break;
 
                         default:
@@ -63,7 +63,7 @@ public class Execute {
                 }
 
             } else if (selectNo.equals("2")) {
-
+                // 상품이름을 찾아서 수정
                 System.out.println("찾는 상품이름을 적으세요 | *: 처음으로 돌아가기");
                 System.out.print("찾는 것은?? : ");
                 String findName = scanner.next();
@@ -92,15 +92,16 @@ public class Execute {
                 }
 
             } else if (selectNo.equals("3")) {
+                // 상품이름으로 찾아서 삭제
                 System.out.println("삭제할 상품이 있는 카테고리를 선택하세요");
                 System.out.println("카테고리> 1: 도서 | 2: 식품 | 3: 전자기기 | *: 처음으로 돌아가기");
-                boolean no3 = true;
-                while (no3) {
+                boolean stayPage = true;
+                while (stayPage) {
                     System.out.print("카테고리 선택> ");
 
-                    String cate = scanner.next();
+                    String category = scanner.next();
 
-                    switch (cate) {
+                    switch (category) {
                         case "1":
                             System.out.println("지울 책 이름을 적으세요 | *: 카테고리 재선택");
                             System.out.print("지울 책 이름은?? : ");
@@ -108,7 +109,7 @@ public class Execute {
 
                             if (!bookName.equals("*")) {
                             orderBook.delete(bookName);
-                            no3 = false;}
+                            stayPage = false;}
                             break;
 
                         case "2":
@@ -118,7 +119,7 @@ public class Execute {
 
                             if(!foodName.equals("*")) {
                             orderFood.delete(foodName);
-                            no3 = false;}
+                            stayPage = false;}
                             break;
 
                         case "3":
@@ -128,12 +129,12 @@ public class Execute {
 
                             if(!electName.equals("*")) {
                             orderElect.delete(electName);
-                            no3 = false;}
+                            stayPage = false;}
                             break;
 
                         case "*":
                             System.out.println("처음으로 돌아갑니다");
-                            no3 = false;
+                            stayPage = false;
                             break;
 
                         default:
@@ -143,7 +144,7 @@ public class Execute {
                 }
 
             } else if (selectNo.equals("4")) {
-
+                //
                 System.out.println("찾는 상품이름을 적으세요");
                 System.out.print("찾는 것은?? : ");
                 String findName = scanner.next();
@@ -154,40 +155,40 @@ public class Execute {
 
 
             } else if (selectNo.equals("5")) {
-
+                // 모든 상품을 조회
                 orderBook.allList();
                 orderFood.allList();
                 orderElect.allList();
 
             } else if (selectNo.equals("6")) {
-
+                // 카테 고리별 상품 조회
                 System.out.println("카테고리> 1: 도서 | 2: 식품 | 3: 전자기기 | *: 처음으로 돌아가기");
-                boolean no6 = true;
-                while(no6) {
+                boolean stayPage = true;
+                while(stayPage) {
                     System.out.print("카테고리 선택> ");
                     String list = scanner.next();
                     switch (list) {
                         case "1":
                             System.out.println("도서에 해당합니다");
                             orderBook.allList();
-                            no6 = false;
+                            stayPage = false;
                             break;
 
                         case "2":
                             System.out.println("식품에 해당합니다");
                             orderFood.allList();
-                            no6 = false;
+                            stayPage = false;
                             break;
 
                         case "3":
                             System.out.println("전자기기에 해당합니다");
                             orderElect.allList();
-                            no6 = false;
+                            stayPage = false;
                             break;
 
                         case "*":
                             System.out.println("처음으로 돌아갑니다");
-                            no6 = false;
+                            stayPage = false;
                             break;
 
                         default:
@@ -195,7 +196,7 @@ public class Execute {
                     }
                 }
             } else if (selectNo.equals("7")) {
-
+                // 상품이름으로 찾아서 할인율을 적용한 가격 재조정
                 System.out.println("할인율을 적용할 상품이름을 적으세요");
                 System.out.print("찾는 상품명은?? : ");
 
@@ -207,23 +208,24 @@ public class Execute {
 
                 System.out.println("적용할 할인율은? 할인율(%)은 10 ~ 90입니다");
 
-                boolean no7 = true;
-                 while(no7) {
+                boolean stayPage = true;
+                 while(stayPage) {
                      System.out.print("입력> ");
-                     int rate1 = scanner.nextInt();
-                     if ((rate1 < 10) || (rate1 > 90)) {
+                     int rate = scanner.nextInt();
+                     if ((rate < 10) || (rate > 90)) {
                          System.out.println("할인율(%)은 10 ~ 90입니다. 다시 입력하세요");
                      } else {
-                         orderBook.discount(findName, rate1);
-                         orderFood.discount(findName, rate1);
-                         orderElect.discount(findName, rate1);
+                         orderBook.discount(findName, rate);
+                         orderFood.discount(findName, rate);
+                         orderElect.discount(findName, rate);
                          System.out.println("가격변경 성공");
-                         no7 = false;
+                         stayPage = false;
                      }
                  }
             }
 
             else if (selectNo.equals("0")) {
+                // 전체 작업 완료
                 run = false;
             } else {
                 System.out.println("존재하지 않는 카테고리 입니다. 다시 입력하세요");
@@ -231,5 +233,8 @@ public class Execute {
         }
         System.out.println("프로그램 종료");
     }
+
+
+
 
 }

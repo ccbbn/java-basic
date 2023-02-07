@@ -12,6 +12,7 @@ public interface Order {
 
 
     public void add();
+
     public void insert();
 
     public void change(String findName, String change);

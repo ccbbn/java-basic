@@ -1,9 +1,9 @@
-package chap07.practice.no2;
+package chap07.practice.no5;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Books extends Product{
+public class Books extends Product {
     public static Books[] booksArray = new Books[100];
     static Scanner scanner = new Scanner(System.in);
 
