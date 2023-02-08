@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Exam {
     private static Scanner scanner = new Scanner(System.in);
-    private static chap07.practice.no3.Product[] basket = new Product[100];
+    private static Product[] basket = new Product[100];
 
     static int a = 0;
 

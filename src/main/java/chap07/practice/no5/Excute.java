@@ -193,6 +193,11 @@ public class Excute {
                     }
             } else if (selectNo.equals("7")) {
                 // 상품이름으로 찾아서 할인율을 적용한 가격 재조정
+
+                // 식품 목록보여주기
+                //
+
+
                 System.out.println("할인율을 적용할 식품 이름을 적으세요");
                 System.out.print("찾는 식품명은?? : ");
 
