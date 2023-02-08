@@ -45,12 +45,17 @@ public class Excute {
                 eachList();
             } else if (selectNo.equals("7")) {
 
-                Discount[] discountedList = planedList();
+
+
+
+                Discount[] interfacedProductList = interfaceArray(); // 생성된 인터페이스타입 배열 대입
                 System.out.print("할인 적용할 상품을 선택해주세요: ");
-                Discount product = discountedList[scanner.nextInt()-1];
+                Discount targetProduct = interfacedProductList[scanner.nextInt()-1]; // 인터페이스 실체 생성
                 System.out.print("적용할 할인율을 입력하세요(10~90): ");
                 int discountRate = scanner.nextInt();
-                applyDiscount(product, discountRate);
+                applyDiscount(targetProduct, discountRate);
+
+                //discountedList[0].setPriceByDiscountRate(discountRate);
 
 
             } else if (selectNo.equals("0")) {
@@ -269,7 +274,7 @@ public class Excute {
                 }
             }
 
-            if (productList[i] != null && productList[i] instanceof Food) {
+            else if (productList[i] != null && productList[i] instanceof Food) {
                 if (productList[i].getName().equals(productName)) {
                     System.out.println("================이름이 " + productName + " 인 음식 정보==============");
                     System.out.println("상품id : " + productList[i].getId());
@@ -280,7 +285,7 @@ public class Excute {
                 }
             }
 
-            if (productList[i] != null && productList[i] instanceof Elect) {
+            else if (productList[i] != null && productList[i] instanceof Elect) {
                 if (productList[i].getName().equals(productName)) {
                     System.out.println("==============이름이 " + productName + " 인 전자기기 정보============");
                     System.out.println("상품id : " + productList[i].getId());
@@ -406,14 +411,14 @@ public class Excute {
     }
 
 
-
-    private static Discount[] planedList(){
+// 인터페이스 타입 배열을 반환하는 매서드 생성
+    private static Discount[] interfaceArray() {
         Discount[] discount = new Discount[100];
         int index = 0;
         for (int i = 0; i < discount.length - 1; i++) {
-            if (productList[i] != null && productList[i] instanceof Discount) {
+            if (productList[i] != null && (productList[i] instanceof Discount)) {
                 System.out.print((index + 1) + "번째 상품: ");
-                showProduct(productList[i]);
+                showProductList(productList[i]);
                 discount[index++] = (Discount) productList[i];
             }
         }
@@ -421,32 +426,36 @@ public class Excute {
     }
 
 
-    private static void showProduct(Product product) {
-        if (product instanceof Books) {
-            System.out.print("{ 도서명: " + (product).getName());
-            System.out.print(", 저자: " + ((Books) product).getWriter());
-            System.out.print(", 가격: " + (( product).getPrice()));
-            System.out.print(", isbn: " + ((Books) product).getIsbn());
-            System.out.print(", 재고: " + ( product).getStock() + " }");
-        } else if (product instanceof Food) {
-            System.out.print("{ 식품명: " + ( product).getName());
-            System.out.print(", 가격: " + ( product).getPrice());
-            System.out.print(", 제조일: " + ((Food) product).getMade());
-            System.out.print(", 유통기한: " + ((Food) product).getLimitation().plusDays(10));
-            System.out.print(", 재고: " + ( product).getStock() + " }");
-        } else if (product instanceof Elect) {
-            System.out.print("{ 제품명: " + ( product).getName());
-            System.out.print(", 가격: " + ( product).getPrice());
-            System.out.print(", 제조사: " + ((Elect) product).getCom());
-            System.out.print(", 색상: " + ((Elect) product).getCol());
+    private static void showProductList(Product productList) {
+        if (productList instanceof Books) {
+            System.out.print("{ 도서명: " + productList.getName());
+            System.out.print(", 저자: " + ((Books) productList).getWriter());
+            System.out.print(", 가격: " + productList.getPrice());
+            System.out.print(", isbn: " + ((Books) productList).getIsbn());
+            System.out.print(", 재고: " + productList.getStock() + " }");
+        } else if (productList instanceof Food) {
+            System.out.print("{ 식품명: " + productList.getName());
+            System.out.print(", 가격: " + productList.getPrice());
+            System.out.print(", 제조일: " + ((Food) productList).getMade());
+            System.out.print(", 유통기한: " + ((Food) productList).getLimitation().plusDays(10));
+            System.out.print(", 재고: " + productList.getStock() + " }");
+        } else if (productList instanceof Elect) {
+            System.out.print("{ 제품명: " + productList.getName());
+            System.out.print(", 가격: " + productList.getPrice());
+            System.out.print(", 제조사: " + ((Elect) productList).getCom());
+            System.out.print(", 색상: " + ((Elect) productList).getCol());
 
         }
         System.out.println();
     }
-    private static void applyDiscount(Discount product, int discountRate) {
-        product.setPriceByDiscountRate(discountRate);
+
+
+    private static void applyDiscount(Discount targetProduct, int discountRate) {
+        targetProduct.setPriceByDiscountRate(discountRate);
 
     }
+
+
 }
 
 

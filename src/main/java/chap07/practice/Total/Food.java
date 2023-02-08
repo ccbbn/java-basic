@@ -2,7 +2,6 @@ package chap07.practice.Total;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Food extends Product implements Discount {
     public static Food[] foodArray = new Food[100];
@@ -45,7 +44,7 @@ public class Food extends Product implements Discount {
     }
 
     @Override
-    public int setPriceByDiscountRate(int rate) {
+    public void setPriceByDiscountRate(int rate) {
         while (rate < 10 || rate > 90) {
             System.out.println("10 ~ 90 까지 값만 입력해주세요");
             rate = new Scanner(System.in).nextInt();
@@ -53,7 +52,6 @@ public class Food extends Product implements Discount {
 
         double ratedPrice = this.getPrice() -  (((double)rate / 100) * this.getPrice());
         this.setPrice((int)(ratedPrice));
-        return this.getPrice();
     }
 
 }
