@@ -2,6 +2,7 @@ package chap07.practice.Total;
 
 import java.awt.print.Book;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -13,7 +14,7 @@ public class Excute {
     private static Product[] productList = new Product[100];
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RangeInvalidException {
 
         addInventory();
 
@@ -45,18 +46,18 @@ public class Excute {
                 eachList();
             } else if (selectNo.equals("7")) {
 
-
-
-
                 Discount[] interfacedProductList = interfaceArray(); // 생성된 인터페이스타입 배열 대입
                 System.out.print("할인 적용할 상품을 선택해주세요: ");
-                Discount targetProduct = interfacedProductList[scanner.nextInt()-1]; // 인터페이스 실체 생성
+                Discount targetProduct = interfacedProductList[scanner.nextInt() - 1]; // 인터페이스 실체 생성
                 System.out.print("적용할 할인율을 입력하세요(10~90): ");
-                int discountRate = scanner.nextInt();
-                applyDiscount(targetProduct, discountRate);
 
-                //discountedList[0].setPriceByDiscountRate(discountRate);
-
+                try {
+                    int discountRate = scanner.nextInt();
+                    applyDiscount(targetProduct, discountRate);
+                } catch (InputMismatchException e) {
+                    System.out.println("양수를 넣거라");
+                }
+                //interfacedProductList[0].setPriceByDiscountRate(discountRate);
 
             } else if (selectNo.equals("0")) {
                 run = false;
@@ -65,10 +66,12 @@ public class Excute {
             }
         }
         System.out.println("프로그램 종료");
+
+
     }
 
 
-    private static void addInventory() {
+    private static void addInventory() throws RangeInvalidException {
         int i = 0;
         productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, Product.bookType);
         productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, Product.bookType);
@@ -82,7 +85,7 @@ public class Excute {
 
     }
 
-    public static void selectMenu() {
+    public static void selectMenu()  {
         System.out.println("1: 도서추가 | 2: 식품추가 | 3: 전자기기추가 | *: 처음으로 돌아가기 ");
 
         boolean stayPage = true;
@@ -97,7 +100,17 @@ public class Excute {
                     break;
                 case "2":
                     System.out.println("식품 추가");
-                    insertFood();
+
+                    try {
+                        insertFood();
+                    } catch (RangeInvalidException e) {
+                        String message = e.getMessage();
+                        System.out.println(message);
+                        System.out.println();
+                        e.printStackTrace();
+                    }
+
+
                     stayPage = false;
                     break;
                 case "3":
@@ -149,7 +162,9 @@ public class Excute {
         }
     }
 
-    public static void insertFood() {
+
+
+    public static void insertFood() throws RangeInvalidException {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -158,11 +173,16 @@ public class Excute {
         System.out.print("상품명: ");
         String name = scanner.next();
 
-        System.out.print("가격: ");
-        int price = scanner.nextInt();
+        int price = 0;
+        int stock = 0;
 
-        System.out.print("재고: ");
-        int stock = scanner.nextInt();
+            System.out.print("가격: ");
+            price = scanner.nextInt();  ///readInt();  -> 안에 trycatch
+
+            System.out.print("재고: ");
+            stock = scanner.nextInt();
+
+
 
         System.out.print("제조일자: ");
         LocalDate made = LocalDate.now();
@@ -454,6 +474,9 @@ public class Excute {
         targetProduct.setPriceByDiscountRate(discountRate);
 
     }
+
+
+
 
 
 }

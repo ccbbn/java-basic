@@ -17,11 +17,12 @@ public abstract class Product {
     public Product(){};
 
     public Product(int id, String name, int price, int stock, int type) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.type = type;
+
+            this.id = id;
+            this.name = name;
+            this.price = price;
+            this.stock = stock;
+            this.type = type;
     }
 
 

@@ -12,8 +12,14 @@ public class Food extends Product implements Discount {
 
     public Food(){};
 
-    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation,int type) {
+    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation,int type) throws RangeInvalidException {
         super(id, name, price, stock, type);
+
+        if ( price < 0 || stock < 0) {
+            throw new RangeInvalidException("음수 불가");
+        }
+
+
         this.made = made;
         this.limitation = limitation;
     }
