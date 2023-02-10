@@ -85,7 +85,7 @@ public class Excute {
 
     }
 
-    public static void selectMenu()  {
+    public static void selectMenu() throws RangeInvalidException {
         System.out.println("1: 도서추가 | 2: 식품추가 | 3: 전자기기추가 | *: 처음으로 돌아가기 ");
 
         boolean stayPage = true;
@@ -130,7 +130,7 @@ public class Excute {
         }
     }
 
-    public static void insertBook() {
+    public static void insertBook() throws RangeInvalidException {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -204,7 +204,7 @@ public class Excute {
         }
     }
 
-    public static void insertElect() {
+    public static void insertElect() throws RangeInvalidException {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);

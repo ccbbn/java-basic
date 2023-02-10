@@ -16,7 +16,10 @@ public abstract class Product {
 
     public Product(){};
 
-    public Product(int id, String name, int price, int stock, int type) {
+    public Product(int id, String name, int price, int stock, int type) throws chap07.practice.TotalException.RangeInvalidException {
+        if ( price < 0 || stock < 0) {
+//            throw new ("음수 불가");
+        }
 
             this.id = id;
             this.name = name;

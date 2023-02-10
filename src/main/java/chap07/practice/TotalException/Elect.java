@@ -10,7 +10,7 @@ class Elect extends Product {
      String com;
      String col;
 
-    public Elect(int id, String name, int price, int stock, String com, String col, int type) {
+    public Elect(int id, String name, int price, int stock, String com, String col, int type) throws RangeInvalidException {
         super(id, name, price, stock, type);
         this.com = com;
         this.col = col;

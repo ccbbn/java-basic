@@ -16,8 +16,12 @@ public abstract class Product {
 
     public Product(){};
 
-    public Product(int id, String name, int price, int stock, int type) {
+    public Product(int id, String name, int price, int stock, int type)throws RangeInvalidException {
 
+
+        if ( price < 0 || stock < 0) {
+            throw new RangeInvalidException("음수 불가");
+        }
             this.id = id;
             this.name = name;
             this.price = price;

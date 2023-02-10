@@ -20,6 +20,8 @@ public class Excute {
 
         addInventory();
 
+
+
         boolean run = true;
         while (run) {
             System.out.println("---------------------------------------------------------------------------------------------------------");
@@ -54,7 +56,9 @@ public class Excute {
                 System.out.print("적용할 할인율을 입력하세요(10~90): ");
 
 
-               applyDiscount(targetProduct, checkIntger());
+
+                int rate = checkInteger();
+                applyDiscount(targetProduct, rate);
 
                 //interfacedProductList[0].setPriceByDiscountRate(discountRate);
 
@@ -84,7 +88,7 @@ public class Excute {
 
     }
 
-    public static void selectMenu()  {
+    public static void selectMenu() throws RangeInvalidException {
         System.out.println("1: 도서추가 | 2: 식품추가 | 3: 전자기기추가 | *: 처음으로 돌아가기 ");
 
         boolean stayPage = true;
@@ -109,7 +113,6 @@ public class Excute {
                         e.printStackTrace();
                     }
 
-
                     stayPage = false;
                     break;
                 case "3":
@@ -129,7 +132,7 @@ public class Excute {
         }
     }
 
-    public static void insertBook() {
+    public static void insertBook() throws RangeInvalidException {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -181,8 +184,6 @@ public class Excute {
         System.out.print("재고: ");
         stock = scanner.nextInt();
 
-
-
         System.out.print("제조일자: ");
         LocalDate made = LocalDate.now();
         System.out.println(made);
@@ -203,7 +204,7 @@ public class Excute {
         }
     }
 
-    public static void insertElect() {
+    public static void insertElect() throws RangeInvalidException {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -471,7 +472,7 @@ public class Excute {
 
 
 
-    private static int checkIntger(){
+    private static int checkInteger(){
         int input;
         while (true) {
             try {
@@ -480,6 +481,7 @@ public class Excute {
             } catch (InputMismatchException e) {
                 System.out.println("올바른 숫자만 입력하세요");
             }
+
         }
         return input;
     }

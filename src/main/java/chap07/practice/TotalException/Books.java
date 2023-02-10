@@ -10,7 +10,7 @@ public class Books extends Product {
     int isbn;
 
 
-    public Books(int id, String name, int price, int stock, String writer, int isbn, int type) {
+    public Books(int id, String name, int price, int stock, String writer, int isbn, int type) throws RangeInvalidException {
         super(id, name, price, stock, type);
         this.writer = writer;
         this.isbn = isbn;
