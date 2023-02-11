@@ -18,13 +18,14 @@ public class Food extends Product implements Discount, Disposable {
 
     ;
 
-    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation, int type) {
+    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation, int type, boolean expire) {
         super(id, name, price, stock, type);
 
 
 
         this.made = made;
         this.limitation = limitation;
+        this.expire = true;
     }
 
 

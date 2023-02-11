@@ -15,7 +15,6 @@ public class Excute {
     static DecimalFormat numComma = new DecimalFormat("#,###");
 
 
-
     public static void main(String[] args) throws Exception {
 
         addInventory();
@@ -57,21 +56,21 @@ public class Excute {
     }
 
 
-    private static void addInventory()  {
+    private static void addInventory() {
         int i = 0;
         productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, Product.bookType);
         productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, Product.bookType);
         productList[i++] = new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, Product.bookType);
-        productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now(), LocalDate.now().minusDays(30), Product.foodType);
-        productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now(), LocalDate.now().minusDays(100), Product.foodType);
-        productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now(), LocalDate.now().plusDays(3), Product.foodType);
+        productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now(), LocalDate.now().minusDays(30), Product.foodType, false);
+        productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now(), LocalDate.now().minusDays(100), Product.foodType, false);
+        productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now(), LocalDate.now().plusDays(3), Product.foodType, false);
         productList[i++] = new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙", Product.electType);
         productList[i++] = new Elect(675665, "냉장고", 1800000, 5, "LG", "실버", Product.electType);
         productList[i] = new Elect(233277, "스피커", 200000, 5, "BOSE", "화이트", Product.electType);
 
     }
 
-    public static void selectMenu()  {
+    public static void selectMenu() {
         System.out.println("1: 도서추가 | 2: 식품추가 | 3: 전자기기추가 | *: 처음으로 돌아가기 ");
 
         boolean stayPage = true;
@@ -138,7 +137,7 @@ public class Excute {
         }
     }
 
-    public static void insertFood()  {
+    public static void insertFood() {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -164,7 +163,7 @@ public class Excute {
         System.out.println("-----입력완료-----");
 
 
-        Food food = new Food(id, name, price, stock, made, limitation, Product.foodType);
+        Food food = new Food(id, name, price, stock, made, limitation, Product.foodType, false);
         for (int i = 0; i <= productList.length; i++) {
             if (productList[i] == null) {
                 productList[i] = food;
@@ -173,7 +172,7 @@ public class Excute {
         }
     }
 
-    public static void insertElect()  {
+    public static void insertElect() {
 
         System.out.print("상품ID: ");
         int id = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -215,7 +214,7 @@ public class Excute {
         }
     }
 
-    public static void findProduct(){
+    public static void findProduct() {
         System.out.println("찾는 상품이름을 적으세요 | *: 처음으로 돌아가기");
         System.out.print("찾는 것은?? : ");
 
@@ -260,17 +259,13 @@ public class Excute {
                     commonInfo(i);
                     System.out.println("작가 : " + ((Books) productList[i]).getWriter());
                 }
-            }
-
-            else if (productList[i] != null && productList[i] instanceof Food) {
+            } else if (productList[i] != null && productList[i] instanceof Food) {
                 if (productList[i].getName().contains(productName)) {
                     System.out.println("================이름이 " + productName + " 인 음식 정보==============");
                     commonInfo(i);
                     System.out.println("유통기한 : " + ((Food) productList[i]).getLimitation());
                 }
-            }
-
-            else if (productList[i] != null && productList[i] instanceof Elect) {
+            } else if (productList[i] != null && productList[i] instanceof Elect) {
                 if (productList[i].getName().contains(productName)) {
                     System.out.println("==============이름이 " + productName + " 인 전자기기 정보============");
                     commonInfo(i);
@@ -281,7 +276,7 @@ public class Excute {
         }
     }
 
-    private static void alllist(){
+    private static void alllist() {
         bookList();
         foodList();
         electList();
@@ -380,8 +375,8 @@ public class Excute {
     private static Disposable[] disposables() {
         Disposable[] disposables = new Disposable[100];
         int index = 0;
-        for (int i = 0; i < disposables.length - 1; i++){
-            if(productList[i] != null && (productList[i] instanceof Disposable)) {
+        for (int i = 0; i < disposables.length - 1; i++) {
+            if (productList[i] != null && (productList[i] instanceof Disposable)) {
                 disposables[index++] = (Disposable) productList[i];
             }
         }
@@ -389,8 +384,7 @@ public class Excute {
     }
 
 
-
-// 인터페이스 타입 배열을 반환하는 매서드 생성
+    // 인터페이스 타입 배열을 반환하는 매서드 생성
     private static Discount[] interfaceArray() {
         Discount[] discount = new Discount[100];
         int index = 0;
@@ -439,7 +433,7 @@ public class Excute {
     }
 
 
-    private static void commonInfo(int i){
+    private static void commonInfo(int i) {
         System.out.print(productList[i].getId());
         System.out.print("        ");
         System.out.print(productList[i].getName().replaceAll("\\s", ""));
@@ -455,16 +449,12 @@ public class Excute {
             if (disposablesList[i] != null) {
 
 
+            }
+            System.out.println(count + "개");
+        }
 
 
-
-
-        }System.out.println(count + "개");
     }
-
-
-
-
 }
 
 
