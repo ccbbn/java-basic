@@ -21,9 +21,9 @@ public class Excute {
 
         boolean run = true;
         while (run) {
-            System.out.println("---------------------------------------------------------------------------------------------------------");
-            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 0.종료");
-            System.out.println("---------------------------------------------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------");
+            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 0.종료");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------");
             System.out.print("선택> ");
 
             String selectNo = scanner.next();
@@ -61,9 +61,9 @@ public class Excute {
         productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, Product.bookType);
         productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, Product.bookType);
         productList[i++] = new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, Product.bookType);
-        productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now(), LocalDate.now().minusDays(30), Product.foodType, false);
-        productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now(), LocalDate.now().minusDays(100), Product.foodType, false);
-        productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now(), LocalDate.now().plusDays(3), Product.foodType, false);
+        productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15), Product.foodType);
+        productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now().minusDays(60), LocalDate.now().minusDays(30), Product.foodType);
+        productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now().minusDays(1), LocalDate.now().plusDays(3), Product.foodType);
         productList[i++] = new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙", Product.electType);
         productList[i++] = new Elect(675665, "냉장고", 1800000, 5, "LG", "실버", Product.electType);
         productList[i] = new Elect(233277, "스피커", 200000, 5, "BOSE", "화이트", Product.electType);
@@ -157,13 +157,13 @@ public class Excute {
         System.out.println(made);
 
         System.out.print("유통기한: ");
-        LocalDate limitation = LocalDate.now().plusYears(1);
+        LocalDate limitation = LocalDate.now().plusDays((long)(Math.random()*100));
         System.out.println(limitation);
 
         System.out.println("-----입력완료-----");
 
 
-        Food food = new Food(id, name, price, stock, made, limitation, Product.foodType, false);
+        Food food = new Food(id, name, price, stock, made, limitation, Product.foodType);
         for (int i = 0; i <= productList.length; i++) {
             if (productList[i] == null) {
                 productList[i] = food;
@@ -322,7 +322,7 @@ public class Excute {
 
     private static void bookList() {
         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■도서목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 저자");
+        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 재고 | 5: 저자");
         System.out.println("=============================================================");
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Books) {
@@ -338,14 +338,14 @@ public class Excute {
 
     public static void foodList() {
         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■식품목록■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 |   4: 제조일     |   5: 유통기한     ");
+        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 재고  |  5: 제조일     |   6: 유통기한     ");
         System.out.println("==================================================================");
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Food) {
                 if (productList[i].getType() == Product.foodType) {
                     commonInfo(i);
                     System.out.print(((Food) productList[i]).made);
-                    System.out.print("        ");
+                    System.out.print("    ");
                     System.out.println(((Food) productList[i]).limitation);
                 }
             }
@@ -356,31 +356,20 @@ public class Excute {
 
     public static void electList() {
         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■전자기기 목록■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 제조사 | 5: 색상");
+        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 재고 | 5: 제조사  | 6: 색상 ");
         System.out.println("===============================================================");
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Elect) {
                 if (productList[i].getType() == Product.electType) {
                     commonInfo(i);
                     System.out.print(((Elect) productList[i]).getCom());
-                    System.out.print("        ");
+                    System.out.print("    ");
                     System.out.println(((Elect) productList[i]).getCol());
                 }
             }
         }
         System.out.println("-------------------------전자기기 목록 끝-------------------------");
         System.out.println();
-    }
-
-    private static Disposable[] disposables() {
-        Disposable[] disposables = new Disposable[100];
-        int index = 0;
-        for (int i = 0; i < disposables.length - 1; i++) {
-            if (productList[i] != null && (productList[i] instanceof Disposable)) {
-                disposables[index++] = (Disposable) productList[i];
-            }
-        }
-        return disposables;
     }
 
 
@@ -432,14 +421,26 @@ public class Excute {
         //interfacedProductList[0].setPriceByDiscountRate(discountRate);
     }
 
-
     private static void commonInfo(int i) {
         System.out.print(productList[i].getId());
-        System.out.print("        ");
+        System.out.print("    ");
         System.out.print(productList[i].getName().replaceAll("\\s", ""));
-        System.out.print("        ");
+        System.out.print("    ");
         System.out.print(numComma.format(productList[i].getPrice()));
-        System.out.print("        ");
+        System.out.print("    ");
+        System.out.print(numComma.format(productList[i].getStock()));
+        System.out.print("    ");
+    }
+
+    private static Disposable[] disposables() {
+        Disposable[] disposables = new Disposable[100];
+        int index = 0;
+        for (int i = 0; i < disposables.length - 1; i++) {
+            if (productList[i] != null && (productList[i] instanceof Disposable)) {
+                disposables[index++] = (Disposable) productList[i];
+            }
+        }
+        return disposables;
     }
 
     private static void disposeProducts(Disposable[] disposablesList) {
@@ -447,15 +448,31 @@ public class Excute {
         disposablesList = disposables();
         for (int i = 0; i < disposablesList.length; i++) {
             if (disposablesList[i] != null) {
-
-
+                if(disposablesList[i].checkExpiration() == 1)
+                { count++;
+                    System.out.println(((Product)disposablesList[i]).getName() +"의 재고 "+ ((Product)disposablesList[i]).getStock()+ "개가 폐기됨");
+                        disposeProduct(((Product)disposablesList[i]).getName());
+                }
             }
-            System.out.println(count + "개");
-        }
 
+        }
+        System.out.println("총 " + count + "가지의 품목이 폐기되었습니다.");
 
     }
+
+    public static void disposeProduct(String productName) {
+        for (int i = 0; i < productList.length - 1; i++) {
+            if (productList[i] != null) {
+                if (productList[i].getName().equals(productName)) {
+                    productList[i] = null;
+                }
+            }
+        }
+    }
+
+
 }
+
 
 
 

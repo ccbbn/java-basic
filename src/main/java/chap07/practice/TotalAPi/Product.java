@@ -10,8 +10,6 @@ public abstract class Product {
     int price;
     int stock;
     int type;
-    LocalDate made;
-    LocalDate limitation;
 
 
     final static int bookType = 1;

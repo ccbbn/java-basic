@@ -1,6 +1,7 @@
 package chap07.practice.TotalAPi;
 
 import java.time.LocalDate;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -8,24 +9,21 @@ public class Food extends Product implements Discount, Disposable {
     public static Food[] foodArray = new Food[100];
     static Scanner scanner = new Scanner(System.in);
 
+
+
     LocalDate made;
     LocalDate limitation;
 
-    boolean expire;
+
 
     public Food() {
     }
 
-    ;
 
-    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation, int type, boolean expire) {
+    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation, int type) {
         super(id, name, price, stock, type);
-
-
-
         this.made = made;
         this.limitation = limitation;
-        this.expire = true;
     }
 
 
@@ -54,15 +52,6 @@ public class Food extends Product implements Discount, Disposable {
     }
 
 
-
-    public boolean isExpire() {
-        return expire;
-    }
-
-    public void setExpire(boolean expire) {
-        this.expire = expire;
-    }
-
     @Override
     public void setPriceByDiscountRate(int rate) {
         while (rate < 10 || rate > 90) {
@@ -75,17 +64,12 @@ public class Food extends Product implements Discount, Disposable {
     }
 
     @Override
-    public boolean Check() {
-
-        if( this.getMade().isBefore(this.getLimitation())){
-            this.expire = false;
-            System.out.println("유통기한 유효합니다");
-            } else {
-            this.expire = true;
-            System.out.println("유통기한이 만료됐습니다.");
+    public int checkExpiration() {
+        int count = 0;
+        if( LocalDate.now().isAfter(this.getLimitation())){
+            count++;
         }
-
-        return false;
+        return count;   // 제조일자가 유통기한을
     }
 
 }
