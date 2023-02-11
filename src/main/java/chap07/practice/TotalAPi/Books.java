@@ -1,10 +1,13 @@
-package chap07.practice.TotalException;
+package chap07.practice.TotalAPi;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Books extends Product {
     public static Books[] booksArray = new Books[100];
     static Scanner scanner = new Scanner(System.in);
+
+    DecimalFormat comma = new DecimalFormat("#,###");
 
     String writer;
     int isbn;

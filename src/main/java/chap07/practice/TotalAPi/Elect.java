@@ -1,4 +1,4 @@
-package chap07.practice.TotalException;
+package chap07.practice.TotalAPi;
 
 import java.util.Scanner;
 

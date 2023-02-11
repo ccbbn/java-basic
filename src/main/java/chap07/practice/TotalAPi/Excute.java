@@ -1,5 +1,6 @@
-package chap07.practice.TotalException;
+package chap07.practice.TotalAPi;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,6 +11,9 @@ public class Excute {
     private static Scanner scanner = new Scanner(System.in);
 
     private static Product[] productList = new Product[100];
+
+    static DecimalFormat numComma = new DecimalFormat("#,###");
+
 
 
     public static void main(String[] args) throws Exception {
@@ -39,6 +43,8 @@ public class Excute {
                 eachList();
             } else if (selectNo.equals("7")) {
                 applyDiscount();
+            } else if (selectNo.equals("8")) {
+                disposeProducts(disposables());
             } else if (selectNo.equals("0")) {
                 run = false;
             } else {
@@ -56,8 +62,8 @@ public class Excute {
         productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, Product.bookType);
         productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, Product.bookType);
         productList[i++] = new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, Product.bookType);
-        productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now(), LocalDate.now().plusDays(30), Product.foodType);
-        productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now(), LocalDate.now().plusDays(20), Product.foodType);
+        productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now(), LocalDate.now().minusDays(30), Product.foodType);
+        productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now(), LocalDate.now().minusDays(100), Product.foodType);
         productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now(), LocalDate.now().plusDays(3), Product.foodType);
         productList[i++] = new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙", Product.electType);
         productList[i++] = new Elect(675665, "냉장고", 1800000, 5, "LG", "실버", Product.electType);
@@ -113,7 +119,7 @@ public class Excute {
         int price = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("재고: ");
-        int stock = (int)ReceptionList.checkInputReception("양의정수입력");
+        int stock = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("저자: ");
         String writer = scanner.next();
@@ -145,7 +151,7 @@ public class Excute {
         int price = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("재고: ");
-        int stock = (int)ReceptionList.checkInputReception("양의정수입력");
+        int stock = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("제조일자: ");
         LocalDate made = LocalDate.now();
@@ -180,7 +186,7 @@ public class Excute {
         int price = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("재고: ");
-        int stock = (int)ReceptionList.checkInputReception("양의정수입력");
+        int stock = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("제조사: ");
         String com = scanner.next();
@@ -249,32 +255,25 @@ public class Excute {
 
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Books) {
-                if (productList[i].getName().equals(productName)) {
+                if (productList[i].getName().contains(productName)) {
                     System.out.println("================이름이 " + productName + " 인 도서 정보==============");
-                    System.out.println("상품id : " + productList[i].getId());
-                    System.out.println("책이름 : " + productList[i].getName());
-                    System.out.println("가격 : " + productList[i].getPrice());
+                    commonInfo(i);
                     System.out.println("작가 : " + ((Books) productList[i]).getWriter());
                 }
             }
 
             else if (productList[i] != null && productList[i] instanceof Food) {
-                if (productList[i].getName().equals(productName)) {
+                if (productList[i].getName().contains(productName)) {
                     System.out.println("================이름이 " + productName + " 인 음식 정보==============");
-                    System.out.println("상품id : " + productList[i].getId());
-                    System.out.println("음식이름 : " + productList[i].getName());
-                    System.out.println("가격 : " + productList[i].getPrice());
-                    System.out.println("제조일 : " + ((Food) productList[i]).getMade());
+                    commonInfo(i);
                     System.out.println("유통기한 : " + ((Food) productList[i]).getLimitation());
                 }
             }
 
             else if (productList[i] != null && productList[i] instanceof Elect) {
-                if (productList[i].getName().equals(productName)) {
+                if (productList[i].getName().contains(productName)) {
                     System.out.println("==============이름이 " + productName + " 인 전자기기 정보============");
-                    System.out.println("상품id : " + productList[i].getId());
-                    System.out.println("전자기기 이름: " + productList[i].getName());
-                    System.out.println("전자기기 가격: " + productList[i].getPrice());
+                    commonInfo(i);
                     System.out.println("제조회사 : " + ((Elect) productList[i]).getCom());
                     System.out.println("색상 : " + ((Elect) productList[i]).getCol());
                 }
@@ -333,12 +332,7 @@ public class Excute {
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Books) {
                 if (productList[i].getType() == Product.bookType) {
-                    System.out.print(productList[i].getId());
-                    System.out.print("        ");
-                    System.out.print(productList[i].getName());
-                    System.out.print("        ");
-                    System.out.print(productList[i].getPrice());
-                    System.out.print("        ");
+                    commonInfo(i);
                     System.out.println(((Books) productList[i]).getWriter());
                 }
             }
@@ -354,12 +348,7 @@ public class Excute {
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Food) {
                 if (productList[i].getType() == Product.foodType) {
-                    System.out.print(productList[i].getId());
-                    System.out.print("        ");
-                    System.out.print(productList[i].getName());
-                    System.out.print("        ");
-                    System.out.print(productList[i].getPrice());
-                    System.out.print("        ");
+                    commonInfo(i);
                     System.out.print(((Food) productList[i]).made);
                     System.out.print("        ");
                     System.out.println(((Food) productList[i]).limitation);
@@ -377,12 +366,7 @@ public class Excute {
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Elect) {
                 if (productList[i].getType() == Product.electType) {
-                    System.out.print(productList[i].getId());
-                    System.out.print("        ");
-                    System.out.print(productList[i].getName());
-                    System.out.print("        ");
-                    System.out.print(productList[i].getPrice());
-                    System.out.print("        ");
+                    commonInfo(i);
                     System.out.print(((Elect) productList[i]).getCom());
                     System.out.print("        ");
                     System.out.println(((Elect) productList[i]).getCol());
@@ -392,6 +376,18 @@ public class Excute {
         System.out.println("-------------------------전자기기 목록 끝-------------------------");
         System.out.println();
     }
+
+    private static Disposable[] disposables() {
+        Disposable[] disposables = new Disposable[100];
+        int index = 0;
+        for (int i = 0; i < disposables.length - 1; i++){
+            if(productList[i] != null && (productList[i] instanceof Disposable)) {
+                disposables[index++] = (Disposable) productList[i];
+            }
+        }
+        return disposables;
+    }
+
 
 
 // 인터페이스 타입 배열을 반환하는 매서드 생성
@@ -441,6 +437,33 @@ public class Excute {
 
         //interfacedProductList[0].setPriceByDiscountRate(discountRate);
     }
+
+
+    private static void commonInfo(int i){
+        System.out.print(productList[i].getId());
+        System.out.print("        ");
+        System.out.print(productList[i].getName().replaceAll("\\s", ""));
+        System.out.print("        ");
+        System.out.print(numComma.format(productList[i].getPrice()));
+        System.out.print("        ");
+    }
+
+    private static void disposeProducts(Disposable[] disposablesList) {
+        int count = 0;
+        disposablesList = disposables();
+        for (int i = 0; i < disposablesList.length; i++) {
+            if (disposablesList[i] != null) {
+
+
+
+
+
+
+        }System.out.println(count + "개");
+    }
+
+
+
 
 }
 

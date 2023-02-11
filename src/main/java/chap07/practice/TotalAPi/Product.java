@@ -1,4 +1,6 @@
-package chap07.practice.TotalException;
+package chap07.practice.TotalAPi;
+
+import java.time.LocalDate;
 
 public abstract class Product {
 
@@ -8,6 +10,9 @@ public abstract class Product {
     int price;
     int stock;
     int type;
+    LocalDate made;
+    LocalDate limitation;
+
 
     final static int bookType = 1;
     final static int foodType = 2;
@@ -17,7 +22,6 @@ public abstract class Product {
     public Product(){};
 
     public Product(int id, String name, int price, int stock, int type)  {
-
 
             this.id = id;
             this.name = name;
@@ -46,6 +50,8 @@ public abstract class Product {
     public void setType(int type) {
         this.type = type;
     }
+
+
 }
 
 

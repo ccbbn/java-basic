@@ -21,3 +21,27 @@
 //    }
 //}
 //
+//private static int checkIntger(){
+//        int input;
+//        while (true) {
+//        try {
+//        input = new Scanner(System.in).nextInt();
+//        break;
+//        } catch (InputMismatchException e) {
+//        System.out.println("올바른 숫자만 입력하세요");
+//        }
+//        }
+//        return input;
+//        }
+
+
+
+//
+//                    try {
+//                            insertFood();
+//                            } catch (RangeInvalidException e) {
+//                            String message = e.getMessage();
+//                            System.out.println(message);
+//                            System.out.println();
+//                            e.printStackTrace();
+//                            }
