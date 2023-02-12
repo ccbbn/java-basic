@@ -442,7 +442,7 @@ public class Excute {
     private static void commonInfo(int i) {
         System.out.print(productList[i].getId());
         System.out.print("    ");
-        System.out.print(productList[i].getName().replaceAll("\\s", ""));
+        System.out.print(productList[i].getName());
         System.out.print("    ");
         System.out.print(numComma.format(productList[i].getPrice()));
         System.out.print("    ");

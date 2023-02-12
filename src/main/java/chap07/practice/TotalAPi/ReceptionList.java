@@ -27,7 +27,7 @@ public class ReceptionList {
                         stayPage = false;
                         break;
                     case "문자입력":
-                        output = new Scanner(System.in).nextLine();
+                        output = new Scanner(System.in).next().trim();
                         stayPage = false;
                         break;
                     case "양의정수입력":
