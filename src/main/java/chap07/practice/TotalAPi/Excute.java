@@ -62,6 +62,11 @@ public class Excute {
         productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
         productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
         productList[i++] = new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(423664, "해리포터와 불의잔", 18000, 200, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(538563, "해리포터와 마법사의 돌", 18000, 150, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(677111, "해리포터와 비밀의 방", 18000, 300, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(789952, "실전투자의 비밀", 18000, 400, "김박사", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(583433, "오즈의 마법사", 12000, 500, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
         productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15), Product.foodType);
         productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now().minusDays(60), LocalDate.now().minusDays(30), Product.foodType);
         productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now().minusDays(1), LocalDate.now().plusDays(3), Product.foodType);
@@ -158,7 +163,7 @@ public class Excute {
         int stock = (int) ReceptionList.checkInputReception("양의정수입력");
 
         System.out.print("제조일자: ");
-        LocalDate made = LocalDate.now();
+        LocalDate made = LocalDate.now().minusDays((long) (Math.random() * 100));
         System.out.println(made);
 
         System.out.print("유통기한: ");
@@ -268,7 +273,7 @@ public class Excute {
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Books) {
                 if (productList[i].getName().contains(productName)) {
-                    System.out.println("================이름이 " + productName + " 인 도서 정보==============");
+                    System.out.println("================이름에 " + productName + " 가 포함된 도서 정보==============");
                     commonInfo(i);
                     System.out.println("작가 : " + ((Books) productList[i]).getWriter());
                 }
@@ -351,7 +356,7 @@ public class Excute {
 
     public static void foodList() {
         System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■식품목록■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 재고  |  5: 제조일     |   6: 유통기한     ");
+        System.out.println("1: 상품id | 2: 상품명 | 3: 가격 | 4: 재고  |  5: 제조일  | 6: 유통기한  ");
         System.out.println("==================================================================");
         for (int i = 0; i < productList.length - 1; i++) {
             if (productList[i] != null && productList[i] instanceof Food) {
@@ -363,7 +368,7 @@ public class Excute {
                 }
             }
         }
-        System.out.println("----------------------------식품 목록 끝----------------------------");
+        System.out.println("----------------------------식품 목록 끝---------------------------");
         System.out.println();
     }
 
