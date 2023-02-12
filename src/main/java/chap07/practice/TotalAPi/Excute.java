@@ -453,7 +453,7 @@ public class Excute {
                 count++;
                 System.out.println(((Product) disposablesList[i]).getName() +"의 재고 " + ((Product) disposablesList[i]).getStock()+ "개가 폐기됨" +
                         "/ 유통기한 : " + ((Product) disposablesList[i]).getExpiration() + "/ 오늘 날짜로 부터 " +
-                        ChronoUnit.DAYS.between(((Product) disposablesList[i]).expiration,LocalDate.now()) + "일 지남");
+                        ChronoUnit.DAYS.between(((Product) disposablesList[i]).getExpiration(),LocalDate.now()) + "일 지남");
                 deleteProduct(((Product) disposablesList[i]).getName());
             }
         }
