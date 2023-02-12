@@ -1,6 +1,7 @@
 package chap07.practice.TotalAPi;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Books extends Product {
@@ -13,8 +14,8 @@ public class Books extends Product {
     int isbn;
 
 
-    public Books(int id, String name, int price, int stock, String writer, int isbn, int type)  {
-        super(id, name, price, stock, type);
+    public Books(int id, String name, int price, int stock, String writer, int isbn, LocalDate made, LocalDate expiration, int type)  {
+        super(id, name, price, stock, made, expiration, type);
         this.writer = writer;
         this.isbn = isbn;
 

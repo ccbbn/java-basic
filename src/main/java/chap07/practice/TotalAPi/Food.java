@@ -12,7 +12,7 @@ public class Food extends Product implements Discount, Disposable {
 
 
     LocalDate made;
-    LocalDate limitation;
+    LocalDate expiration;
 
 
 
@@ -20,10 +20,10 @@ public class Food extends Product implements Discount, Disposable {
     }
 
 
-    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate limitation, int type) {
-        super(id, name, price, stock, type);
+    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate expiration, int type) {
+        super(id, name, price, stock, made, expiration, type);
         this.made = made;
-        this.limitation = limitation;
+        this.expiration = expiration;
     }
 
 
@@ -43,12 +43,15 @@ public class Food extends Product implements Discount, Disposable {
         this.made = made;
     }
 
-    public LocalDate getLimitation() {
-        return limitation;
+    public LocalDate getExpiration() {
+        return expiration;
     }
 
-    public void setLimitation(LocalDate limitation) {
-        this.limitation = limitation;
+
+
+
+    public void setLimitation(LocalDate expiration) {
+        this.expiration = expiration;
     }
 
 
@@ -64,12 +67,12 @@ public class Food extends Product implements Discount, Disposable {
     }
 
     @Override
-    public int checkExpiration() {
-        int count = 0;
-        if( LocalDate.now().isAfter(this.getLimitation())){
-            count++;
+    public boolean isExpiredDate() {
+        boolean isExpiredDate = false;
+        if( LocalDate.now().isAfter(this.getExpiration())){
+            isExpiredDate = true;
         }
-        return count;   // 제조일자가 유통기한을
+        return isExpiredDate;
     }
 
 }

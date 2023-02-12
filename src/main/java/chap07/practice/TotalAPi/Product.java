@@ -11,6 +11,8 @@ public abstract class Product {
     int stock;
     int type;
 
+    LocalDate made;
+    LocalDate expiration;
 
     final static int bookType = 1;
     final static int foodType = 2;
@@ -19,16 +21,25 @@ public abstract class Product {
 
     public Product(){};
 
-    public Product(int id, String name, int price, int stock, int type)  {
+    public Product(int id, String name, int price, int stock, LocalDate made, LocalDate expiration, int type)  {
 
             this.id = id;
             this.name = name;
             this.price = price;
             this.stock = stock;
             this.type = type;
+            this.made = made;
+            this.expiration = expiration;
     }
 
 
+    public LocalDate getMade() {
+        return made;
+    }
+
+    public LocalDate getExpiration() {
+        return expiration;
+    }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
