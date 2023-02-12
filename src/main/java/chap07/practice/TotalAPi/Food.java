@@ -49,12 +49,6 @@ public class Food extends Product implements Discount, Disposable {
 
 
 
-
-    public void setLimitation(LocalDate expiration) {
-        this.expiration = expiration;
-    }
-
-
     @Override
     public void setPriceByDiscountRate(int rate) {
         while (rate < 10 || rate > 90) {
@@ -69,7 +63,7 @@ public class Food extends Product implements Discount, Disposable {
     @Override
     public boolean isExpiredDate() {
         boolean isExpiredDate = false;
-        if( LocalDate.now().isAfter(this.getExpiration())){
+        if( LocalDate.now().isAfter(this.getExpiration()) ){
             isExpiredDate = true;
         }
         return isExpiredDate;

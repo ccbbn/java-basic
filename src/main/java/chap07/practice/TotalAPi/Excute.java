@@ -59,15 +59,15 @@ public class Excute {
 
     private static void addInventory() {
         int i = 0;
-        productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100,LocalDate.now(),LocalDate.now().plusYears(100),Product.bookType);
-        productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, LocalDate.now(),LocalDate.now().plusYears(100),Product.bookType);
-        productList[i++] = new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, LocalDate.now(),LocalDate.now().plusYears(100),Product.bookType);
+        productList[i++] = new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
+        productList[i++] = new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType);
         productList[i++] = new Food(778978, "떡볶이", 3000, 100, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15), Product.foodType);
         productList[i++] = new Food(123978, "라볶이", 4000, 100, LocalDate.now().minusDays(60), LocalDate.now().minusDays(30), Product.foodType);
         productList[i++] = new Food(123978, "소고기", 50000, 100, LocalDate.now().minusDays(1), LocalDate.now().plusDays(3), Product.foodType);
-        productList[i++] = new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙",LocalDate.now(),LocalDate.now().plusYears(100), Product.electType);
-        productList[i++] = new Elect(675665, "냉장고", 1800000, 5, "LG", "실버",LocalDate.now(),LocalDate.now().plusYears(100), Product.electType);
-        productList[i] = new Elect(233277, "스피커", 200000, 5, "BOSE", "화이트",LocalDate.now(),LocalDate.now().plusYears(100), Product.electType);
+        productList[i++] = new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙", LocalDate.now(), LocalDate.now().plusYears(100), Product.electType);
+        productList[i++] = new Elect(675665, "냉장고", 1800000, 5, "LG", "실버", LocalDate.now(), LocalDate.now().plusYears(100), Product.electType);
+        productList[i] = new Elect(233277, "스피커", 200000, 5, "BOSE", "화이트", LocalDate.now(), LocalDate.now().plusYears(100), Product.electType);
 
     }
 
@@ -129,7 +129,7 @@ public class Excute {
 
 
         LocalDate made = LocalDate.now();
-        LocalDate expiration = LocalDate.now().plusYears((long)(Math.random()*100));
+        LocalDate expiration = LocalDate.now().plusYears((long) (Math.random() * 100));
 
         System.out.println("-----입력완료-----");
 
@@ -162,7 +162,7 @@ public class Excute {
         System.out.println(made);
 
         System.out.print("유통기한: ");
-        LocalDate expiration = LocalDate.now().plusDays((long)(Math.random()*100));
+        LocalDate expiration = LocalDate.now().plusDays((long) (Math.random() * 100));
         System.out.println(expiration);
 
         System.out.println("-----입력완료-----");
@@ -199,7 +199,7 @@ public class Excute {
         String col = scanner.next();
 
         LocalDate made = LocalDate.now();
-        LocalDate expiration = LocalDate.now().plusYears((long)(Math.random()*100));
+        LocalDate expiration = LocalDate.now().plusYears((long) (Math.random() * 100));
 
         System.out.println("-----입력완료-----");
 
@@ -247,6 +247,17 @@ public class Excute {
         String productName = (String) ReceptionList.checkInputReception("문자입력");
         deleteProduct(productName);
     }
+
+    public static void deleteProduct(String productName) {
+        for (int i = 0; i < productList.length - 1; i++) {
+            if (productList[i] != null) {
+                if (productList[i].getName().equals(productName)) {
+                    productList[i] = null;
+                }
+            }
+        }
+    }
+
 
     public static void findName() {
 
@@ -449,27 +460,16 @@ public class Excute {
         int count = 0;
         Disposable[] disposablesList = disposables();
         for (int i = 0; i < disposablesList.length; i++) {
-            if ( (disposablesList[i] != null) && (disposablesList[i].isExpiredDate()) ) {
+            if ((disposablesList[i] != null) && (disposablesList[i].isExpiredDate())) {
                 count++;
-                System.out.println(((Product) disposablesList[i]).getName() +"의 재고 " + ((Product) disposablesList[i]).getStock()+ "개가 폐기됨" +
+                System.out.println(((Product) disposablesList[i]).getName() + "의 재고 " + ((Product) disposablesList[i]).getStock() + "개가 폐기됨" +
                         "/ 유통기한 : " + ((Product) disposablesList[i]).getExpiration() + "/ 오늘 날짜로 부터 " +
-                        ChronoUnit.DAYS.between(((Product) disposablesList[i]).getExpiration(),LocalDate.now()) + "일 지남");
+                        ChronoUnit.DAYS.between(((Product) disposablesList[i]).getExpiration(), LocalDate.now()) + "일 지남");
                 deleteProduct(((Product) disposablesList[i]).getName());
             }
         }
         System.out.println("총 " + count + "가지의 품목이 폐기되었습니다.");
     }
-
-    public static void deleteProduct(String productName) {
-        for (int i = 0; i < productList.length - 1; i++) {
-            if (productList[i] != null) {
-                if (productList[i].getName().equals(productName)) {
-                    productList[i] = null;
-                }
-            }
-        }
-    }
-
 
 }
 
