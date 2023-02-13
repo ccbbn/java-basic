@@ -264,7 +264,7 @@ public class Excute {
     }
 
 
-    public static void findName() {
+    public static void findName(){
 
         System.out.println("찾는 상품이름을 적으세요");
         System.out.print("찾는 것은?? : ");
@@ -447,7 +447,7 @@ public class Excute {
         System.out.print(numComma.format(productList[i].getPrice()));
         System.out.print("    ");
         System.out.print(numComma.format(productList[i].getStock()));
-        System.out.print("    ");
+        System.out.print("    "); // 전역변수 최소화
     }
 
     private static Disposable[] disposables() {
@@ -471,6 +471,8 @@ public class Excute {
                         "/ 유통기한 : " + ((Product) disposablesList[i]).getExpiration() + "/ 오늘 날짜로 부터 " +
                         ChronoUnit.DAYS.between(((Product) disposablesList[i]).getExpiration(), LocalDate.now()) + "일 지남");
                 deleteProduct(((Product) disposablesList[i]).getName());
+
+                // products[i] instanceof Disposalabe
             }
         }
         System.out.println("총 " + count + "가지의 품목이 폐기되었습니다.");
