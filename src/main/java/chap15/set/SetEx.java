@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class SetEx {
     /// 주머니와 같다
+    // 중복불가
     public static void main(String[] args) {
 //        Set<String> set = new HashSet<>();
 //

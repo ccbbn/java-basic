@@ -9,7 +9,7 @@ import lombok.Setter;
 
 public class Member {
     String name;
-    int age;
+    public int age;
 
 
     // 1. hashCode() 값이 같은지 2. equals() 값이 같은지
