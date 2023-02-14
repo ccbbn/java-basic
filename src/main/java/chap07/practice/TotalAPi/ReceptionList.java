@@ -53,7 +53,7 @@ public class ReceptionList {
                         break;
                 }
             } catch (NullPointerException e) {
-                System.out.println("ted");
+                System.out.println("널포인트이셉션");
 
 
             } catch (RangeInvalidException e) {
