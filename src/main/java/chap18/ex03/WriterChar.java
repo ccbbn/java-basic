@@ -33,7 +33,7 @@ public class WriterChar {
 
                 if (!input1.equals("q!")) {
                     writer.write(input1 + "\n");
-                    //writer.flush(); 바로 갱신해줌
+                    writer.flush();
 
                 } else {
                     rep = false;
