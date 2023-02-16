@@ -11,7 +11,6 @@ public class ObjectInOut {
         FileOutputStream fos = new FileOutputStream("C://Temp/ObjectTest.jpg");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-
         Product pr1 = new Product("빼빼로", 2000, 10);
         Product pr2 = new Product("치토스", 2000, 100);
         Product pr3 = new Product("소시지", 8000, 15);
