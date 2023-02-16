@@ -1,4 +1,4 @@
-package chap12generic.check.q4;
+package chap13generic.check.q4;
 
 public class ChildPair<K, V> extends Pair<K, V>{
     public ChildPair(K key, V value) {

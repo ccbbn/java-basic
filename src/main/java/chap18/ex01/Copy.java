@@ -1,4 +1,4 @@
-package chap18.ex;
+package chap18.ex01;
 
 import java.io.*;
 

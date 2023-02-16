@@ -1,4 +1,4 @@
-package chap12generic.ex01;
+package chap13generic.ex01;
 
 public class Tire {
 void roll(){

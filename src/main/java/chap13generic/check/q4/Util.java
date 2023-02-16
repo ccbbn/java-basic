@@ -1,4 +1,4 @@
-package chap12generic.check.q4;
+package chap13generic.check.q4;
 
 public class Util {
      public static <A extends Number > int getValue(A a1, A a2){

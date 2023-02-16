@@ -1,6 +1,4 @@
-package chap12generic.check.q3;
-
-import chap07.poly.ex1.C;
+package chap13generic.check.q3;
 
 public class ContainerEx {
     public static void main(String[] args) {

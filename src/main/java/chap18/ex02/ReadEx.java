@@ -1,8 +1,6 @@
-package chap18.inOut;
+package chap18.ex02;
 
-import javax.print.DocFlavor;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 

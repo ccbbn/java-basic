@@ -1,4 +1,4 @@
-package chap12generic.check.q2;
+package chap13generic.check.q2;
 
 public class ContainerEx {
     public static void main(String[] args) {
