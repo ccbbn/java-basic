@@ -21,7 +21,7 @@ public class StreamEx {
             System.out.println(name);
         }
 
-       Iterator<String > iterator = set.iterator();
+       Iterator<String> iterator = set.iterator();
         while ((iterator.hasNext())){
             System.out.println(iterator.next());
         }
