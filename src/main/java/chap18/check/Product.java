@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class Product  {
+public class Product implements Serializable{
 
     public static Object builder;
     String name;
