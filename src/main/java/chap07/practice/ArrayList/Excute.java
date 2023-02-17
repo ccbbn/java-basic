@@ -18,7 +18,7 @@ public class Excute {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    private static ArrayList<Product> productList = new ArrayList<>();
+    private static final ArrayList<Product> productList = new ArrayList<>();
 
     static DecimalFormat numComma = new DecimalFormat("#,###");
 
@@ -55,6 +55,8 @@ public class Excute {
                 applyDiscount();
             } else if (selectNo.equals("8")) {
                 disposeProducts();
+            } else if (selectNo.equals("9")) {
+                decending();
             } else if (selectNo.equals("0")) {
                 run = false;
             } else {
@@ -75,20 +77,20 @@ public class Excute {
         int i = 0;
         Product[] product = new Product[15];
 
-        product[i++] = (new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(423664, "해리포터와 불의잔", 18000, 200, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(538563, "해리포터와 마법사의 돌", 18000, 150, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(677111, "해리포터와 비밀의 방", 18000, 300, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(789952, "실전투자의 비밀", 18000, 400, "김박사", 545100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Books(583433, "오즈의 마법사", 12000, 500, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100),Product.bookType));
-        product[i++] = (new Food(778978, "떡볶이", 3000, 100, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15),Product.foodType));
-        product[i++] = (new Food(123978, "라볶이", 4000, 100, LocalDate.now().minusDays(60), LocalDate.now().minusDays(30),Product.foodType));
-        product[i++] = (new Food(123978, "소고기", 50000, 100, LocalDate.now().minusDays(1), LocalDate.now().plusDays(3),Product.foodType));
-        product[i++] = (new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙", LocalDate.now(), LocalDate.now().plusYears(100),Product.electType));
-        product[i++] = (new Elect(675665, "냉장고", 1800000, 5, "LG", "실버", LocalDate.now(), LocalDate.now().plusYears(100),Product.electType));
-        product[i++] = (new Elect(233277, "스피커", 200000, 5, "BOSE", "화이트", LocalDate.now(), LocalDate.now().plusYears(100),Product.electType));
+        product[i++] = (new Books(123123, "초밥왕", 8000, 10, "데라사와", 110100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(223223, "정처기", 23000, 50, "윤영빈", 123692, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(533433, "구해줘", 18000, 100, "기욤뮈소", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(423664, "해리포터와 불의잔", 18000, 200, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(538563, "해리포터와 마법사의 돌", 18000, 150, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(677111, "해리포터와 비밀의 방", 18000, 300, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(789952, "실전투자의 비밀", 18000, 400, "김박사", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Books(583433, "오즈의 마법사", 12000, 500, "jk롤링", 545100, LocalDate.now(), LocalDate.now().plusYears(100), Product.bookType));
+        product[i++] = (new Food(778978, "떡볶이", 3000, 100, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15), Product.foodType));
+        product[i++] = (new Food(123978, "라볶이", 4000, 100, LocalDate.now().minusDays(60), LocalDate.now().minusDays(30), Product.foodType));
+        product[i++] = (new Food(123978, "소고기", 50000, 100, LocalDate.now().minusDays(1), LocalDate.now().plusDays(3), Product.foodType));
+        product[i++] = (new Elect(878876, "스마트폰", 500000, 10, "삼성", "블랙", LocalDate.now(), LocalDate.now().plusYears(100), Product.electType));
+        product[i++] = (new Elect(675665, "냉장고", 1800000, 5, "LG", "실버", LocalDate.now(), LocalDate.now().plusYears(100), Product.electType));
+        product[i++] = (new Elect(233277, "스피커", 200000, 5, "BOSE", "화이트", LocalDate.now(), LocalDate.now().plusYears(100), Product.electType));
 
         oos.writeObject(product);
 
@@ -104,7 +106,7 @@ public class Excute {
 
 
         Product[] product = (Product[]) ois2.readObject();
-        for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++) {
             productList.add(product[i]);
         }
         ois2.close();
@@ -179,8 +181,6 @@ public class Excute {
     }
 
 
-
-
     public static void insertFood() {
 
         System.out.print("상품ID: ");
@@ -244,8 +244,8 @@ public class Excute {
     public static void changeName(String originName, String newName) {
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getName().equals(originName)) {
-                    productList.get(i).setName(newName);
-                    return;
+                productList.get(i).setName(newName);
+                return;
             }
         }
     }
@@ -279,20 +279,19 @@ public class Excute {
     public static void deleteProduct(String productName) {
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getName().equals(productName)) {
-                   productList.remove(i);
-                   return;
+                productList.remove(i);
+                return;
             }
         }
     }
 
 
-    public static void findName(){
+    public static void findName() {
 
         System.out.println("찾는 상품이름을 적으세요");
         System.out.print("찾는 것은?? : ");
         String productName = (String) ReceptionList.checkInputReception("문자입력");
         filteredList(productName);
-
 
 
     }
@@ -402,8 +401,8 @@ public class Excute {
 
         ArrayList<Discount> discount = new ArrayList<>();
         for (int i = 0; i < productList.size(); i++) {
-            if ( productList.get(i) instanceof Discount) {
-                discount.add((Discount)productList.get(i));
+            if (productList.get(i) instanceof Discount) {
+                discount.add((Discount) productList.get(i));
                 System.out.print((index++ + 1) + "번째 상품: ");
                 showProductList(productList.get(i));
             }
@@ -447,7 +446,7 @@ public class Excute {
         //interfacedProductList[0].setPriceByDiscountRate(discountRate);
     }
 
-    private static void filteredList(String productName){
+    private static void filteredList(String productName) {
 
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i) instanceof Books) {
@@ -472,8 +471,6 @@ public class Excute {
             }
         }
     }
-
-
 
 
     private static void commonInfo(int i) {
@@ -516,18 +513,18 @@ public class Excute {
     }
 
 
+    private static void decending() {
 
-    private static void transferTree(){
-
-
-
-
-
-
-
+        Collections.sort(productList);
+//            for (int i = 0; i<productList.size(); i++) {
+//                System.out.println("id" + Product.getId() + "이름" + Product.getName() + "가격" + Product.getPrice() + "재고" + Product.getStock
+//        Comparator.comparing(Product::getStock)
     }
-
 }
+
+
+
+
 
 
 

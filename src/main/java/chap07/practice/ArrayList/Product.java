@@ -2,8 +2,10 @@ package chap07.practice.ArrayList;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
 
-public abstract class Product implements Serializable {
+public abstract class Product implements Serializable, Comparable<Product> {
+
 
 
     int id;
@@ -34,6 +36,9 @@ public abstract class Product implements Serializable {
     }
 
 
+
+
+
     public LocalDate getMade() {
         return made;
     }
@@ -61,6 +66,14 @@ public abstract class Product implements Serializable {
         this.type = type;
     }
 
+
+    @Override
+    public int compareTo(Product o) {
+        if (this.price > o.price ) return 1;
+        else if (this.price == o.price) return 0;
+        else
+            return -1;
+    }
 
 }
 
