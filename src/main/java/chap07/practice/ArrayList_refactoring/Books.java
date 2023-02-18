@@ -1,11 +1,9 @@
-package chap07.practice.ArrayList;
+package chap07.practice.ArrayList_refactoring;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.Scanner;
 
-public class Books extends Product  {
+public class Books extends Product {
 
     DecimalFormat comma = new DecimalFormat("#,###");
 
@@ -13,7 +11,7 @@ public class Books extends Product  {
     int isbn;
 
 
-    public Books(int id, String name, int price, int stock, String writer, int isbn, LocalDate made, LocalDate expiration, String type)  {
+    public Books(int id, String name, int price, int stock, String writer, int isbn, LocalDate made, LocalDate expiration, int type)  {
         super(id, name, price, stock, made, expiration, type);
         this.writer = writer;
         this.isbn = isbn;

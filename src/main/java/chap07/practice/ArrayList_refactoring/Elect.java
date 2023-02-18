@@ -1,26 +1,24 @@
-package chap07.practice.ArrayList;
+package chap07.practice.ArrayList_refactoring;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 class Elect extends Product {
 
      String com;
      String col;
 
-    public Elect(int id, String name, int price, int stock, String com, String col, LocalDate made, LocalDate expiration, String type) {
+    public Elect(int id, String name, int price, int stock, String com, String col, LocalDate made, LocalDate expiration, int type) {
         super(id, name, price, stock, made, expiration, type);
         this.com = com;
         this.col = col;
     }
 
 
-     public String getType() {
+     public int getType() {
          return type;
      }
 
-     public void setType(String type) {
+     public void setType(int type) {
          this.type = type;
      }
 

@@ -1,8 +1,7 @@
-package chap07.practice.ArrayList;
+package chap07.practice.ArrayList_refactoring;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Comparator;
 
 public abstract class Product implements Serializable, Comparable<Product> {
 
@@ -12,19 +11,19 @@ public abstract class Product implements Serializable, Comparable<Product> {
     String name;
     int price;
     int stock;
-    String type;
+    int type;
 
     LocalDate made;
     LocalDate expiration;
 
-    final static String  bookType = "도서";
-    final static String  foodType = "식품";
-    final static String  electType = "전자기기";
+    final static int bookType = 1;
+    final static int foodType = 2;
+    final static int electType = 3;
 
 
     public Product(){};
 
-    public Product(int id, String name, int price, int stock, LocalDate made, LocalDate expiration, String type)  {
+    public Product(int id, String name, int price, int stock, LocalDate made, LocalDate expiration, int type)  {
 
             this.id = id;
             this.name = name;
@@ -59,10 +58,10 @@ public abstract class Product implements Serializable, Comparable<Product> {
     public int getStock() { return stock; }
     public void setStock(int stock) { this.stock = stock; }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
-    public void setType(String  type) {
+    public void setType(int type) {
         this.type = type;
     }
 

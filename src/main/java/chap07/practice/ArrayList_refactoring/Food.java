@@ -1,6 +1,5 @@
-package chap07.practice.ArrayList;
+package chap07.practice.ArrayList_refactoring;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -16,18 +15,18 @@ public class Food extends Product implements Discount, Disposable {
     }
 
 
-    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate expiration, String type) {
+    public Food(int id, String name, int price, int stock, LocalDate made, LocalDate expiration, int type) {
         super(id, name, price, stock, made, expiration, type);
         this.made = made;
         this.expiration = expiration;
     }
 
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

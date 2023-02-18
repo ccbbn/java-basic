@@ -1,11 +1,16 @@
-package chap07.practice.ArrayList;
+package chap07.practice.ArrayList_refactoring;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 
 public class Excute {
@@ -26,9 +31,9 @@ public class Excute {
 
         boolean run = true;
         while (run) {
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 9. 가격 정렬 | 0.종료");
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------");
+            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 0.종료");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------");
             System.out.print("선택> ");
 
             String selectNo = scanner.next();
@@ -50,7 +55,7 @@ public class Excute {
             } else if (selectNo.equals("8")) {
                 disposeProducts();
             } else if (selectNo.equals("9")) {
-                descending();
+                decending();
             } else if (selectNo.equals("0")) {
                 run = false;
             } else {
@@ -340,7 +345,7 @@ public class Excute {
         System.out.println("=============================================================");
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i) instanceof Books) {
-                if (Objects.equals(productList.get(i).getType(), Product.bookType)) {
+                if (productList.get(i).getType() == Product.bookType) {
                     commonInfo(i);
                     System.out.println(((Books) productList.get(i)).getWriter());
                 }
@@ -356,7 +361,7 @@ public class Excute {
         System.out.println("==================================================================");
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i) instanceof Food) {
-                if (Objects.equals(productList.get(i).getType(), Product.foodType)) {
+                if (productList.get(i).getType() == Product.foodType) {
                     commonInfo(i);
                     System.out.print(((Food) productList.get(i)).made);
                     System.out.print("    ");
@@ -374,7 +379,7 @@ public class Excute {
         System.out.println("===============================================================");
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i) instanceof Elect) {
-                if (Objects.equals(productList.get(i).getType(), Product.electType)) {
+                if (productList.get(i).getType() == Product.electType) {
                     commonInfo(i);
                     System.out.print(((Elect) productList.get(i)).getCom());
                     System.out.print("    ");
@@ -507,76 +512,27 @@ public class Excute {
     }
 
 
-    private static void descending() {
-        System.out.println("1: 도서 | 2: 식품 | 3: 전자기기 | 4. 전체 ");
-        boolean run = true;
-        while (run) {
-            System.out.print("품목 선택> ");
-            String cate = scanner.next();
-            switch (cate) {
-                case "1":
-                    ArrayList<Books> booksList = new ArrayList<>();
-                    for (Product product : productList) {
-                        if (product instanceof Books) {
-                            Books books = (Books) product;
-                            booksList.add(books);
-                        }
-                    }
-                    System.out.println("도서를 낮은 가격부터 보여줍니다");
-                    booksList.stream().sorted().forEach(book -> System.out.println(
-                            "가격 : " + book.getPrice() + " / " + " [ 상품명 : " + book.getName() + " ]" + " [ 재고 : " + book.getStock() + " ]" +
-                                    " [ 작가 : " + book.getWriter() + " ]" + " [ ISBN : " + book.getIsbn() + " ]")
-                    );
-                    run = false;
-                    break;
+    private static void decending() {
 
-                case "2":
-                    ArrayList<Food> foodsList = new ArrayList<>();
-                    for (Product product : productList) {
-                        if (product instanceof Food) {
-                            Food food = (Food) product;
-                            foodsList.add(food);
-                        }
-                    }
-                    System.out.println("식품을 낮은 가격부터 보여줍니다");
-                    foodsList.stream().sorted().forEach(food -> System.out.println(
-                            "가격 : " + food.getPrice() + " / " + " [ 상품명 : " + food.getName() + " ]" + " [ 재고 : " + food.getStock() + " ]" +
-                                    " [ 제작일 : " + food.getMade() + " ]" + " [ 유통기한 : " + food.getExpiration() + " ]")
-                    );
-                    run = false;
-                    break;
 
-                case "3":
-                    ArrayList<Elect> electsList = new ArrayList<>();
-                    for (Product product : productList) {
-                        if (product instanceof Elect) {
-                            Elect elect = (Elect) product;
-                            electsList.add(elect);
-                        }
-                    }
-                    System.out.println("전자기기를 낮은 가격부터 보여줍니다");
-                    electsList.stream().sorted().forEach(elect -> System.out.println(
-                                    "가격 : " + elect.getPrice() + " / " + " [ 상품명 : " + elect.getName() + " ]" + " [ 재고 : " + elect.getStock() + " ]" +
-                                            " [ 제작사 : " + elect.getCom() + " ]" + " [ 색상 : " + elect.getCol() + " ]")
-                    );
-                    run = false;
-                    break;
+//        convertTOChildArray();
 
-                case "4":
-                    System.out.println("전체 상품을 낮은 가격부터 보여줍니다");
-                    productList.stream().sorted().forEach(product -> System.out.println(
-                            "가격 : " + product.getPrice() + " / " + " [ 품목 : " + product.getType() + " ]" +
-                                    " [ 상품명 : " + product.getName() + " ]" + " [ 재고 : " + product.getStock() + " ]")
-                    );
-                    run = false;
-                    break;
 
-                default:
-                    System.out.println("다시 입력하세요");
-            }
+        System.out.println("낮은 상품부터 보여줍니다");
+        productList.stream().sorted().forEach(product -> System.out.println(
+                "가격 : " + product.getPrice() + " / " + " [ 상품명 : " + product.getName() + " ]" + " [ 재고 : " + product.getStock() + " ]"));
 
-        }
+
+
+
+        ArrayList<Books> booksList = productList.stream().filter(product -> product instanceof Books).map(product -> (Books)product).collect(Collectors.toCollection(ArrayList::new));
+        booksList.stream().sorted().forEach(book -> System.out.println(book.getWriter()));
+
+
+
+
     }
+
 }
 
 
