@@ -1,11 +1,13 @@
 package chap07.practice.ArrayList;
 
+import javax.swing.*;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 
 public class Excute {
@@ -50,7 +52,9 @@ public class Excute {
             } else if (selectNo.equals("8")) {
                 disposeProducts();
             } else if (selectNo.equals("9")) {
-                descending();
+                sortingProduct();
+            } else if (selectNo.equals("10")){
+                saveAndLoad();
             } else if (selectNo.equals("0")) {
                 run = false;
             } else {
@@ -61,7 +65,6 @@ public class Excute {
 
 
     }
-
 
     private static void addInventory() throws Exception {
 
@@ -131,7 +134,6 @@ public class Excute {
                     insertElect();
                     stayPage = false;
                     break;
-
                 case "*":
                     System.out.println("처음으로 돌아갑니다");
                     stayPage = false;
@@ -507,7 +509,7 @@ public class Excute {
     }
 
 
-    private static void descending() {
+    private static void sortingProduct() {
         System.out.println("1: 도서 | 2: 식품 | 3: 전자기기 | 4. 전체 ");
         boolean run = true;
         while (run) {
@@ -515,20 +517,37 @@ public class Excute {
             String cate = scanner.next();
             switch (cate) {
                 case "1":
-                    ArrayList<Books> booksList = new ArrayList<>();
-                    for (Product product : productList) {
-                        if (product instanceof Books) {
-                            Books books = (Books) product;
-                            booksList.add(books);
-                        }
+//                    ArrayList<Books> booksList = new ArrayList<>();
+//                    for (Product product : productList) {
+//                        if (product instanceof Books) {
+//                            Books books = (Books) product;
+//                            booksList.add(books);
+//                        }
+//                    }
+                    ArrayList<Books> booksList = productList.stream()
+                            .filter(product -> product instanceof Books)
+                            .map(product -> (Books) product)
+                            .collect(Collectors.toCollection(ArrayList::new));
+
+                    System.out.println("1 : 오름차순 | 2: 내림차순");
+                    String input1 = scanner.next();
+                    if (input1.equals("1")) {
+                        System.out.println("도서를 낮은 가격부터 보여줍니다");
+                        booksList.stream().sorted().forEach(book -> System.out.println(
+                                "가격 : " + book.getPrice() + " / " + " [ 상품명 : " + book.getName() + " ]" + " [ 재고 : " + book.getStock() + " ]" +
+                                        " [ 작가 : " + book.getWriter() + " ]" + " [ ISBN : " + book.getIsbn() + " ]")
+                        );
+                        run = false;
+                        break;
+                    } else if (input1.equals("2")) {
+                        System.out.println("도서를 높은 가격부터 보여줍니다");
+                        booksList.stream().sorted(Comparator.reverseOrder()).forEach(book -> System.out.println(
+                                "가격 : " + book.getPrice() + " / " + " [ 상품명 : " + book.getName() + " ]" + " [ 재고 : " + book.getStock() + " ]" +
+                                        " [ 작가 : " + book.getWriter() + " ]" + " [ ISBN : " + book.getIsbn() + " ]")
+                        );
+                        run = false;
+                        break;
                     }
-                    System.out.println("도서를 낮은 가격부터 보여줍니다");
-                    booksList.stream().sorted().forEach(book -> System.out.println(
-                            "가격 : " + book.getPrice() + " / " + " [ 상품명 : " + book.getName() + " ]" + " [ 재고 : " + book.getStock() + " ]" +
-                                    " [ 작가 : " + book.getWriter() + " ]" + " [ ISBN : " + book.getIsbn() + " ]")
-                    );
-                    run = false;
-                    break;
 
                 case "2":
                     ArrayList<Food> foodsList = new ArrayList<>();
@@ -538,13 +557,26 @@ public class Excute {
                             foodsList.add(food);
                         }
                     }
-                    System.out.println("식품을 낮은 가격부터 보여줍니다");
-                    foodsList.stream().sorted().forEach(food -> System.out.println(
-                            "가격 : " + food.getPrice() + " / " + " [ 상품명 : " + food.getName() + " ]" + " [ 재고 : " + food.getStock() + " ]" +
-                                    " [ 제작일 : " + food.getMade() + " ]" + " [ 유통기한 : " + food.getExpiration() + " ]")
-                    );
-                    run = false;
-                    break;
+
+                    System.out.println("1 : 오름차순 | 2: 내림차순");
+                    String input2 = scanner.next();
+                    if (input2.equals("1")) {
+                        System.out.println("식품을 낮은 가격부터 보여줍니다");
+                        foodsList.stream().sorted().forEach(food -> System.out.println(
+                                "가격 : " + food.getPrice() + " / " + " [ 상품명 : " + food.getName() + " ]" + " [ 재고 : " + food.getStock() + " ]" +
+                                        " [ 제작일 : " + food.getMade() + " ]" + " [ 유통기한 : " + food.getExpiration() + " ]")
+                        );
+                        run = false;
+                        break;
+                    } else if (input2.equals("2")) {
+                        System.out.println("식품을 높은 가격부터 보여줍니다");
+                        foodsList.stream().sorted(Comparator.reverseOrder()).forEach(food -> System.out.println(
+                                "가격 : " + food.getPrice() + " / " + " [ 상품명 : " + food.getName() + " ]" + " [ 재고 : " + food.getStock() + " ]" +
+                                        " [ 제작일 : " + food.getMade() + " ]" + " [ 유통기한 : " + food.getExpiration() + " ]")
+                        );
+                        run = false;
+                        break;
+                    }
 
                 case "3":
                     ArrayList<Elect> electsList = new ArrayList<>();
@@ -554,28 +586,116 @@ public class Excute {
                             electsList.add(elect);
                         }
                     }
-                    System.out.println("전자기기를 낮은 가격부터 보여줍니다");
-                    electsList.stream().sorted().forEach(elect -> System.out.println(
-                                    "가격 : " + elect.getPrice() + " / " + " [ 상품명 : " + elect.getName() + " ]" + " [ 재고 : " + elect.getStock() + " ]" +
-                                            " [ 제작사 : " + elect.getCom() + " ]" + " [ 색상 : " + elect.getCol() + " ]")
-                    );
-                    run = false;
-                    break;
+                    System.out.println("1 : 오름차순 | 2: 내림차순");
+                    String input3 = scanner.next();
+
+                    if (input3.equals("1")) {
+                        System.out.println("전자기기를 낮은 가격부터 보여줍니다");
+                        electsList.stream().sorted().forEach(elect -> System.out.println(
+                                "가격 : " + elect.getPrice() + " / " + " [ 상품명 : " + elect.getName() + " ]" + " [ 재고 : " + elect.getStock() + " ]" +
+                                        " [ 제작사 : " + elect.getCom() + " ]" + " [ 색상 : " + elect.getCol() + " ]")
+                        );
+                        run = false;
+                        break;
+                    } else if (input3.equals("2")) {
+                        System.out.println("전자기기를 높은 가격부터 보여줍니다");
+                        electsList.stream().sorted(Comparator.reverseOrder()).forEach(elect -> System.out.println(
+                                "가격 : " + elect.getPrice() + " / " + " [ 상품명 : " + elect.getName() + " ]" + " [ 재고 : " + elect.getStock() + " ]" +
+                                        " [ 제작사 : " + elect.getCom() + " ]" + " [ 색상 : " + elect.getCol() + " ]")
+                        );
+                        run = false;
+                        break;
+                    }
 
                 case "4":
-                    System.out.println("전체 상품을 낮은 가격부터 보여줍니다");
-                    productList.stream().sorted().forEach(product -> System.out.println(
-                            "가격 : " + product.getPrice() + " / " + " [ 품목 : " + product.getType() + " ]" +
-                                    " [ 상품명 : " + product.getName() + " ]" + " [ 재고 : " + product.getStock() + " ]")
-                    );
-                    run = false;
-                    break;
+                    System.out.println("1 : 오름차순 | 2: 내림차순");
+                    String input4 = scanner.next();
+
+                    if (input4.equals("1")) {
+                        System.out.println("전체 상품을 낮은 가격부터 보여줍니다");
+                        productList.stream().sorted().forEach(product -> System.out.println(
+                                "가격 : " + product.getPrice() + " / " + " [ 품목 : " + product.getType() + " ]" +
+                                        " [ 상품명 : " + product.getName() + " ]" + " [ 재고 : " + product.getStock() + " ]")
+                        );
+                        run = false;
+                        break;
+                    } else if (input4.equals("2")) {
+                        System.out.println("전체 상품을 높은 가격부터 보여줍니다");
+                        productList.stream().sorted(Comparator.reverseOrder()).forEach(product -> System.out.println(
+                                "가격 : " + product.getPrice() + " / " + " [ 품목 : " + product.getType() + " ]" +
+                                        " [ 상품명 : " + product.getName() + " ]" + " [ 재고 : " + product.getStock() + " ]")
+                        );
+                        run = false;
+                        break;
+
+                    }
 
                 default:
                     System.out.println("다시 입력하세요");
+
+
+            }
+        }
+    }
+
+
+    private static void saveAndLoad() throws IOException, ClassNotFoundException {
+
+
+        boolean stayPage = true;
+        while(stayPage) {
+            System.out.println("1: 저장 | 2: 불러오기 | *: 돌아가기 ");
+            String situation = scanner.next();
+
+            switch (situation) {
+                case "1" :
+                    System.out.println("저장할 파일명을 입력해주세요.");
+                    System.out.print("저장할 파일명은? : ");
+                    String savingName = scanner.next();
+
+                    FileOutputStream fos = new FileOutputStream("C:/Temp/" + savingName + ".dat");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                    oos.writeObject(productList);
+                    oos.flush();
+                    oos.close();
+                    fos.close();
+
+                    stayPage = false;
+                    break;
+                case "2" :
+                    System.out.println("불러올 파일명을 입력해주세요.");
+                    System.out.print("불러올 이름은? : ");
+                    String loadingName = scanner.next();
+
+                    FileInputStream fis = new FileInputStream("C:/Temp/" + loadingName +".dat");
+                    ObjectInputStream ois2 = new ObjectInputStream(fis);
+
+
+                    Product product = (Product) ois2.readObject();
+                    System.out.println(product);
+
+                    ois2.close();
+                    fis.close();
+                    stayPage = false;
+                    break;
+
+
+
+
+
+
+
+
             }
 
         }
+
+
+
+
+
+
     }
 }
 

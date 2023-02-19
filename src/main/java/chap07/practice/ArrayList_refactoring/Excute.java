@@ -525,9 +525,15 @@ public class Excute {
 
 
 
-        ArrayList<Books> booksList = productList.stream().filter(product -> product instanceof Books).map(product -> (Books)product).collect(Collectors.toCollection(ArrayList::new));
-        booksList.stream().sorted().forEach(book -> System.out.println(book.getWriter()));
+//        ArrayList<Books> booksList = productList.stream().filter(product -> product instanceof Books).map(product -> (Books)product).collect(Collectors.toCollection(ArrayList::new));
+//        booksList.stream().sorted().forEach(book -> System.out.println(book.getWriter()));
 
+        ArrayList<Books> booksList = productList.stream()
+                .filter(product -> product instanceof Books)
+                .map(product -> (Books) product)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        booksList.stream().sorted().forEach(book -> System.out.println(book.getWriter()));
 
 
 
