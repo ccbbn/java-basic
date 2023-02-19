@@ -28,9 +28,9 @@ public class Excute {
 
         boolean run = true;
         while (run) {
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 9. 가격 정렬 | 0.종료");
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 9. 가격 정렬 | 10. 삭제 및 불러오기 | 0.종료");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.print("선택> ");
 
             String selectNo = scanner.next();
@@ -672,18 +672,18 @@ public class Excute {
                     ObjectInputStream ois2 = new ObjectInputStream(fis);
 
 
-                    Product product = (Product) ois2.readObject();
-                    System.out.println(product);
+                    ArrayList<Product> product = (ArrayList<Product>) ois2.readObject();
+                    for( int i = 0; i < product.size(); i++) {
+                        productList.set(i, product.get(i));
+                    }
+                    for (int i = 1; i <= ((product.size()) - productList.size()); i++) {
+                        productList.add(productList.size() - 1 + i, product.get(productList.size() + i - 1));
+                    }
 
                     ois2.close();
                     fis.close();
                     stayPage = false;
                     break;
-
-
-
-
-
 
 
 
