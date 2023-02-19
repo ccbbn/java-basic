@@ -105,9 +105,7 @@ public class Excute {
 
 
         Product[] product = (Product[]) ois2.readObject();
-        for (int i = 0; i < product.length; i++) {
-            productList.add(product[i]);
-        }
+        Collections.addAll(productList, product);
         ois2.close();
         fis.close();
 
@@ -240,12 +238,13 @@ public class Excute {
     }
 
     public static void changeName(String originName, String newName) {
-        for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getName().equals(originName)) {
-                productList.get(i).setName(newName);
+        for (Product product : productList) {
+            if (product.getName().equals(originName)) {
+                product.setName(newName);
                 return;
             }
         }
+
     }
 
     public static void updateProduct() {
