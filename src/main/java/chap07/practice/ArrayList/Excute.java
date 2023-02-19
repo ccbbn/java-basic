@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import static jdk.nashorn.internal.objects.NativeString.trim;
+
 
 public class Excute {
 
@@ -29,7 +31,7 @@ public class Excute {
         boolean run = true;
         while (run) {
             System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 9. 가격 정렬 | 10. 삭제 및 불러오기 | 0.종료");
+            System.out.println("1.상품추가 | 2.정보수정 | 3.삭제 | 4.상품명 조회 | 5.모든 상품 조회 | 6.상품 카테고리별 조회 | 7. 할인율 적용 | 8. 상품 폐기 | 9. 가격 정렬 | 10. 저장 및 불러오기 | 0.종료");
             System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.print("선택> ");
 
@@ -274,7 +276,7 @@ public class Excute {
 
     public static void deleteProduct(String productName) {
         for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getName().equals(productName)) {
+            if ((productList.get(i).getName().equals(productName))) {
                 productList.remove(i);
                 return;
             }
@@ -673,7 +675,7 @@ public class Excute {
 
 
                     ArrayList<Product> product = (ArrayList<Product>) ois2.readObject();
-                    for( int i = 0; i < product.size(); i++) {
+                    for( int i = 0; i < productList.size(); i++) {
                         productList.set(i, product.get(i));
                     }
                     for (int i = 1; i <= ((product.size()) - productList.size()); i++) {
