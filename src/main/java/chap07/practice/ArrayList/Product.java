@@ -69,10 +69,10 @@ public abstract class Product implements Serializable, Comparable<Product> {
 
     @Override
     public int compareTo(Product o) {
-        if (this.price > o.price ) return 1;
+        if (this.price > o.price ) return -1;
         else if (this.price == o.price) return 0;
         else
-            return -1;
+            return 1;
     }
 
 }
