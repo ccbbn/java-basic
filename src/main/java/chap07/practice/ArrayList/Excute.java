@@ -678,7 +678,7 @@ public class Excute {
                         productList.set(i, product.get(i));
                     }
                     for (int i = 1; i <= ((product.size()) - productList.size()); i++) {
-                        productList.add(productList.size() - 1 + i, product.get(productList.size() + i - 1));
+                        productList.add(productList.size() - 1 + i, product.get(productList.size() -1 + i));
                     }
 
                     ois2.close();
