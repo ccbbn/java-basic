@@ -12,7 +12,7 @@ public class JoinEx {
 
         sumThread.join(); //
 
-        System.out.println(sumThread.sum);  //출력이 먼저일지, sum계산이 먼저일지 정해줘야함 -> join으로 메인스레드를 잠깐 멈춤
+        System.out.println(SumThread.sum);  //출력이 먼저일지, sum계산이 먼저일지 정해줘야함 -> join으로 메인스레드를 잠깐 멈춤
 
     }
 }
