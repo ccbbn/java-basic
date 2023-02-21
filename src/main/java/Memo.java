@@ -45,3 +45,28 @@
 //                            System.out.println();
 //                            e.printStackTrace();
 //                            }
+//
+//import java.util.Arrays;
+//
+//
+//class Solution {
+//
+//    public static void main(String[] args) {
+//        solution();
+//
+//
+//    }
+//
+//    private static void solution() {
+//        String my_string = "abc";
+//        String letter ="a";
+//
+//        System.out.println();
+//
+//        String[] answer = my_string.split("");
+//        Arrays.stream(answer).filter(!)
+//
+//    }
+//
+//
+//}
