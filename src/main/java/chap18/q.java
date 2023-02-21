@@ -53,13 +53,10 @@ public class q {
                     game();
                     run = false;
                     break;
-
                 case "n":
                     System.out.println("그만하자");
-                    count = -1;
                     run = false;
                     break;
-
                 default:
                     System.out.println("잘못 입력함");
 
