@@ -3,8 +3,8 @@
 //
 //public class Memo {
 //
-//    static Scanner scanner = new Scanner(System.in);
-//    public static void main(String[] args) {
+////    static Scanner scanner = new Scanner(System.in);
+////    public static void main(String[] args) {
 
 
 //        private static void checkInteger1 (int a){
@@ -35,6 +35,7 @@
 //        }
 
 
+import java.util.Arrays;
 
 //
 //                    try {
@@ -56,17 +57,23 @@
 //
 //
 //    }
-//
-//    private static void solution() {
+
+//    private void solution() {
 //        String my_string = "abc";
 //        String letter ="a";
 //
 //        System.out.println();
 //
-//        String[] answer = my_string.split("");
-//        Arrays.stream(answer).filter(!)
+//        String[] list = my_string.split("");
+//        String[] answer = new String[(my_string.length())];
+//        for (int i = 0; i < my_string.length(); i++) {
+//            if (!list[i].equals(letter)) {
+//                list[i] =
+//
+//            }
+//        }
 //
 //    }
-//
-//
+
+
 //}

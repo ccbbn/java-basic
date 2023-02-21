@@ -28,6 +28,8 @@ public class TcpServerV2 {
                 serverSocket = new ServerSocket(50001);
                 System.out.println("서버 시작됨");
 
+                //쓰레드를 더 만들면 동시에 다른 사람을 기다리 않아아도 됨. 쓰레드 1개면 할당된 사람의 작없이 다 끝나야 다른 사람이 연결됨
+
                 while (true) {
                     System.out.println("서버 연결 요청을 기다림");
                     Socket socket = serverSocket.accept();
