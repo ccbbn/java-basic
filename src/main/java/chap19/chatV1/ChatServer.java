@@ -30,6 +30,9 @@ public class ChatServer {
             chatServer.start();
         } catch (Exception e) {
             e.printStackTrace();
+
+
+
         }
     }
 
