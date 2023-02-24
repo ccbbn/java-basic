@@ -25,21 +25,21 @@ public class TcpServerV2 {
             @SneakyThrows
             @Override
             public void run() {
-                serverSocket = new ServerSocket(50001);
+                serverSocket = new ServerSocket(5001);  // 서버를 만듦
                 System.out.println("서버 시작됨");
 
                 //쓰레드를 더 만들면 동시에 다른 사람을 기다리 않아아도 됨. 쓰레드 1개면 할당된 사람의 작없이 다 끝나야 다른 사람이 연결됨
 
                 while (true) {
                     System.out.println("서버 연결 요청을 기다림");
-                    Socket socket = serverSocket.accept();
+                    Socket socket = serverSocket.accept(); //  클라이언트가 서버로 접속하게 함// 클라이언트가 소켓을 만들면
 
                     InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
                     System.out.println("서버: " + isa.getHostName() + "/" +isa.getAddress() + "의 연결요청을 수락함");
 
 
                     DataInputStream dis = new DataInputStream(socket.getInputStream());//클라이언트와 연결됨 스트림
-                    String message = dis.readUTF();
+                    String message = dis.readUTF(); // readUTF <-  스캔 ,dis가 입력한 것을 메시지에 넣음
                     System.out.println("서버 데이터 수신 " +  message);
 
 

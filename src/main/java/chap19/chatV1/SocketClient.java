@@ -50,6 +50,7 @@ public class SocketClient {
                     JSONObject json = new JSONObject(receiveData);
                     String command = json.getString("command");
 
+                    // command <- "command"의 키값 '// 키 값이 다음 케이스 마다~~
                     switch (command) {
                         // 처음 접속할 때 :
                         case "incoming":
@@ -57,13 +58,13 @@ public class SocketClient {
                             // 채팅명 초기화
                             this.chatName = json.getString("data");
                             // 클라이언트 정보 저장
-                            chatServer.addSocketClient(this);
+                            chatServer.addSocketClient(this); // 챗서버(클라이언츠 map) 에 접속한 사람(this)을 추가함
                             // 접속한 모든 클라이언트한테 수신정보 송신
-                            chatServer.sendToAll(this, "들어오셨습니다.");
+                            chatServer.sendToAll(this, "들어오셨습니다."); //챗서버에 접속한 모든 소켓에게 접속한 사람(this)이 들어왔다고 메시지를 보냄
                             break;
-                        case "message":
+                        case "message": // ("command", "message")
                             // 받은 채팅 메시지를 모든 클라이언트한테 뿌려주기
-                            String message = json.getString("data");
+                            String message = json.getString("data"); // ("data", "이름")
                             chatServer.sendToAll(this, message);
                             break;
                     }

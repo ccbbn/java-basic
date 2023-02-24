@@ -87,12 +87,12 @@ public class Server {
         System.out.println("방장 " + hostName + "이/가" +  roomName1+ " 으로 "+ gameType1 + "을 생성했습니다." );
     }
 
-    public void joinGameRoom(String userName, String roomName, ) {
-        // 들어갈 때
-        GameRoom gameRoom = gameRooms.get("roomName");
-
-        // userName을 가지고 SocketClient를 찾아서 게임룸 안에 users 맵에 넣어준다.
-        //gameRoom.users.put(userName, )
-
-    }
+//    public void joinGameRoom(String userName, String roomName, ) {
+//        // 들어갈 때
+//        GameRoom gameRoom = gameRooms.get("roomName");
+//
+//        // userName을 가지고 SocketClient를 찾아서 게임룸 안에 users 맵에 넣어준다.
+//        //gameRoom.users.put(userName, )
+//
+//    }
 }

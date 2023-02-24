@@ -84,7 +84,7 @@ public class SocketClient {
                             this.userName = json.getString("userName");
                             this.gameType1 = json.getString("gameType1");
                             this.roomName1 = json.getString("roomName1");
-                            server.joinGameRoom(userName, roomName1);
+//                            server.joinGameRoom(userName, roomName1);
                             break;
 
                         case "startGame" :

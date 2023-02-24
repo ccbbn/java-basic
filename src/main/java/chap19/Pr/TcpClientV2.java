@@ -12,7 +12,7 @@ public class TcpClientV2 {
     @SneakyThrows
     public static void main(String[] args) {
 //192.168.0.10
-        Socket socket = new Socket("192.168.0.10",50001);
+        Socket socket = new Socket("192.168.200.106",5001);
         System.out.println("연결 성공");
 
         // 보조 스트림장착
@@ -20,10 +20,10 @@ public class TcpClientV2 {
                 new DataOutputStream(socket.getOutputStream());
         // 데이터를 서버로 송신
         System.out.println("데이터를 입력해주세요");
-        String sendDate = new Scanner(System.in).next();
-        dos.writeUTF(sendDate);
+        String sendData = new Scanner(System.in).next();
+        dos.writeUTF(sendData);
         dos.flush();
-        System.out.println("클라이언트 데이터를 보냄 :" + sendDate);
+        System.out.println("클라이언트 데이터를 보냄 :" + sendData);
 
         // 데이터를 서버에서 수신
         DataInputStream dis = new DataInputStream(socket.getInputStream());

@@ -22,7 +22,7 @@ public class TcpServer {
     public static void main(String[] args) {
 
         try {
-            serverSocket = new ServerSocket(50001); // 연결을 대기하하고 수락하는 소켓
+            serverSocket = new ServerSocket(5001); // 연결을 대기하하고 수락하는 소켓
             System.out.println("서버가 시작됨");
 
 
