@@ -5,10 +5,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -74,6 +71,8 @@ public class Server {
     }
 
 
+
+
     public void sendToLobby(SocketClient socket, String message) {
         JSONObject jsonForLobby = new JSONObject();
         jsonForLobby.put("lobbyOrRoom","lobby");
@@ -99,20 +98,23 @@ public class Server {
             sc.send(sendData);
         }
     }
-    int roomCount = 0;
+    int roomCount = 1;
     public void createGameRoom(SocketClient socket, String roomName) {
 
         String key = socket.gamerName + "@" + socket.userIP;
         GameRoom newGameRoom = new GameRoom(roomName);
-        roomCount++;
-        for (int i = 1; i < roomCount+1; i++) {
-            roomList.put(i ,newGameRoom);
-        }
         newGameRoom.GameMember.put(key, socket);
+
+        roomList.put(roomCount++ ,newGameRoom);
+        for (int i = 1; i < roomCount; i++) {
+            System.out.println(roomList.get(i).RoomName);
+        }
+
         System.out.println("방이름 :" + roomName);
         System.out.println("게임방 입장 : " + key);
         System.out.println("현재 게임방 인원수 :" + newGameRoom.GameMember.size());
         System.out.println("만든 사람 :" + socket.gamerName);
+
         this.gameRoom = newGameRoom;
     }
 
@@ -141,12 +143,14 @@ public class Server {
 
 
 
-////    public void joinGameRoom(SocketClient socket, String roomName) {
-////        String key = socketClient.chatMemberName + "@" + socketClient.userIP;
-////        chatMember.put(key, socketClient);
-////        System.out.println("채팅방 입장 : " + key);
-////        System.out.println("현재 채팅방 인원수 : " + chatMember.size());
-////
-//
-//    }
+    public void joinGameRoom(SocketClient socket, String roomName) {
+        String key = socketClient.chatMemberName + "@" + socketClient.userIP;
+        if ( roomList.get(i).getRoomName().equals(roomName)){
+            roomList.values(i).
+        }
+        System.out.println("채팅방 입장 : " + key);
+        System.out.println("현재 채팅방 인원수 : " + chatMember.size());
+
+
+    }
 }

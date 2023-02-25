@@ -87,7 +87,6 @@ public class User {
 
                 case "4" :
                     System.out.println("현재 방 목록을 보여줍니다.");
-                    System.out.println(roomList.get(1).getRoomName());
                     String selectRoom = new Scanner(System.in).useDelimiter("\n").next();
 
             }
@@ -127,6 +126,10 @@ public class User {
                     String message = json.getString("messageToGameRoom");
                     System.out.println("<" + gamerName + "@" + gamerIP + ">" + message);
                 }
+
+
+
+
 
 
 

@@ -9,6 +9,7 @@ public class GameRoom {
 
 
     String RoomName;
+
     Map<String, SocketClient> GameMember = Collections.synchronizedMap((new HashMap<>()));
 
     public GameRoom(String roomName) {
