@@ -20,6 +20,8 @@ public class Server {
     ExecutorService threadPool = Executors.newFixedThreadPool(100);
     public static Map<String, SocketClient> guests = Collections.synchronizedMap(new HashMap<>());
     public static Map<String, SocketClient> players = Collections.synchronizedMap((new HashMap<>()));
+
+    public static Map<String, SocketClient> players2 = Collections.synchronizedMap((new HashMap<>()));
     
     
     public static void main(String[] args) {
