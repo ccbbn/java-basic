@@ -29,6 +29,7 @@ public class SocketClient {
 
     String user;
     String host;
+    String playerName;
 
 
     public SocketClient(Server server, Socket socket) {
@@ -61,22 +62,40 @@ public class SocketClient {
                         case "incoming" :
                             this.userName = json.getString("userName");
                             server.addSocketClient(this);
-                            server.sendToAll(this, "님이 들어오셨습니다.", "user");
+                            server.sendToAll(this, "님이 들어오셨습니다.");
                             break;
+
+                        case "gameRoomIncoming" :
+                            this.playerName = json.getString("userName");
+                            server.addSocketClientToGameRoom(this);
+                            //server.sendToAll(this,"이 대기실을 떠났습니다.");
+                            server.sendToGameRoom(this, "이 게임방에 입장해습니다.");
+                            break;
+
+
+
 
                         case "hostIncoming" :
                             this.hostName = json.getString("hostName");
                             server.addSocketClientForHost(this);
-                            server.sendToAll(this,"방장" + hostName + "이 나타났다","host");
-                            server.sendToAll(this, "님이 들어오셨습니다.","host");
+                            server.sendToAll(this,"방장" + hostName + "이 나타났다");
+                            server.sendToAll(this, "님이 들어오셨습니다.");
                             break;
 
 
                         case "messageToAll" :
                             // 받은 채팅 메시지를 모든 클라이언트한테 뿌려주기
                             String message = json.getString("message");
-                            server.sendToAll(this, message,"user");
-                            server.sendToAll(this, message,"host");
+                            server.sendToAll(this, message);
+                            break;
+
+                        case "messageToPlayer" :
+                            String messageToPlayer = json.getString("message");
+                            server.sendToGameRoom(this,messageToPlayer);
+
+
+
+
 //                        case "createGameRoom1" :
 //                            this.hostName = json.getString("hostName");
 //                            this.gameType1 = json.getString("gameType1");
@@ -132,7 +151,7 @@ public class SocketClient {
                     }
                 }
             } catch (IOException e) {
-                server.sendToAll(this, "님이 나가셨습니다.","user");
+                server.sendToAll(this, "님이 나가셨습니다.");
                 server.removeSocketClient(this);
             }
         });
@@ -143,7 +162,7 @@ public class SocketClient {
             dos.writeUTF(sendData);
             dos.flush();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+
         }
     }
 

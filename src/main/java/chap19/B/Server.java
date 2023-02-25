@@ -67,27 +67,24 @@ public class Server {
 
 
     public void addSocketClientToGameRoom(SocketClient socketClient) {
-        String key = socketClient.userName + "@" + socketClient.userIP;
+        String key = socketClient.playerName + "@" + socketClient.userIP;
+       // guests.remove(key);
         players.put(key, socketClient);
         System.out.println("게임방 입장 : " + key);
-        System.out.println("현재 참가한 인원수 : " + players.size());
-        System.out.println("방장이 시작을 눌러주세요");
+        System.out.println("현재 게임방 인원수 : " + players.size());
+
         
     }
     
     
 
-    public void sendToAll(SocketClient socket, String message, String type) {
+    public void sendToAll(SocketClient socket, String message) {
         JSONObject jsonForLobby = new JSONObject();
+        jsonForLobby.put("lobbyOrGameRoom","lobby");
         jsonForLobby.put("userIP", socket.userIP);
 
-        if (type.equals("user")) {
-            jsonForLobby.put("userName", socket.userName);
-        } else if (type.equals("host")) {
-            jsonForLobby.put("userName", socket.hostName);
-        }
-
-        jsonForLobby.put("message", message);
+        jsonForLobby.put("userName", socket.userName);
+        jsonForLobby.put("messageUser", message);
         String sendData = jsonForLobby.toString();
 
         // 모든 클라이언트 정보 가져와서 sendData
@@ -96,6 +93,28 @@ public class Server {
             sc.send(sendData);
         }
     }
+
+    public void sendToGameRoom(SocketClient socket, String message) {
+        JSONObject jsonForGameRoom = new JSONObject();
+        jsonForGameRoom.put("lobbyOrGameRoom","GameRoom");
+        jsonForGameRoom.put("playerIP", socket.userIP);
+
+        jsonForGameRoom.put("playerName", socket.playerName);
+        jsonForGameRoom.put("messagePlay", message);
+        String sendData = jsonForGameRoom.toString();
+
+        // 모든 클라이언트 정보 가져와서 sendData
+        Collection<SocketClient> socketClients = players.values();
+        for (SocketClient sc : socketClients) {
+            sc.send(sendData);
+        }
+    }
+
+
+
+
+
+
     public void sendToAllFromHost(SocketClient socket, String message) {
         JSONObject jsonForLobby = new JSONObject();
         jsonForLobby.put("userIP", socket.userIP);
@@ -136,7 +155,6 @@ public class Server {
         System.out.println("나감: " + key);
         System.out.println("현재 채팅자 수: " + guests.size() + "\n");
     }
-
 
 
 

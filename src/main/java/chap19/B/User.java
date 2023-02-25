@@ -1,10 +1,12 @@
 package chap19.B;
 
+import chap11.ex03.Sys;
 import org.json.JSONObject;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.invoke.SwitchPoint;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -21,44 +23,55 @@ public class User {
     String Host;
 
 
-
-
     public static void main(String[] args) {
         try {
             User user = new User();
             user.connect();
-
-            System.out.print("채팅명 입력 > ");
+            System.out.print("닉네임입력 > ");
             user.userName = new Scanner(System.in).next();
-            System.out.println("게임을 만드시겠습니까 > Y/N");
-            String gameMake = new Scanner(System.in).next();
+            System.out.println("1. 로비   | 2. 방개설");
+            String choice = new Scanner(System.in).next();
             JSONObject json = new JSONObject();
 
-            if(gameMake.equals("Y")) {
-                json.put("command", "hostIncoming");
-                json.put("hostName", user.userName);
-                String HostData = json.toString();
-                user.send(HostData);
-                user.receive();
-                System.out.println("나오니?");
+            switch(choice) {
+                case "1" :
+                    System.out.println("로비에 입장합니다.");
+                    json.put("command", "incoming");
+                    json.put("userName", user.userName);
+                    String sendData = json.toString();
+                    user.send(sendData);
+                    user.receive();
 
-            } else if (gameMake.equals("N")) {
-                json.put("command", "incoming");
-                json.put("userName", user.userName);
-                String NormalPeopleData = json.toString();
-                user.send(NormalPeopleData);
-                user.receive();
+                    while (true) {
+                        String message = new Scanner(System.in).useDelimiter("\n").next();
+                        json.put("command", "messageToAll");
+                        json.put("message", message);
+                        sendData = json.toString();
+                        user.send(sendData);
+                    }
+
+                case "2" :
+                    System.out.println("게임방에 입장합니다.");
+
+                    json.put("command", "gameRoomIncoming");
+                    json.put("userName", user.userName);
+                    String sendDataToGameRoom = json.toString();
+                    user.send(sendDataToGameRoom);
+                    user.receive();
+
+                    while (true) {
+                        String message = new Scanner(System.in).useDelimiter("\n").next();
+                        json.put("command", "messageToPlayer");
+                        json.put("message", message);
+                        sendData = json.toString();
+                        user.send(sendData);
+                    }
+
+
+
             }
 
 
-            while (true) {
-                String message = new Scanner(System.in).useDelimiter("\n").next();
-                json.put("command", "messageToAll");
-                json.put("message", message);
-                String sendData = json.toString();
-                user.send(sendData);
-
-            }
 
         } catch (Exception e) {
             e.getMessage();
@@ -72,12 +85,28 @@ public class User {
                 while (true) {
                     String readData = dis.readUTF();
                     JSONObject json = new JSONObject(readData);
+
+
+
+
+                if( json.getString("lobbyOrGameRoom").equals("lobby") ) {
+
+
                     String userIP = json.getString("userIP");
-
                     String userName = json.getString("userName");
-
-                    String message = json.getString("message");
+                    String message = json.getString("messageUser");
                     System.out.println("<" + userName + "@" + userIP + ">" + message);
+
+                } else if(json.getString("lobbyOrGameRoom").equals("GameRoom")) {
+
+
+                    String playerIP = json.getString("playerIP");
+                    String playerName = json.getString("playerName");
+                    String messageToPlayer = json.getString("messagePlay");
+                    System.out.println("<" + playerName + "@" + playerIP + ">" + messageToPlayer);
+                }
+
+
                 }
             } catch (Exception e) {
 
