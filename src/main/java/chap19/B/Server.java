@@ -26,6 +26,8 @@ public class Server {
 
     public static Map<String, SocketClient> chatMember = Collections.synchronizedMap((new HashMap<>()));
 
+    public static Map<Integer, GameRoom> roomList = Collections.synchronizedMap((new HashMap<>()));
+
 
 
     public static void main(String[] args) {
@@ -76,11 +78,9 @@ public class Server {
         JSONObject jsonForLobby = new JSONObject();
         jsonForLobby.put("lobbyOrRoom","lobby");
         jsonForLobby.put("userIP", socket.userIP);
-
         jsonForLobby.put("userName", socket.userName);
         jsonForLobby.put("messageToUser", message);
         String sendData = jsonForLobby.toString();
-
         Collection<SocketClient> socketClients = guests.values();
         for (SocketClient sc : socketClients) {
             sc.send(sendData);
@@ -91,12 +91,9 @@ public class Server {
         JSONObject jsonForChatRoom = new JSONObject();
         jsonForChatRoom.put("lobbyOrRoom","chatRoom");
         jsonForChatRoom.put("chatIP", socket.userIP);
-
         jsonForChatRoom.put("chatName", socket.chatMemberName);
         jsonForChatRoom.put("messageToChatMember", message);
         String sendData = jsonForChatRoom.toString();
-
-        // 모든 클라이언트 정보 가져와서 sendData
         Collection<SocketClient> socketClients = chatMember.values();
         for (SocketClient sc : socketClients) {
             sc.send(sendData);
@@ -104,8 +101,13 @@ public class Server {
     }
 
     public void createGameRoom(SocketClient socket, String roomName) {
+        int roomCount = 0;
         String key = socket.gamerName + "@" + socket.userIP;
         GameRoom newGameRoom = new GameRoom(roomName);
+        roomCount++;
+        for (int i = 1; i <= roomCount; i++) {
+            roomList.put(i ,newGameRoom);
+        }
         newGameRoom.GameMember.put(key, socket);
         System.out.println("방이름 :" + roomName);
         System.out.println("게임방 입장 : " + key);
@@ -119,13 +121,10 @@ public class Server {
         JSONObject jsonForGameRoom = new JSONObject();
         jsonForGameRoom.put("lobbyOrRoom","newGameRoom");
         jsonForGameRoom.put("gamerIP", socket.userIP);
-
         jsonForGameRoom.put("gamerName", socket.gamerName);
         jsonForGameRoom.put("messageToGameRoom", message);
         String sendData = jsonForGameRoom.toString();
         Collection<SocketClient> socketClients = gameRoom.GameMember.values();
-
-
         for (SocketClient sc : socketClients) {
             sc.send(sendData);
         }
@@ -142,12 +141,12 @@ public class Server {
 
 
 
-//    public void joinGameRoom(String userName, String roomName, ) {
-//        // 들어갈 때
-//        GameRoom gameRoom = gameRooms.get("roomName");
-//
-//        // userName을 가지고 SocketClient를 찾아서 게임룸 안에 users 맵에 넣어준다.
-//        //gameRoom.users.put(userName, )
+////    public void joinGameRoom(SocketClient socket, String roomName) {
+////        String key = socketClient.chatMemberName + "@" + socketClient.userIP;
+////        chatMember.put(key, socketClient);
+////        System.out.println("채팅방 입장 : " + key);
+////        System.out.println("현재 채팅방 인원수 : " + chatMember.size());
+////
 //
 //    }
 }

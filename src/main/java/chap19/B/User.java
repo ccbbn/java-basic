@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
+import static chap19.B.Server.roomList;
+
 public class User {
 
     Socket socket;
@@ -82,6 +84,11 @@ public class User {
                         sendData = json.toString();
                         user.send(sendData);
                     }
+
+                case "4" :
+                    System.out.println("현재 방 목록을 보여줍니다.");
+                    System.out.println(roomList.get(1).getRoomName());
+                    String selectRoom = new Scanner(System.in).useDelimiter("\n").next();
 
             }
 
