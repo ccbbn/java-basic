@@ -99,13 +99,13 @@ public class Server {
             sc.send(sendData);
         }
     }
-
+    int roomCount = 0;
     public void createGameRoom(SocketClient socket, String roomName) {
-        int roomCount = 0;
+
         String key = socket.gamerName + "@" + socket.userIP;
         GameRoom newGameRoom = new GameRoom(roomName);
         roomCount++;
-        for (int i = 1; i <= roomCount; i++) {
+        for (int i = 1; i < roomCount+1; i++) {
             roomList.put(i ,newGameRoom);
         }
         newGameRoom.GameMember.put(key, socket);
