@@ -74,7 +74,7 @@ public class SocketClient {
                             break;
                         case "message":
                             // 받은 채팅 메시지를 모든 클라이언트한테 뿌려주기
-                            String message = json.getString("data");
+                            String message = json.getString("toAll");
                             chatServer.sendToAll(this, message);
                             break;
                         case "secret":

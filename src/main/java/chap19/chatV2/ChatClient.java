@@ -62,7 +62,7 @@ public class ChatClient {
                 }
                 json = new JSONObject();
                 json.put("command", "message");
-                json.put("data", message);
+                json.put("toAll", message);
                 sendData = json.toString();
                 chatClient.send(sendData);
             }

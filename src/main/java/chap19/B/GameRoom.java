@@ -1,30 +1,38 @@
 package chap19.B;
 
+import lombok.SneakyThrows;
 import org.json.JSONObject;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GameRoom {
+
+    Socket socket;
     DataInputStream dis;
     DataOutputStream dos;
-    String userIP;
-    String gameType1;
-    String roomName1;
-    String gameStart;
-    String gameStop;
-    String chat;
-    String out;
-    String result;
-
-    public Map<String, SocketClient> users = Collections.synchronizedMap(new HashMap<>());
+    String playerName;
 
 
 
+    public Map<String, SocketClient> players = Collections.synchronizedMap(new HashMap<>());
+
+
+
+    @SneakyThrows
     public static void main(String[] args) {
+
+        GameRoom gameRoom = new GameRoom();
+        gameRoom.connectionFromGameRoom();
+
+        System.out.println(":");
+
+
 
     }
 
@@ -47,5 +55,14 @@ public class GameRoom {
             }
         });
         thread.start();
+    }
+
+
+
+    private void connectionFromGameRoom()throws IOException {
+        socket = new Socket("localhost", 50001);
+        dis = new DataInputStream(socket.getInputStream());
+        dos = new DataOutputStream(socket.getOutputStream());
+        System.out.println("[서버]에 연결됨");
     }
 }

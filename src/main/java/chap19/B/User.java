@@ -17,6 +17,11 @@ public class User {
     String message;
     String hostName;
 
+    String user;
+    String Host;
+
+
+
 
     public static void main(String[] args) {
         try {
@@ -27,39 +32,32 @@ public class User {
             user.userName = new Scanner(System.in).next();
             System.out.println("게임을 만드시겠습니까 > Y/N");
             String gameMake = new Scanner(System.in).next();
-
             JSONObject json = new JSONObject();
-            json.put("command", "incoming");
-            json.put("userName", user.userName);
-            String sendData = json.toString();
 
-            user.send(sendData);
-            user.receive();
-
-            // createGameRoom1  (if creat room -> host다)
             if(gameMake.equals("Y")) {
-                json = new JSONObject();
-                json.put("command", "createGameRoom1");
+                json.put("command", "hostIncoming");
                 json.put("hostName", user.userName);
-                //json.put();
-                //json.put();
-                sendData = json.toString();
-                user.send(sendData);
+                String HostData = json.toString();
+                user.send(HostData);
+                user.receive();
+                System.out.println("나오니?");
+
+            } else if (gameMake.equals("N")) {
+                json.put("command", "incoming");
+                json.put("userName", user.userName);
+                String NormalPeopleData = json.toString();
+                user.send(NormalPeopleData);
+                user.receive();
             }
-//            //out
-//            if() {
-//
-//            }
+
 
             while (true) {
                 String message = new Scanner(System.in).useDelimiter("\n").next();
-
-                json = new JSONObject();
-                json.put("command", "message");
-                json.put("data", message);
-                sendData = json.toString();
+                json.put("command", "messageToAll");
+                json.put("message", message);
+                String sendData = json.toString();
                 user.send(sendData);
-                continue;
+
             }
 
         } catch (Exception e) {
@@ -74,13 +72,15 @@ public class User {
                 while (true) {
                     String readData = dis.readUTF();
                     JSONObject json = new JSONObject(readData);
+                    String userIP = json.getString("userIP");
+
                     String userName = json.getString("userName");
-                    String hostName = json.getString("hostName");
+
                     String message = json.getString("message");
-                    System.out.println("<" + userName + "> " + message);
+                    System.out.println("<" + userName + "@" + userIP + ">" + message);
                 }
             } catch (Exception e) {
-                e.getMessage();
+
             }
         });
         thread.start();
@@ -103,6 +103,21 @@ public class User {
         }
 
     }
+    public void createRoom1(String hostName, String gameType1, String roomName1, SocketClient socketClient) {
+
+        GameRoom gameRoom = new GameRoom();
+        String key = hostName;
+        gameRoom.players.put(key, socketClient);
+        System.out.println("방장 " + hostName + "이/가" +  roomName1+ " 으로 "+ gameType1 + "을 생성했습니다." );
+    }
+
+
+
+
+
+
+
+
 
 
 

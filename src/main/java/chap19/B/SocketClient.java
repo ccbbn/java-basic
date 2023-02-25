@@ -15,6 +15,7 @@ public class SocketClient {
     DataInputStream dis;
     DataOutputStream dos;
     String userIP;
+    String hostIP;
     String userName;
     String message;
     String hostName;
@@ -26,6 +27,9 @@ public class SocketClient {
     String out;
     String result;
 
+    String user;
+    String host;
+
 
     public SocketClient(Server server, Socket socket) {
         try {
@@ -35,6 +39,7 @@ public class SocketClient {
             this.dos = new DataOutputStream(socket.getOutputStream());
             InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
             this.userIP = isa.getHostName();
+
 
             receive();
 
@@ -56,70 +61,78 @@ public class SocketClient {
                         case "incoming" :
                             this.userName = json.getString("userName");
                             server.addSocketClient(this);
-                            // 접속한 모든 클라이언트한테 수신정보 송신
-                            server.sendToAll(this, "님이 들어오셨습니다.");
+                            server.sendToAll(this, "님이 들어오셨습니다.", "user");
                             break;
+
+                        case "hostIncoming" :
+                            this.hostName = json.getString("hostName");
+                            server.addSocketClientForHost(this);
+                            server.sendToAll(this,"방장" + hostName + "이 나타났다","host");
+                            server.sendToAll(this, "님이 들어오셨습니다.","host");
+                            break;
+
+
                         case "messageToAll" :
                             // 받은 채팅 메시지를 모든 클라이언트한테 뿌려주기
                             String message = json.getString("message");
-                            server.sendToAll(this, message);
-
-                        case "createGameRoom1" :
-                            this.hostName = json.getString("hostName");
-                            this.gameType1 = json.getString("gameType1");
-                            this.roomName1 = json.getString("roomName1");
-                            server.createRoom1(hostName, gameType1, roomName1, this);
-                            // 게임방 만들고
-                            // 응답
-
-                            break;
-
-                        case "findGameRoom" :
-                            this.userName = json.getString("userName");
-                            this.gameType1 = json.getString("gameType1");
-                            this.roomName1 = json.getString("roomName1");
-                            break;
-
-                        case "joinGameRoom" :
-                            this.userName = json.getString("userName");
-                            this.gameType1 = json.getString("gameType1");
-                            this.roomName1 = json.getString("roomName1");
-//                            server.joinGameRoom(userName, roomName1);
-                            break;
-
-                        case "startGame" :
-                            this.hostName = json.getString("hostName");
-                            this.gameStart = json.getString("gameStart");
-                            break;
-
-                        case "gameStop" :
-                            this.hostName = json.getString("hostName");
-                            this.gameStop = json.getString("gameStop");
-                            break;
-
-                        case "chat" :
-                            this.hostName = json.getString("hostName");
-                            this.userName = json.getString("userName");
-                            message = json.getString("message");
-                            break;
-
-                        case "out" :
-                            this.hostName = json.getString("hostName");
-                            this.userName = json.getString("userName");
-                            message = json.getString("message");
-                            break;
-
-                        case "result" :
-                            this.hostName = json.getString("hostName");
-                            this.userName = json.getString("userName");
-                            message = json.getString("message");
-                            break;
+                            server.sendToAll(this, message,"user");
+                            server.sendToAll(this, message,"host");
+//                        case "createGameRoom1" :
+//                            this.hostName = json.getString("hostName");
+//                            this.gameType1 = json.getString("gameType1");
+//                            this.roomName1 = json.getString("roomName1");
+//                            //server.createRoom1(hostName, gameType1, roomName1, this);
+//                            // 게임방 만들고
+//                            // 응답
+//
+//                            break;
+//
+//                        case "findGameRoom" :
+//                            this.userName = json.getString("userName");
+//                            this.gameType1 = json.getString("gameType1");
+//                            this.roomName1 = json.getString("roomName1");
+//                            break;
+//
+//                        case "joinGameRoom" :
+//                            this.userName = json.getString("userName");
+//                            this.gameType1 = json.getString("gameType1");
+//                            this.roomName1 = json.getString("roomName1");
+////                            server.joinGameRoom(userName, roomName1);
+//                            break;
+//
+//                        case "startGame" :
+//                            this.hostName = json.getString("hostName");
+//                            this.gameStart = json.getString("gameStart");
+//                            break;
+//
+//                        case "gameStop" :
+//                            this.hostName = json.getString("hostName");
+//                            this.gameStop = json.getString("gameStop");
+//                            break;
+//
+//                        case "chat" :
+//                            this.hostName = json.getString("hostName");
+//                            this.userName = json.getString("userName");
+//                            message = json.getString("message");
+//                            break;
+//
+//                        case "out" :
+//                            this.hostName = json.getString("hostName");
+//                            this.userName = json.getString("userName");
+//                            message = json.getString("message");
+//                            break;
+//
+//                        case "result" :
+//                            this.hostName = json.getString("hostName");
+//                            this.userName = json.getString("userName");
+//                            message = json.getString("message");
+//                            break;
 
 
                     }
                 }
             } catch (IOException e) {
-                server.sendToAll(this, "님이 나가셨습니다.");
+                server.sendToAll(this, "님이 나가셨습니다.","user");
                 server.removeSocketClient(this);
             }
         });
