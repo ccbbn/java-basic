@@ -178,7 +178,7 @@ public class User {
 
 //    192.168.200.106
     private void connect()throws IOException {
-        socket = new Socket("localhost", 50001);
+        socket = new Socket("192.168.200.106", 50001);
         dis = new DataInputStream(socket.getInputStream());
         dos = new DataOutputStream(socket.getOutputStream());
         System.out.println("[서버]에 연결됨");
