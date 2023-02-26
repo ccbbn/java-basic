@@ -104,8 +104,6 @@ public class SocketClient {
 
                     String receiveData = dis.readUTF();
 
-
-
                     JSONObject json = new JSONObject(receiveData);
 
                     String command = json.getString("command");
@@ -198,9 +196,22 @@ public class SocketClient {
                         case "messageToJoinedGameRoom" :
 
                             String messageToJoinedGameRoom = json.getString("message");
-                            String roomName1 = json.getString("RoomName");
+                            String roomName1 = json.getString("inputtedRoomName");
 
                             server.sendToJoinedGameRoom(this, messageToJoinedGameRoom, roomName1);
+
+                            break;
+
+                        case "roomInfo" :
+
+                            server.roomInfo();
+
+                            break;
+
+                        case "checkRoomInfo" :
+                            this.userName = json.getString("userName");
+
+                            server.addSocketRoomInfo(this);
 
                             break;
 

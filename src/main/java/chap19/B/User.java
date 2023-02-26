@@ -89,10 +89,13 @@ public class User {
                     }
 
                 case "4":
-                    System.out.println("현재 방 목록을 보여줍니다.");
-//                    if (!Server.roomList.isEmpty()) {
-                        for (int i = 1; i <= Server.roomList.size(); i++) {
-                            System.out.println("[" + i + "번방]" + Server.roomList.get(i).getRoomName());
+                    System.out.println("현재 방 목록을 보려면 *를 눌러");
+                    String q = new Scanner(System.in).next();
+                    if (q.equals("*")){
+                    json.put("command", "roomInfo");
+                    String roomInfo = json.toString();
+                    user.send(roomInfo);
+                    user.receive();}
 
                             System.out.print("입장하고 싶은 방제목을 입력하세요 > ");
                             String inputtedRoomName = new Scanner(System.in).useDelimiter("\n").next();
@@ -110,7 +113,7 @@ public class User {
                                 sendData = json.toString();
                                 user.send(sendData);
                             }
-                        }
+//                        }
 //                    } else
 //                        System.out.println("현재 개설된 방은 없음");
                 }
@@ -174,8 +177,11 @@ public class User {
                     String message = json.getString("messageToJoinedGameRoom");
                     System.out.println("<" + playerName + "@" + playerIP + ">" + message);
 
-                }
+                } else if (json.getString("roomInfo").equals("roomInfo")) {
 
+                    String roomInfo = json.getString("roomInfo");
+                    System.out.println(roomInfo);
+                }
                 }
             } catch (Exception e) {
 

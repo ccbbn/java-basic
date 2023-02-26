@@ -84,6 +84,8 @@ public class Server {
         }
     }
 
+
+
     public void sendToChatRoom(SocketClient socket, String message) {
         JSONObject jsonForChatRoom = new JSONObject();
         jsonForChatRoom.put("roomType","chatRoom");
@@ -134,7 +136,7 @@ public class Server {
     public void joinGameRoom(SocketClient socket, String inputtedRoomName) {
         String key = socket.chatMemberName + "@" + socket.userIP;
 
-        for (int i = 1; i <= roomList.size(); i++) {
+        for (int i = 1; i < roomCount; i++) {
             if (roomList.get(i).getRoomName().equals(inputtedRoomName)) {
                 roomList.get(i).GameMember.put(key, socket);
             }
@@ -147,12 +149,12 @@ public class Server {
     public void sendToJoinedGameRoom(SocketClient socket, String message, String inputtedRoomName) {
         JSONObject jsonForJoinedGameRoom = new JSONObject();
         jsonForJoinedGameRoom.put("roomType","joinedGameRoom");
-        jsonForJoinedGameRoom.put("playIP", socket.userIP);
-        jsonForJoinedGameRoom.put("playName", socket.playerName);
+        jsonForJoinedGameRoom.put("playerIP", socket.userIP);
+        jsonForJoinedGameRoom.put("playerName", socket.playerName);
         jsonForJoinedGameRoom.put("messageToJoinedGameRoom", message);
         String sendData = jsonForJoinedGameRoom.toString();
 
-        for (int i = 1; i <= roomList.size(); i++) {
+        for (int i = 1; i < roomCount; i++) {
             if (roomList.get(i).getRoomName().equals(inputtedRoomName)) {
                 Collection<SocketClient> socketClients = roomList.get(i).GameMember.values();
                 for (SocketClient sc : socketClients) {
@@ -163,7 +165,27 @@ public class Server {
     }
 
 
+    public void addSocketRoomInfo(SocketClient socketClient) {
+        String key = socketClient.userName + "@" + socketClient.userIP;
+        guests.put(key, socketClient);
+    }
 
+
+    public void roomInfo() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("roomInfo", "roomInfo");
+        // roomCount = 2
+        for(int i = 1; i < roomCount; i++) {
+            jsonObject.put("roomInfo", roomList.get(roomCount - 1).GameMember.values());
+        }
+        String sendData = jsonObject.toString();
+        Collection<SocketClient> socketClients = guests.values();
+        for (SocketClient sc : socketClients) {
+            sc.send(sendData);
+        }
+
+
+    }
 
 
 
