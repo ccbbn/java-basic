@@ -21,10 +21,14 @@ public class GameRoom {
     }
 
 
-    public void roomList(){
+    public void game1(String answerToGame1){
 
 
-    };
+    }
+
+    public void game2(String answerToGame2){
+
+    }
 
 
 }

@@ -17,6 +17,7 @@ public class Server {
     GameRoom gameRoom;
 
 
+
     ServerSocket serverSocket;
     ExecutorService threadPool = Executors.newFixedThreadPool(100);
     public static Map<String, SocketClient> guests = Collections.synchronizedMap(new HashMap<>());
@@ -75,7 +76,7 @@ public class Server {
 
     public void sendToLobby(SocketClient socket, String message) {
         JSONObject jsonForLobby = new JSONObject();
-        jsonForLobby.put("lobbyOrRoom","lobby");
+        jsonForLobby.put("roomType","lobby");
         jsonForLobby.put("userIP", socket.userIP);
         jsonForLobby.put("userName", socket.userName);
         jsonForLobby.put("messageToUser", message);
@@ -88,7 +89,7 @@ public class Server {
 
     public void sendToChatRoom(SocketClient socket, String message) {
         JSONObject jsonForChatRoom = new JSONObject();
-        jsonForChatRoom.put("lobbyOrRoom","chatRoom");
+        jsonForChatRoom.put("roomType","chatRoom");
         jsonForChatRoom.put("chatIP", socket.userIP);
         jsonForChatRoom.put("chatName", socket.chatMemberName);
         jsonForChatRoom.put("messageToChatMember", message);
@@ -101,7 +102,7 @@ public class Server {
     int roomCount = 1;
     public void createGameRoom(SocketClient socket, String roomName) {
 
-        String key = socket.gamerName + "@" + socket.userIP;
+        String key = socket.hostName + "@" + socket.userIP;
         GameRoom newGameRoom = new GameRoom(roomName);
         newGameRoom.GameMember.put(key, socket);
 
@@ -113,24 +114,59 @@ public class Server {
         System.out.println("방이름 :" + roomName);
         System.out.println("게임방 입장 : " + key);
         System.out.println("현재 게임방 인원수 :" + newGameRoom.GameMember.size());
-        System.out.println("만든 사람 :" + socket.gamerName);
+        System.out.println("만든 사람 :" + socket.hostName);
 
-        this.gameRoom = newGameRoom;
+//        this.gameRoom = newGameRoom;
     }
 
 
     public void sendToGameRoom(SocketClient socket, String message){
         JSONObject jsonForGameRoom = new JSONObject();
-        jsonForGameRoom.put("lobbyOrRoom","newGameRoom");
-        jsonForGameRoom.put("gamerIP", socket.userIP);
-        jsonForGameRoom.put("gamerName", socket.gamerName);
+        jsonForGameRoom.put("roomType","newGameRoom");
+        jsonForGameRoom.put("hostIP", socket.userIP);
+        jsonForGameRoom.put("hostName", socket.hostName);
         jsonForGameRoom.put("messageToGameRoom", message);
         String sendData = jsonForGameRoom.toString();
-        Collection<SocketClient> socketClients = gameRoom.GameMember.values();
+        Collection<SocketClient> socketClients = roomList.get(roomCount-1).GameMember.values();
         for (SocketClient sc : socketClients) {
             sc.send(sendData);
         }
     }
+
+    public void joinGameRoom(SocketClient socket, String inputtedRoomName) {
+        String key = socket.chatMemberName + "@" + socket.userIP;
+
+        for (int i = 1; i <= roomList.size(); i++) {
+            if (roomList.get(i).getRoomName().equals(inputtedRoomName)) {
+                roomList.get(i).GameMember.put(key, socket);
+            }
+            System.out.println( roomList.get(i).getRoomName() + " 입장 : " + key);
+            System.out.println("현재 인원수 : " + roomList.get(i).GameMember.size());
+
+        }
+    }
+
+    public void sendToJoinedGameRoom(SocketClient socket, String message, String inputtedRoomName) {
+        JSONObject jsonForJoinedGameRoom = new JSONObject();
+        jsonForJoinedGameRoom.put("roomType","joinedGameRoom");
+        jsonForJoinedGameRoom.put("playIP", socket.userIP);
+        jsonForJoinedGameRoom.put("playName", socket.playerName);
+        jsonForJoinedGameRoom.put("messageToJoinedGameRoom", message);
+        String sendData = jsonForJoinedGameRoom.toString();
+
+        for (int i = 1; i <= roomList.size(); i++) {
+            if (roomList.get(i).getRoomName().equals(inputtedRoomName)) {
+                Collection<SocketClient> socketClients = roomList.get(i).GameMember.values();
+                for (SocketClient sc : socketClients) {
+                    sc.send(sendData);
+                }
+            }
+        }
+    }
+
+
+
+
 
 
 
@@ -143,14 +179,4 @@ public class Server {
 
 
 
-    public void joinGameRoom(SocketClient socket, String roomName) {
-        String key = socketClient.chatMemberName + "@" + socketClient.userIP;
-        if ( roomList.get(i).getRoomName().equals(roomName)){
-            roomList.values(i).
-        }
-        System.out.println("채팅방 입장 : " + key);
-        System.out.println("현재 채팅방 인원수 : " + chatMember.size());
-
-
-    }
 }

@@ -73,8 +73,8 @@ public class User {
                     json.put("command", "createGameRoom");
                     json.put("userName",user.userName);
                     json.put("roomName", roomName);
-                    String sendDataToGameRoom2 = json.toString();
-                    user.send(sendDataToGameRoom2);
+                    String sendDataToGameRoom = json.toString();
+                    user.send(sendDataToGameRoom);
                     user.receive();
 
                     while (true) {
@@ -87,7 +87,22 @@ public class User {
 
                 case "4" :
                     System.out.println("현재 방 목록을 보여줍니다.");
-                    String selectRoom = new Scanner(System.in).useDelimiter("\n").next();
+                    if (roomList.size() != 0) {
+                        for (int i = 1 ; i <= roomList.size(); i++ ) {
+                            System.out.println("[" + i + "번방]"+ roomList.get(i).getRoomName());
+                        }
+                    } else
+                        System.out.println("현재 개설된 방은 없음");
+
+                    System.out.print("입장하고 싶은 방제목을 입력하세요 > ");
+                    String inputtedRoomName = new Scanner(System.in).useDelimiter("\n").next();
+                    json.put("command", "joinGameRoom");
+                    json.put("playerName", user.userName);
+                    json.put("inputtedRoomName", inputtedRoomName);
+                    String sendDataToJoinedGameRoom = json.toString();
+                    user.send(sendDataToJoinedGameRoom);
+                    user.receive();
+
 
             }
 
@@ -105,26 +120,37 @@ public class User {
                     String readData = dis.readUTF();
                     JSONObject json = new JSONObject(readData);
 
-                if( json.getString("lobbyOrRoom").equals("lobby") ) {
+                if( json.getString("roomType").equals("lobby") ) {
 
                     String userIP = json.getString("userIP");
                     String userName = json.getString("userName");
                     String message = json.getString("messageToUser");
                     System.out.println("<" + userName + "@" + userIP + ">" + message);
 
-                } else if(json.getString("lobbyOrRoom").equals("chatRoom")) {
+                } else if(json.getString("roomType").equals("chatRoom")) {
 
                     String chatIP = json.getString("chatIP");
                     String chatName = json.getString("chatName");
                     String message = json.getString("messageToChatMember");
                     System.out.println("<" + chatName + "@" + chatIP + ">" + message);
 
-                } else if(json.getString("lobbyOrRoom").equals("newGameRoom")){
+                } else if(json.getString("roomType").equals("newGameRoom")){
 
-                    String gamerIP = json.getString("gamerIP");
-                    String gamerName = json.getString("gamerName");
+                    String hostIP = json.getString("hostIP");
+                    String hostName = json.getString("hostName");
                     String message = json.getString("messageToGameRoom");
-                    System.out.println("<" + gamerName + "@" + gamerIP + ">" + message);
+                    System.out.println("<" + hostName + "@" + hostIP + ">" + message);
+
+                } else if(json.getString("roomType").equals("joinedGameRoom")) {
+
+                    String playerIP = json.getString("playerIP");
+                    String playerName = json.getString("playerName");
+                    String message = json.getString("messageToJoinedGameRoom");
+                    System.out.println("<" + playerName + "@" + playerIP + ">" + message);
+
+
+
+
                 }
 
 
