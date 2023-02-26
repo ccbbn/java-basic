@@ -17,10 +17,11 @@ public class Server {
 
     ServerSocket serverSocket;
     ExecutorService threadPool = Executors.newFixedThreadPool(100);
+
+
     public static Map<String, SocketClient> guests = Collections.synchronizedMap(new HashMap<>());
-
+    public static Map<String, SocketClient> lobby = Collections.synchronizedMap(new HashMap<>());
     public static Map<String, SocketClient> chatMember = Collections.synchronizedMap((new HashMap<>()));
-
     public static Map<Integer, GameRoom> roomList = Collections.synchronizedMap((new HashMap<>()));
 
 
@@ -53,11 +54,19 @@ public class Server {
         thread.start();
     }
 
-    public void addSocketClient(SocketClient socketClient) {
+
+
+    public void addSocketGuests(SocketClient socketClient) {
         String key = socketClient.userName + "@" + socketClient.userIP;
         guests.put(key, socketClient);
+        System.out.println(key + "으로 접속했습니다.");
+    }
+
+    public void addSocketClient(SocketClient socketClient) {
+        String key = socketClient.userName + "@" + socketClient.userIP;
+        lobby.put(key, socketClient);
         System.out.println("입장 : " + key);
-        System.out.println("현재 대기실 인원수 : " + guests.size());
+        System.out.println("현재 대기실 인원수 : " + lobby.size());
     }
 
     public void addSocketClientToChatRoom(SocketClient socketClient) {
@@ -78,7 +87,7 @@ public class Server {
         jsonForLobby.put("userName", socket.userName);
         jsonForLobby.put("messageToUser", message);
         String sendData = jsonForLobby.toString();
-        Collection<SocketClient> socketClients = guests.values();
+        Collection<SocketClient> socketClients = lobby.values();
         for (SocketClient sc : socketClients) {
             sc.send(sendData);
         }
@@ -190,9 +199,9 @@ public class Server {
 
     public void removeSocketClient(SocketClient socketClient) {
         String key = socketClient.userName + "@" + socketClient.userIP;
-        guests.remove(key);
+        lobby.remove(key);
         System.out.println("나감: " + key);
-        System.out.println("현재 채팅자 수: " + guests.size() + "\n");
+        System.out.println("현재 채팅자 수: " + lobby.size() + "\n");
     }
 
 

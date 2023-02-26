@@ -1,5 +1,6 @@
 package chap19.B;
 
+import chap11.ex03.Sys;
 import org.json.JSONObject;
 
 import java.io.DataInputStream;
@@ -28,6 +29,12 @@ public class User {
 
             System.out.print("닉네임입력 > ");
             user.userName = new Scanner(System.in).next();
+
+            JSONObject json1 = new JSONObject();
+            json1.put("command", "guests");
+            json1.put("userName", user.userName);
+            String sendData1 = json1.toString();
+            user.send(sendData1);
 
             System.out.println("1. 로비   | 2. 채팅방 | 3. 방 만들기 | 4. 방 입장하기" );
             String choice = new Scanner(System.in).next();
@@ -84,6 +91,14 @@ public class User {
                     }
 
                 case "4":
+                    System.out.println("방목록");
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("command","roomInfo");
+                    String room = jsonObject.toString();
+                    user.send(room);
+                    user.receive();
+
+
                     System.out.print("입장하고 싶은 방제목을 입력하세요 > ");
                     String inputtedRoomName = new Scanner(System.in).useDelimiter("\n").next();
                     json.put("command", "joinGameRoom");
@@ -92,11 +107,6 @@ public class User {
                     String sendDataToJoinedGameRoom = json.toString();
                     user.send(sendDataToJoinedGameRoom);
                     user.receive();
-
-//                    jsonObject.put("command","roomInfo");
-//                    String room = jsonObject.toString();
-//                    user.send(room);
-//                    user.receive();
 
                     while (true) {
                         String message = new Scanner(System.in).useDelimiter("\n").next();
@@ -161,6 +171,7 @@ public class User {
         });
         thread.start();
     }
+
 
 
     private void send(String sendData) throws IOException {

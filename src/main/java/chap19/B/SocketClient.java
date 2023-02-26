@@ -112,6 +112,16 @@ public class SocketClient {
 
                     switch (command) {
 
+                        case "guests" :
+
+                            this.userName = json.getString("userName");
+
+                            server.addSocketGuests(this);
+
+                            break;
+
+
+
                         case "incoming" :
 
                             this.userName = json.getString("userName");
