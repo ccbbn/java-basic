@@ -14,9 +14,6 @@ import java.util.concurrent.Executors;
 public class Server {
 
 
-    GameRoom gameRoom;
-
-
 
     ServerSocket serverSocket;
     ExecutorService threadPool = Executors.newFixedThreadPool(100);
@@ -107,14 +104,15 @@ public class Server {
         newGameRoom.GameMember.put(key, socket);
 
         roomList.put(roomCount++ ,newGameRoom);
+        System.out.println("========개설된 게임방 =========");
         for (int i = 1; i < roomCount; i++) {
-            System.out.println(roomList.get(i).RoomName);
+            System.out.println(roomList.get(i).getRoomName());
         }
+        System.out.println("=============================");
 
-        System.out.println("방이름 :" + roomName);
-        System.out.println("게임방 입장 : " + key);
-        System.out.println("현재 게임방 인원수 :" + newGameRoom.GameMember.size());
-        System.out.println("만든 사람 :" + socket.hostName);
+        System.out.println("생성된 게임방 이름 :" + roomName);
+        System.out.println(roomName + " 게임방의 방장 : " + "☆★" + socket.hostName  + "☆★" );
+        System.out.println("현재 " + roomName +" 게임방의 인원수 :" + newGameRoom.GameMember.size());
 
 //        this.gameRoom = newGameRoom;
     }
