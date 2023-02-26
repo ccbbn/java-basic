@@ -171,12 +171,12 @@ public class Server {
     }
 
 
-    public void roomInfo() {
+    public void roomInfo(SocketClient socketClient) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("roomInfo", "roomInfo");
         // roomCount = 2
         for(int i = 1; i < roomCount; i++) {
-            jsonObject.put("roomInfo", roomList.get(roomCount - 1).GameMember.values());
+            jsonObject.put("roomInfo", roomList.get(i).getRoomName());
         }
         String sendData = jsonObject.toString();
         Collection<SocketClient> socketClients = guests.values();

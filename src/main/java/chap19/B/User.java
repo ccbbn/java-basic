@@ -18,8 +18,6 @@ public class User {
     DataOutputStream dos;
     String userName;
 
-    Map<Integer, GameRoom> roomList = Server.roomList;
-
     String message;
     String hostName;
 
@@ -89,58 +87,40 @@ public class User {
                     }
 
                 case "4":
-                    System.out.println("현재 방 목록을 보려면 *를 눌러");
-                    String q = new Scanner(System.in).next();
-                    if (q.equals("*")){
-                    json.put("command", "roomInfo");
+                    System.out.println("현재 방 목록");
+                    json.put("command", "checkRoomInfo");
+                    json.put("userName", user.userName);
                     String roomInfo = json.toString();
                     user.send(roomInfo);
-                    user.receive();}
+                    json.put("command","roomInfo");
+                    sendData = json.toString();
+                    user.send(sendData);
+                    user.receive();
 
-                            System.out.print("입장하고 싶은 방제목을 입력하세요 > ");
-                            String inputtedRoomName = new Scanner(System.in).useDelimiter("\n").next();
-                            json.put("command", "joinGameRoom");
-                            json.put("playerName", user.userName);
-                            json.put("inputtedRoomName", inputtedRoomName);
-                            String sendDataToJoinedGameRoom = json.toString();
-                            user.send(sendDataToJoinedGameRoom);
-                            user.receive();
+                    System.out.print("입장하고 싶은 방제목을 입력하세요 > ");
+                    String inputtedRoomName = new Scanner(System.in).useDelimiter("\n").next();
+                    json.put("command", "joinGameRoom");
+                    json.put("playerName", user.userName);
+                    json.put("inputtedRoomName", inputtedRoomName);
+                    String sendDataToJoinedGameRoom = json.toString();
+                    user.send(sendDataToJoinedGameRoom);
+                    user.receive();
 
-                            while (true) {
-                                String message = new Scanner(System.in).useDelimiter("\n").next();
-                                json.put("command", "messageToJoinedGameRoom");
-                                json.put("message", message);
-                                sendData = json.toString();
-                                user.send(sendData);
-                            }
-//                        }
-//                    } else
-//                        System.out.println("현재 개설된 방은 없음");
+                    while (true) {
+                        String message = new Scanner(System.in).useDelimiter("\n").next();
+                        json.put("command", "messageToJoinedGameRoom");
+                        json.put("message", message);
+                        sendData = json.toString();
+                        user.send(sendData);
+                    }
+
                 }
-
-
 
         } catch (Exception e) {
             e.getMessage();
 
         }
     }
-//    private void receiveRoomInfo() {
-//        Thread thread = new Thread( () -> {
-//            try {
-//
-//                String readData = dis.readUTF();
-//                JSONObject json = new JSONObject(readData);
-//                Map<Integer, GameRoom> roomList =;
-//
-//            } catch (Exception e) {
-//
-//            }
-//        });
-//        thread.start();
-//    }
-
-
 
     private void receive() {    // 받는 건 쓰레드로
         Thread thread = new Thread(() -> {

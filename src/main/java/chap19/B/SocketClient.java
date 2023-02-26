@@ -204,7 +204,7 @@ public class SocketClient {
 
                         case "roomInfo" :
 
-                            server.roomInfo();
+                            server.roomInfo(this);
 
                             break;
 
