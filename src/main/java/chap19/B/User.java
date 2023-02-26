@@ -18,22 +18,19 @@ public class User {
     DataOutputStream dos;
     String userName;
 
-    String message;
-    String hostName;
-
-    String user;
-    String Host;
 
 
     public static void main(String[] args) {
         try {
             User user = new User();
             user.connect();
+            JSONObject json = new JSONObject();
+
             System.out.print("닉네임입력 > ");
             user.userName = new Scanner(System.in).next();
+
             System.out.println("1. 로비   | 2. 채팅방 | 3. 방 만들기 | 4. 방 입장하기" );
             String choice = new Scanner(System.in).next();
-            JSONObject json = new JSONObject();
 
 
             switch (choice) {
@@ -87,16 +84,6 @@ public class User {
                     }
 
                 case "4":
-                    System.out.println("현재 방 목록");
-                    json.put("command", "checkRoomInfo");
-                    json.put("userName", user.userName);
-                    String roomInfo = json.toString();
-                    user.send(roomInfo);
-                    json.put("command","roomInfo");
-                    sendData = json.toString();
-                    user.send(sendData);
-                    user.receive();
-
                     System.out.print("입장하고 싶은 방제목을 입력하세요 > ");
                     String inputtedRoomName = new Scanner(System.in).useDelimiter("\n").next();
                     json.put("command", "joinGameRoom");
@@ -106,6 +93,11 @@ public class User {
                     user.send(sendDataToJoinedGameRoom);
                     user.receive();
 
+//                    jsonObject.put("command","roomInfo");
+//                    String room = jsonObject.toString();
+//                    user.send(room);
+//                    user.receive();
+
                     while (true) {
                         String message = new Scanner(System.in).useDelimiter("\n").next();
                         json.put("command", "messageToJoinedGameRoom");
@@ -113,7 +105,6 @@ public class User {
                         sendData = json.toString();
                         user.send(sendData);
                     }
-
                 }
 
         } catch (Exception e) {
@@ -157,7 +148,8 @@ public class User {
                     String message = json.getString("messageToJoinedGameRoom");
                     System.out.println("<" + playerName + "@" + playerIP + ">" + message);
 
-                } else if (json.getString("roomInfo").equals("roomInfo")) {
+                } else if (json.getString("roomList").equals("roomList1")) {
+
 
                     String roomInfo = json.getString("roomInfo");
                     System.out.println(roomInfo);
@@ -175,6 +167,8 @@ public class User {
         dos.writeUTF(sendData);
         dos.flush();
     }
+
+
 
 //    192.168.200.106
     private void connect()throws IOException {

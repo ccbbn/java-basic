@@ -204,16 +204,16 @@ public class SocketClient {
 
                         case "roomInfo" :
 
-                            server.roomInfo(this);
+                            server.roomInfo();
 
                             break;
 
-                        case "checkRoomInfo" :
-                            this.userName = json.getString("userName");
-
-                            server.addSocketRoomInfo(this);
-
-                            break;
+//                        case "checkRoomInfo" :
+//                            this.userName = json.getString("userName");
+//
+//                            server.addSocketRoomInfo(this);
+//
+//                            break;
 
 
 

@@ -165,19 +165,17 @@ public class Server {
     }
 
 
-    public void addSocketRoomInfo(SocketClient socketClient) {
-        String key = socketClient.userName + "@" + socketClient.userIP;
-        guests.put(key, socketClient);
-    }
+//    public void addSocketRoomInfo(SocketClient socketClient) {
+//        String key = socketClient.userName + "@" + socketClient.userIP;
+//        guests.put(key, socketClient);
+//    }
 
 
-    public void roomInfo(SocketClient socketClient) {
+    public void roomInfo() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("roomInfo", "roomInfo");
-        // roomCount = 2
-        for(int i = 1; i < roomCount; i++) {
-            jsonObject.put("roomInfo", roomList.get(i).getRoomName());
-        }
+        jsonObject.put("roomList", "roomList1");
+        jsonObject.put("roomInfo",roomList.get(1).getRoomName());
+
         String sendData = jsonObject.toString();
         Collection<SocketClient> socketClients = guests.values();
         for (SocketClient sc : socketClients) {
