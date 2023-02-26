@@ -102,6 +102,14 @@ public class User {
                             String sendDataToJoinedGameRoom = json.toString();
                             user.send(sendDataToJoinedGameRoom);
                             user.receive();
+
+                            while (true) {
+                                String message = new Scanner(System.in).useDelimiter("\n").next();
+                                json.put("command", "messageToJoinedGameRoom");
+                                json.put("message", message);
+                                sendData = json.toString();
+                                user.send(sendData);
+                            }
                         }
 //                    } else
 //                        System.out.println("현재 개설된 방은 없음");
