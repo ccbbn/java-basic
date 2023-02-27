@@ -13,7 +13,6 @@ public class ChatClient {
 
     Socket socket;
 
-
     // 서버로부터 데이터를 받을 때 사용하는 입력 스트림
     DataInputStream dis;
     // 서버로 데이터를 보낼 때 사용하는 출력 스트림

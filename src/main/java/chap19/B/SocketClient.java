@@ -77,9 +77,6 @@ public class SocketClient {
             this.userIP = isa.getHostName();
 
 
-
-
-
             receive();
 
 
