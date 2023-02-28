@@ -116,7 +116,7 @@ public class ProductClient {
     private static void create(JSONObject jsonObject) throws IOException {
         int no = 1;
         System.out.println("[상품 생성]");
-        jsonObject.put("menu","1");
+        jsonObject.put("menu",1);
         jsonObject.put("no",no++);
         System.out.print("상품 이름: ");
         jsonObject.put("name", new Scanner(System.in).next());
