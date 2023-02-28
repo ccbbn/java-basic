@@ -1,22 +1,18 @@
-import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class aa {
 
     public static void main(String[] args) {
-        solution(new int[]{1, 2, 3, 5});
+
+
+            solution(10,20);
+
     }
-    public static int[] solution(int[] num_list) {
-        int[] answer = {};
 
-        for(int i = 0; i< num_list.length; i++){
-            if ( num_list[i]%2 == 0){
-                answer[0] += 1;
-            } else {
-                answer[1] += 1;
-            }
-
-        }
-
+    private static int solution(int num1, int num2) {
+        int answer = Stream.of(num1, num2).
         return answer;
     }
 }
+
