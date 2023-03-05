@@ -19,38 +19,18 @@ public class aa {
     }
 
 
-    public String[] solution(String[] quiz) {
-        String[] answer = new String[quiz.length];
-        int x = 0;
-        int y = 0;
-        int z = 0;
+    public int solution(int[][] dots) {
 
+        int width = 0;
+        int height = 0;
 
-        for (int i = 0; i < quiz.length; i++) {
-
-            String[] arrayQuiz = quiz[i].split(" ");
-
-            //x>0
-
-            x = Integer.parseInt(arrayQuiz[0]);
-
-            if (arrayQuiz[1].equals("-")) {
-                y = -1 * Integer.parseInt(arrayQuiz[2]);
-            } else {
-                y = Integer.parseInt(arrayQuiz[2]);
+        for (int i = 0; i < dots.length; i++) {
+            if (dots[0][1] == dots[i][1]) {
+                width = dots[i][0] - dots[0][0];
+            } else if (dots[0][0] == dots[i][0]) {
+                height = dots[i][1] - dots[0][1];
             }
-
-            z = Integer.parseInt(arrayQuiz[4]);
-
-
-            if (x + y == z) {
-                answer[i] = "O";
-            } else {
-                answer[i] = "X";
-            }
-
-        } return answer;
-
+        }
+        return Math.abs(width) * Math.abs(height);
     }
 }
-
