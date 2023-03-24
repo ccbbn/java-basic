@@ -1,36 +1,70 @@
-import chap07.poly.ex1.A;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class aa {
 
     public static void main(String[] args) {
 
-        int[][] x = {{1, 4}, {9, 2}, {3, 8}, {11, 6}};
-        String[] spell = {"p", "o", "s"};
-        String[] dic = {"sod", "eocd", "qixm", "adio", "soo"};
-        solution(new String[]{"3 - 4 = -3", "5 + 6 = 11"}); // (3,-,4,+,5)
+//        int[][] x = {{1, 4}, {9, 2}, {3, 8}, {11, 6}};
+//        String[] spell = {"p", "o", "s"};
+//        String[] dic = {"sod", "eocd", "qixm", "adio", "soo"};
+////        solution("1 2 Z 3"); // (3,-,4,+,5)
+//        int[][] score = {{80, 70}, {90, 50}, {40, 70}, {50, 80}};
+
+
+        solution(new int[]{10000,20,36,47,40,6,10,7000}, 30);
 
 
     }
 
+    public static void solution(int[] numList, int n) {
 
-    public int solution(int[][] dots) {
+        int[] abs1 = new int[numList.length];
+        int[] place = new int[2];
+        int[] answer = new int[numList.length];
 
-        int width = 0;
-        int height = 0;
 
-        for (int i = 0; i < dots.length; i++) {
-            if (dots[0][1] == dots[i][1]) {
-                width = dots[i][0] - dots[0][0];
-            } else if (dots[0][0] == dots[i][0]) {
-                height = dots[i][1] - dots[0][1];
+        for ( int i = 0; i < numList.length; i++ ) {
+                abs1[i] = Math.abs(numList[i] - n);
+        }
+        Arrays.sort(abs1); /*10 10 20 30 40*/
+        int same;
+        int order=0;
+        for (int k = 1; k < numList.length; k++) {
+            if (abs1[k - 1] == abs1[k]) {
+                same = abs1[k - 1];
+                for (int j : numList) {
+                    if (same == Math.abs(j - n)) {
+                        place[order++] = j;
+                    }
+                }
             }
         }
-        return Math.abs(width) * Math.abs(height);
+        for (int i = 0 ; i < numList.length; i++) {
+
+        }
+
+
+
+
+        System.out.println(Arrays.toString(abs1));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
