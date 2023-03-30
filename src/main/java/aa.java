@@ -1,36 +1,76 @@
-import chap07.poly.ex1.A;
+import chap07.poly.ex7.Parent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.IntStream;
+import java.util.*;
 import java.util.stream.Stream;
 
-public class aa {
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.toBinaryString;
 
+
+public class aa {
     public static void main(String[] args) {
 
-        int[][] x = {{1, 4}, {9, 2}, {3, 8}, {11, 6}};
-        String[] spell = {"p", "o", "s"};
-        String[] dic = {"sod", "eocd", "qixm", "adio", "soo"};
-        solution(new String[]{"3 - 4 = -3", "5 + 6 = 11"}); // (3,-,4,+,5)
+
+    String my_str = "abc1Addfggg4556b";
+    solution(12, 21);
+
+
 
 
     }
 
-
-    public int solution(int[][] dots) {
-
-        int width = 0;
-        int height = 0;
-
-        for (int i = 0; i < dots.length; i++) {
-            if (dots[0][1] == dots[i][1]) {
-                width = dots[i][0] - dots[0][0];
-            } else if (dots[0][0] == dots[i][0]) {
-                height = dots[i][1] - dots[0][1];
+    public static void solution(int a, int b) {
+        int answer = 0;
+        int com = 0;
+        for (int i = a; i > 1; i--) {
+            if (b % a == 0) {
+                com = a;
+                break;
             }
         }
-        return Math.abs(width) * Math.abs(height);
+
+        int denom = 0;
+        if (com == 0) {  // ex 21
+            while (b > 1) {
+                if (b % 2 == 0) {
+                    b /= 2;
+                    continue;
+                } else if (b % 5 == 0) {
+                    b /= 5;
+                    continue;
+                }
+                break;
+            }
+
+        } else { //ex 20
+
+            denom = b / com;
+            while (denom > 1) {
+                if (denom % 2 == 0) {
+                    denom /= 2;
+                    continue;
+                } else if (denom % 5 == 0) {
+                    denom /= 5;
+                    continue;
+                }
+                break;
+            }
+
+        }
+
+        if (com == 0 && b == 1) {
+            answer = 1;
+        } else if (com != 0 && denom == 1) {
+            answer = 1;
+        } else
+            answer = 2;
+
+
+        System.out.println(answer);
+
+
     }
 }
+
+
+
